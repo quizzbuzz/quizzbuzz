@@ -29,13 +29,10 @@ class Home extends React.Component {
 
   render () {
     const messages = this.state.messages.map((message, index) => {
-      const img = message.img ? <img src={message.img} width='200px' /> : null
-      return <li key={index}><b>{message.from}:</b>{message.body} {img}</li>
+      return <li key={index}><b>{message.from}:</b>{message.body}</li>
     })
     return (
       <div>
-        <h1>ez.ngrok.io</h1>
-        <h1>+18622562970</h1>
         <input type='text' placeholder='Enter a message...' onKeyUp={this.handleSubmit} />
         {messages}
       </div>
