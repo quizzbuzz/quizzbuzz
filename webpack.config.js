@@ -9,13 +9,13 @@ var config = {
     "./web/static/js/app.js"],
   output: {
     path: "./priv/static",
-    filename: "js/bundle.js",
+    filename: "js/bundle.js"
   },                // the entry point for our app
   resolve: {
     root: [
-      path.resolve(__dirname, './web/static')
+      path.resolve(__dirname, './web/static/js')
     ],
-    extensions: ['', '.js', '.json', '.jsx', '.css']
+    extensions: ['', '.js', '.json', '.jsx']
   },
   module: {
     loaders: [
