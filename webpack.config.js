@@ -3,7 +3,8 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var config = {
+
+module.exports = {
   entry: [
     './web/static/css/app.css',
     "./web/static/js/app.js"],
@@ -30,5 +31,3 @@ var config = {
     new ExtractTextPlugin("css/app.css")
   ]
 };
-
-module.exports = config;

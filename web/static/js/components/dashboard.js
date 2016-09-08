@@ -1,28 +1,31 @@
-import React from 'react'
 import socket from "../socket"
+import React from 'react'
+
+const rooms = ["general", "mix", "ecto", "plug", "elixir", "erlang"]
 
 class Dashboard extends React.Components {
-  getInitialState() {
-    return ({
+  constructor (props) {
+    super(props)
+    this.state = {
       activeRoom: "general",
-      messages: [],
+      answer: [],
       channel: socket.channel("topic:general")
-    })
+    }
   }
   handleRoomLinkClick(room) {
     const channel = socket.channel(`topic:${room}`)
-    this.setState({activeRoom: room, messages: [], channel: channel})
+    this.setState({activeRoom: room, answers: [], channel: channel})
     this.configureChannel(channel)
   }
-  handleMessageSubmit(message) {
-    this.state.channel.push("message", {body: message})
+  handleAnswerSubmit(answer) {
+    this.state.channel.push("answer", {body: answer})
   }
   configureChannel(channel) {
     channel.join()
-      .receive("ok", () => { console.log(`Succesfully joined the ${this.state.activeRoom} chat room.`) })
-      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} chat room.`) })
-    channel.on("message", payload => {
-      this.setState({messages: this.state.messages.concat([payload.body])})
+      .receive("ok", () => { console.log(`Succesfully joined the ${this.state.activeRoom} game room.`) })
+      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`) })
+    channel.on("answer", payload => {
+      this.setState({answers: this.state.answers.concat([payload.body])})
     })
   }
   componentDidMount() {
@@ -32,13 +35,12 @@ class Dashboard extends React.Components {
     return (
       <div>
         <RoomList onRoomLinkClick={this.handleRoomLinkClick} rooms={rooms}/>
-        <ActiveRoom room={this.state.activeRoom} messages={this.state.message} onMessageSubmit={this.handleMessageSubmit}/>
+        <ActiveRoom room={this.state.activeRoom} answers={this.state.answer} onAnswerSubmit={this.handleAnswerSubmit}/>
       </div>
     )
   }
 }
 
-const rooms = ["general", "mix", "ecto", "plug", "elixir", "erlang"]
 
 class RoomList extends React.Components {
   render() {
@@ -67,27 +69,27 @@ class ActiveRoom extends React.Components {
   render() {
     return (
       <div>
-      <span>Welcome to the {this.props.room} chat room!</span>
-        <MessageInput onMessageSubmit={this.props.onMessageSubmit}/>
-        <MessageList messages={this.props.messages}/>
+      <span>Welcome to the {this.props.room} game room!</span>
+        <AnswerInput onAnswerSubmit={this.props.onAnswerSubmit}/>
+        <AnswerList answers={this.props.answers}/>
       </div>
     )
   }
 }
 
-class MessageList extends React.Components{
+class AnswerList extends React.Components {
   render() {
     return (
       <div>
-        {this.props.messages.map(message => {
-          return <Message data={message} />
+        {this.props.answers.map(answer => {
+          return <Answer data={answer} />
         })}
       </div>
     )
   }
 }
 
-class Message extends React.Componets {
+class Answer extends React.Componets {
   render() {
     return (
       <div>
@@ -98,20 +100,16 @@ class Message extends React.Componets {
   }
 }
 
-class MessageInput extends React.Components{
+class AnswerInput extends React.Components {
   handleSubmit(e) {
     e.preventDefault()
-    let text = React.findDOMNode(this.refs.text).value.trim()
+    let text = ReactDOM.findDOMNode(this.refs.text).value.trim()
     let date = (new Date()).toLocaleTimeString()
-    React.findDOMNode(this.refs.text).value = ""
-    this.props.onMessageSubmit({text: text, date: date})
+    ReactDOM.findDOMNode(this.refs.text).value = ""
+    this.props.onAnswerSubmit({text: text, date: date})
   }
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" ref="text"/>
-      </form>
-    )
+    return <button ref="text" onSubmit={this.handleSubmit}>A</button>
   }
 }
 
