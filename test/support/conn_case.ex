@@ -26,6 +26,7 @@ defmodule Quizzbuzz.ConnCase do
       import Ecto.Query
 
       import Quizzbuzz.Router.Helpers
+      import Quizzbuzz.Factory
 
       # The default endpoint for testing
       @endpoint Quizzbuzz.Endpoint

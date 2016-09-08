@@ -19,6 +19,12 @@ defmodule Quizzbuzz.Router do
     get "/", PageController, :index
   end
 
+  scope "/round", Quizzbuzz do
+    pipe_through :api
+
+    resources "/question", QuestionController, only: [:index]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Quizzbuzz do
   #   pipe_through :api
