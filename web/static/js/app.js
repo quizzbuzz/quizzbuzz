@@ -15,9 +15,9 @@ import "phoenix_html"
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Home from 'components/home'
-import socket from "socket"
+import Dashboard from 'components/dashboard'
 
-ReactDOM.render(<Home/>, document.getElementById('home'))
+ReactDOM.render(<Dashboard/>, document.getElementById('home'))
 // Import local files
 //
 // Local files can be imported directly using relative
