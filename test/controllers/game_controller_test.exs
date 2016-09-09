@@ -1,11 +1,15 @@
-defmodule Quizzbuzz.QuestionControllerTest do
+defmodule Quizzbuzz.GameControllerTest do
   use Quizzbuzz.ConnCase
+
+  alias Quizzbuzz.Game
+  alias Quizzbuzz.Question
+
 
   test "#index renders a single question" do
     conn = build_conn()
-    question = insert(:question)
+    game = insert(:game)
 
-    conn = get conn, question_path(conn, :index)
+    conn = get conn, game_path(conn, :index)
 
     assert json_response(conn, 200) == %{
       "round" => %{

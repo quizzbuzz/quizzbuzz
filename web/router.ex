@@ -22,7 +22,7 @@ defmodule Quizzbuzz.Router do
   scope "/round", Quizzbuzz do
     pipe_through :api
 
-    resources "/question", QuestionController, only: [:index]
+    resources "/question", GameController, only: [:index]
   end
 
   # Other scopes may use custom stacks.

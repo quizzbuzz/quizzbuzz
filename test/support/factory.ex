@@ -1,11 +1,19 @@
 defmodule Quizzbuzz.Factory do
   use ExMachina.Ecto, repo: Quizzbuzz.Repo
 
-  def question_factory do
-    %Quizzbuzz.Question{
-        body: "How many roads must a man walk down, before you can call him a man?",
-        options: ["1", "3", "5", "42"],
-        answer: "42"
-      }
+  alias Quizzbuzz.Game
+  alias Quizzbuzz.Question
+
+  def game_factory do
+    %Game{
+      title: "Game 1",
+      topic: "Philosophy",
+      questions: [%Question{
+      body: "How many roads must a man walk down before he is a man?",
+      options: ["1","2","3","4"],
+      answer: "1",
+    }]
+    }
   end
+
 end

@@ -1,19 +1,18 @@
-defmodule Quizzbuzz.QuestionView do
+defmodule Quizzbuzz.GameView do
   use Quizzbuzz.Web, :view
 
-  def render("index.json", %{questions: questions}) do
-    %{
-      round: question_json(questions)
-    }
+  def render("index.json", %{game: game}) do
+    [question | _ ] = game_json(game).game.questions
+    IO.inspect question.options
   end
 
-  defp question_json(question) do
+  defp game_json(game) do
     %{
-      question: %{
-        id: question.id,
-        body: question.body,
-        options: question.options,
-        answer: question.answer
+      game: %{
+        id: game.id,
+        title: game.title,
+        topic: game.topic,
+        questions: game.questions
       }
     }
   end
