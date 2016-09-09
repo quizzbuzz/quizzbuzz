@@ -5,16 +5,22 @@ defmodule Quizzbuzz.GameChannel do
   def join("game:" <> room, _, socket) do
     game = set_game
     {:ok, _} = GenServer.start_link(__MODULE__, game.questions, name: :game1)
-    IO.inspect GenServer.call(:game1, :pop)
-    {:ok, game.game_info, socket}
+    question = GenServer.call(:game1, :pop)
+    {:ok, question, socket}
   end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
-  def handle_in("ping", payload, socket) do
-    IO.inspect payload
-    {:reply, {:ok, payload}, socket}
+  def handle_in("answer", payload, socket) do
+    question = GenServer.call(:game1, :pop)
+    #do something the payload.answer
+    {:new_question, question, socket}
   end
+
+  def handle_in("ping", payload, socket) do
+    {:reply, {:ok, payload}, socket} #does response payload need to be in this format?
+  end
+
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (game:lobby).
@@ -27,13 +33,23 @@ defmodule Quizzbuzz.GameChannel do
   defp set_game do
     game = last_game
     game_info = game_info(game)
-    questions = game.questions
+    questions = shuffle(game.questions)
     %{game_info: game_info, questions: questions}
+  end
+
+  defp shuffle(questions) do
+    Enum.shuffle(Enum.map questions, fn(question) -> %{
+      question: %{
+        body: question.body,
+        answer: question.answer,
+        options: Enum.shuffle(question.options)
+      }
+    }
+    end)
   end
 
   defp game_info(game) do
     %{
-      title: game.title,
       topic: game.topic
     }
   end
