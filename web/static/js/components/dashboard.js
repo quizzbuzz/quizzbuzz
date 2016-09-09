@@ -1,6 +1,5 @@
 import socket from "../socket"
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 const rooms = ["general", "mix", "ecto", "plug", "elixir", "erlang"]
 

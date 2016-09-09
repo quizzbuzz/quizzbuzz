@@ -16,7 +16,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Dashboard from 'components/dashboard'
 
-ReactDOM.render(<Dashboard />, document.getElementById('home'))
+ReactDOM.render(<Dashboard />, document.getElementById('game'))
+
 // Import local files
 //
 // Local files can be imported directly using relative
