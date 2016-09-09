@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <center>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
@@ -20,5 +21,6 @@
       </main>
 
     <script src="<%= static_path(@conn, "/js/bundle.js") %>"></script>
+  </center>
   </body>
 </html>

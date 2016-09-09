@@ -1,14 +1,15 @@
 import socket from "../socket"
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 const rooms = ["general", "mix", "ecto", "plug", "elixir", "erlang"]
 
-class Dashboard extends React.Components {
-  constructor (props) {
-    super(props)
+class Dashboard extends React.Component {
+  constructor () {
+    super()
     this.state = {
       activeRoom: "general",
-      answer: [],
+      answers: [],
       channel: socket.channel("topic:general")
     }
   }
@@ -17,7 +18,7 @@ class Dashboard extends React.Components {
     this.setState({activeRoom: room, answers: [], channel: channel})
     this.configureChannel(channel)
   }
-  handleAnswerSubmit(answer) {
+  handleAnswerClick(answer) {
     this.state.channel.push("answer", {body: answer})
   }
   configureChannel(channel) {
@@ -34,15 +35,15 @@ class Dashboard extends React.Components {
   render() {
     return (
       <div>
-        <RoomList onRoomLinkClick={this.handleRoomLinkClick} rooms={rooms}/>
-        <ActiveRoom room={this.state.activeRoom} answers={this.state.answer} onAnswerSubmit={this.handleAnswerSubmit}/>
+        <RoomList onRoomLinkClick={this.handleRoomLinkClick.bind(this)} rooms={rooms}/>
+        <ActiveRoom room={this.state.activeRoom} answers={this.state.answers} onAnswerClick={this.handleAnswerClick.bind(this)}/>
       </div>
     )
   }
 }
 
 
-class RoomList extends React.Components {
+class RoomList extends React.Component {
   render() {
     return (
       <div>
@@ -54,42 +55,42 @@ class RoomList extends React.Components {
   }
 }
 
-class  RoomLink extends React.Components {
+class  RoomLink extends React.Component {
   handleClick() {
     this.props.onClick(this.props.name)
   }
   render() {
     return (
-      <a style={{cursor: "pointer"}} onClick={this.handleClick}>{this.props.name}</a>
+      <a style={{cursor: "pointer"}} onClick={this.handleClick.bind(this)}>{this.props.name}</a>
     )
   }
 }
 
-class ActiveRoom extends React.Components {
+class ActiveRoom extends React.Component {
   render() {
     return (
       <div>
       <span>Welcome to the {this.props.room} game room!</span>
-        <AnswerInput onAnswerSubmit={this.props.onAnswerSubmit}/>
+        <AnswerInput onAnswerClick={this.props.onAnswerClick}/>
         <AnswerList answers={this.props.answers}/>
       </div>
     )
   }
 }
 
-class AnswerList extends React.Components {
+class AnswerList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.answers.map(answer => {
-          return <Answer data={answer} />
+        {this.props.answers.map((answer, index) => {
+          return <Answer key={index} data={answer} />
         })}
       </div>
     )
   }
 }
 
-class Answer extends React.Componets {
+class Answer extends React.Component {
   render() {
     return (
       <div>
@@ -100,16 +101,19 @@ class Answer extends React.Componets {
   }
 }
 
-class AnswerInput extends React.Components {
-  handleSubmit(e) {
-    e.preventDefault()
-    let text = ReactDOM.findDOMNode(this.refs.text).value.trim()
+class AnswerInput extends React.Component {
+  handleClick(event) {
+    let answer = event.currentTarget.textContent
     let date = (new Date()).toLocaleTimeString()
-    ReactDOM.findDOMNode(this.refs.text).value = ""
-    this.props.onAnswerSubmit({text: text, date: date})
+    this.props.onAnswerClick({text: answer, date: date})
   }
   render() {
-    return <button ref="text" onSubmit={this.handleSubmit}>A</button>
+    return <div>
+      <button onClick={this.handleClick.bind(this)}>A</button>
+      <button onClick={this.handleClick.bind(this)}>B</button>
+      <button onClick={this.handleClick.bind(this)}>C</button>
+      <button onClick={this.handleClick.bind(this)}>D</button>
+      </div>
   }
 }
 

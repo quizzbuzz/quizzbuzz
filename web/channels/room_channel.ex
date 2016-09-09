@@ -5,14 +5,15 @@ defmodule Quizzbuzz.RoomChannel do
     {:ok, socket}
   end
 
-  def handle_in("message", %{"body" => body}, socket) do
-    broadcast! socket, "message", %{body: new_json}
+  def handle_in("answer", %{"body" => body}, socket) do
+    broadcast! socket, "answer", %{body: body}
     {:noreply, socket}
   end
 
   defp new_json do
     %{
-      text: "Hello"
+      question: "the answer is 2",
+      answers: ["1", "2", "3", "4"]
     }
   end
 
