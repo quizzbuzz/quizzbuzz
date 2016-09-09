@@ -3,7 +3,7 @@ defmodule Quizzbuzz.UserSocket do
 
   ## Channels
   # channel "room:*", Quizzbuzz.RoomChannel
-
+  channel "game:lobby", Quizzbuzz.GameChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
