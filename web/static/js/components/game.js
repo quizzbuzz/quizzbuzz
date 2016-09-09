@@ -33,15 +33,17 @@ class Game extends React.Component {
 
   }
   render() {
-    return (
-      <div>
+    if (this.state.options) {
+      return (
+        <div>
         <div>{this.state.question}</div>
-        <button onClick={this.handleClick.bind(this)}>A</button>
-        <button onClick={this.handleClick.bind(this)}>B</button>
-        <button onClick={this.handleClick.bind(this)}>C</button>
-        <button onClick={this.handleClick.bind(this)}>D</button>
-      </div>
-    )
+        {this.state.options.map((option, index )=> {
+          return <button key={index} onClick={this.handleClick.bind(this)}>{option}</button>
+        })}
+        </div>
+      )
+    }
+    return <div></div>
   }
 
 }
