@@ -20,9 +20,4 @@ defmodule Quizzbuzz.Router do
     get "/game", GameController, :index
   end
 
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Quizzbuzz do
-  #   pipe_through :api
-  # end
 end
