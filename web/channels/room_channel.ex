@@ -10,10 +10,14 @@ defmodule Quizzbuzz.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_info(:after_join, socket) do
+    push socket, "questions", new_json
+    {:noreply, socket}
+  end
+
   defp new_json do
     %{
       question: "the answer is 2",
-      answers: ["1", "2", "3", "4"]
     }
   end
 

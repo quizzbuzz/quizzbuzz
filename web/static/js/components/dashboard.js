@@ -102,6 +102,7 @@ class Answer extends React.Component {
 
 class AnswerInput extends React.Component {
   handleClick(event) {
+    console.log(this);
     let answer = event.currentTarget.textContent
     let date = (new Date()).toLocaleTimeString()
     this.props.onAnswerClick({text: answer, date: date})
