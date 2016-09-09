@@ -1,5 +1,16 @@
 /* This file is for your main application css. */
 body{
-  background-color: white;
-  color: dodgerblue;
+  background-color: rgb(12, 201, 139);
+  color: white;
+}
+
+div {
+  background-color: rgb(132, 79, 244);
+  padding: 20px;
+
+}
+
+button.space {
+  margin: 10px;
+  
 }

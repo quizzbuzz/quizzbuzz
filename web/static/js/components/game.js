@@ -14,11 +14,12 @@ class Game extends React.Component {
   configureChannel(channel) {
     channel.join()
       .receive("ok", (payload) => {
-        this.setState({question: payload.question, options: payload.options})
         console.log(`Succesfully joined the ${this.state.activeRoom} game room.`)
       })
-      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)}
-    )
+      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)})
+    channel.on("new_question", payload => {
+        this.setState({question: payload.question, options: payload.options})
+      })
   }
   componentWillMount() {
     this.configureChannel(this.state.channel)
@@ -36,10 +37,10 @@ class Game extends React.Component {
     if (this.state.options) {
       return (
         <div>
-        <div>{this.state.question}</div>
-        {this.state.options.map((option, index )=> {
-          return <button key={index} onClick={this.handleClick.bind(this)}>{option}</button>
-        })}
+          <div>{this.state.question}</div>
+          {this.state.options.map((option, index )=> {
+            return <button key={index} onClick={this.handleClick.bind(this)}>{option}</button>
+          })}
         </div>
       )
     }

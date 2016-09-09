@@ -2,54 +2,20 @@ defmodule Quizzbuzz.RoomChannel do
   use Phoenix.Channel
 
   def join("room:"<> _topic_name, _auth_msg, socket) do
-    {:ok, %{question: "The answer is A", options: ["A", "B", "C", "D"]}, socket}
+    send self, :after_join
+    {:ok, socket}
   end
 
+  def handle_info(:after_join, socket) do
+   push socket, "new_question", %{question: "The answer is A", options: ["A", "B", "C", "D"]}
+   {:noreply, socket}
+ end
+
   def handle_in("answer", %{"body" => body}, socket) do
-    broadcast! socket, "answer", %{body: new_json}
+    push socket, "new_question", %{question: "the answer is ewfdvcxbdv",
+    options: ["these", "are", "my", "options"]}
     IO.puts body
     {:noreply, socket}
   end
-
-
-  defp new_json do
-    %{
-      body: "the answer is 2",
-    }
-  end
-
+  
 end
-
-
-# def join("rooms:lobby", message, socket) do
-#    Process flag(:trap_exit, true)
-#    :timer.send_interval(5000, :ping)
-#    send(self, {:after_join, message})
-#
-#    {:ok, socket}
-#  end
-#
-#  def join("rooms:" <> _private_subtopic, _message, _socket) do
-#    {:error, %{reason: "unauthorized"}}
-#  end
-#
-#  def handle_info({:after_join, msg}, socket) do
-#    broadcast! socket, "user:entered", %{user: msg["user"]}
-#    push socket, "join", %{status: "connected"}
-#    {:noreply, socket}
-#  end
-#
-#  def handle_info(:ping, socket) do
-#    push socket, "new:msg", %{user: "SYSTEM", body: "ping"}
-#    {:noreply, socket}
-#  end
-#
-#  def terminate(reason, _socket) do
-#    Logger debug"> leave #{inspect reason}"
-#    :ok
-#  end
-#
-#  def handle_in("new:msg", msg, socket) do
-#    broadcast! socket, "new:msg", %{user: msg["user"], body: msg["body"]}
-#    {:reply, {:ok, %{msg: msg["body"]}}, assign(socket, :user, msg["user"]}
-#  end
