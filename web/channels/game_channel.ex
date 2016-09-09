@@ -14,7 +14,8 @@ defmodule Quizzbuzz.GameChannel do
   def handle_in("answer", payload, socket) do
     question = GenServer.call(:game1, :pop)
     #do something the payload.answer
-    {:new_question, question, socket}
+    push socket, "new_question", question
+    {:noreply, socket}
   end
 
   def handle_in("ping", payload, socket) do
@@ -32,9 +33,8 @@ defmodule Quizzbuzz.GameChannel do
 
   defp set_game do
     game = last_game
-    game_info = game_info(game)
     questions = shuffle(game.questions)
-    %{game_info: game_info, questions: questions}
+    %{questions: questions}
   end
 
   defp shuffle(questions) do
@@ -48,11 +48,11 @@ defmodule Quizzbuzz.GameChannel do
     end)
   end
 
-  defp game_info(game) do
-    %{
-      topic: game.topic
-    }
-  end
+  # defp game_info(game) do
+  #   %{
+  #     topic: game.topic
+  #   }
+  # end
 
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
