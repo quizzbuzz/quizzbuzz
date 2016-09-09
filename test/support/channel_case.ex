@@ -24,7 +24,7 @@ defmodule Quizzbuzz.ChannelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-
+      import Quizzbuzz.Factory
 
       # The default endpoint for testing
       @endpoint Quizzbuzz.Endpoint

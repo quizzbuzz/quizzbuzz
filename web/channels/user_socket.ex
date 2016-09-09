@@ -2,9 +2,9 @@ defmodule Quizzbuzz.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "room:*", Quizzbuzz.RoomChannel
+  # channel "room:*", Quizzbuzz.RoomChannel
+  channel "game:*", Quizzbuzz.GameChannel
 
-  ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
 
