@@ -1,8 +1,7 @@
-defmodule Quizzbuzz.PageController do
+defmodule Quizzbuzz.RoomController do
   use Quizzbuzz.Web, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    render conn, "index"
   end
-
 end
