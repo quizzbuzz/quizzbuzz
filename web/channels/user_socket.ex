@@ -2,7 +2,7 @@ defmodule Quizzbuzz.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "topic:*", Quizzbuzz.RoomChannel
+  channel "room:*", Quizzbuzz.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

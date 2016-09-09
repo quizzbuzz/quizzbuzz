@@ -14,9 +14,9 @@
 import "phoenix_html"
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Gaming from 'components/game'
+import Game from 'components/game'
 
-ReactDOM.render(<Gaming />, document.getElementById('game'))
+ReactDOM.render(<Game />, document.getElementById('game'))
 
 // Import local files
 //

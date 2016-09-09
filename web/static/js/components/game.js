@@ -1,33 +1,49 @@
 import socket from "../socket"
 import React from 'react'
 
-class Gaming extends React.Component {
+class Game extends React.Component {
   constructor () {
     super()
     this.state = {
-      activeRoom: "general",
-      questions: [],
-      channel: socket.channel("topic:general")
+      activeRoom: "single-player",
+      question: '',
+      options: '',
+      channel: socket.channel("room:single-player")
     }
   }
   configureChannel(channel) {
     channel.join()
-      .receive("ok", () => { console.log(`Succesfully joined the ${this.state.activeRoom} game room.`) })
-      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`) })
-    channel.on("answer", payload => {
-      this.setState({answers: this.state.answers.concat([payload.body])})
-    })
+      .receive("ok", (payload) => {
+        this.setState({question: payload.question, options: payload.options})
+        console.log(`Succesfully joined the ${this.state.activeRoom} game room.`)
+      })
+      .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)}
+    )
+  }
+  componentWillMount() {
+    this.configureChannel(this.state.channel)
+  }
+  handleClick(event) {
+    let answer = event.currentTarget.textContent
+    this.state.channel.push("answer", {body: answer})
+    console.log("clicked " + answer);
   }
   componentDidMount() {
-    this.configureChannel(this.state.channel)
+    console.log(this.state.options);
+
   }
   render() {
     return (
       <div>
-      Game
+        <div>{this.state.question}</div>
+        <button onClick={this.handleClick.bind(this)}>A</button>
+        <button onClick={this.handleClick.bind(this)}>B</button>
+        <button onClick={this.handleClick.bind(this)}>C</button>
+        <button onClick={this.handleClick.bind(this)}>D</button>
       </div>
     )
   }
+
 }
 
-export default Gaming
+export default Game
