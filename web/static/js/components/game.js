@@ -21,6 +21,7 @@ class Game extends React.Component {
       })
       .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)}
     )
+    channel.push("ready", {user_id: Math.floor(Math.random() * 10000) + 1 })
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })

@@ -22,6 +22,11 @@ defmodule Quizzbuzz.GameChannel do
     {:reply, {:ok, payload}, socket} #does response payload need to be in this format?
   end
 
+  def handle_in("ready", payload, socket) do
+    IO.puts payload
+    {:noreply, socket} #does response payload need to be in this format?
+  end
+
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (game:lobby).
