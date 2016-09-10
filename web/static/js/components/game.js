@@ -10,7 +10,8 @@ class Game extends React.Component {
       options: '',
       answer: '',
       score: 0,
-      channel: socket.channel("game:single-player")
+      channel: socket.channel("game:single-player"),
+      user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
   }
   configureChannel(channel) {
@@ -21,7 +22,7 @@ class Game extends React.Component {
       })
       .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)}
     )
-    channel.push("ready", {user_id: Math.floor(Math.random() * 10000) + 1 })
+    channel.push("ready", {user_id: this.state.user_id })
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })
@@ -32,7 +33,7 @@ class Game extends React.Component {
   handleClick(event) {
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
-    this.state.channel.push("answer", {body: answer})
+    this.state.channel.push("answer", {body: answer, user_id: this.state.user_id})
     console.log("clicked " + answer);
   }
   checkAnswer(answer) {
