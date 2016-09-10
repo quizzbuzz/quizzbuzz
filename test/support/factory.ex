@@ -22,4 +22,17 @@ defmodule Quizzbuzz.Factory do
     }
   end
 
+  def one_question_test do
+    %Game{
+      title: "FE Test Game",
+      topic: "Everything",
+      questions: [
+        %Question{
+          body: "What is 1 + 1?",
+          options: ["1","2","3","4"],
+          answer: "2",
+          }]
+    }
+  end
+
 end

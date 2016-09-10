@@ -5,4 +5,6 @@ defmodule Quizzbuzz.PageControllerTest do
     conn = get conn, "/"
     assert html_response(conn, 200) =~ "Play"
   end
+
+  
 end
