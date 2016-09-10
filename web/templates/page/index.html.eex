@@ -1,1 +1,3 @@
-<a href="/game">Play</a>
+<form actin="/game">
+  <button formaction="/game" id="play" class="sizing">Play</a>
+</form>

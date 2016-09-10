@@ -60,7 +60,7 @@ class  RoomLink extends React.Component {
   }
   render() {
     return (
-      <a style={{cursor: "pointer"}} onClick={this.handleClick.bind(this)}>{this.props.name}</a>
+      <a onClick={this.handleClick.bind(this)}>{this.props.name}</a>
     )
   }
 }
