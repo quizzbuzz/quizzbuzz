@@ -14,7 +14,9 @@
 
   <body>
     <center>
-      <div class="header">Quizzbuzz!</div>
+      <div class="header">
+        <a href="/">Quizzbuzz!</a>
+      </div>
       <!-- <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
 
