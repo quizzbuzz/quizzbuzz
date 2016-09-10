@@ -4,7 +4,13 @@ defmodule Quizzbuzz.GameControllerTest do
   alias Quizzbuzz.Game
   alias Quizzbuzz.Question
 
-  # 
+  test "GET /game", %{conn: conn} do
+    conn = get conn, "/game"
+    assert html_response(conn, 200) =~ ""
+  end
+
+
+  #
   # test "#index renders a single question" do
   #   conn = build_conn()
   #   game = insert(:game)
