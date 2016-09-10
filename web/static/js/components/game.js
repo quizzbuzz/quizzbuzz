@@ -54,6 +54,10 @@ class Game extends React.Component {
     return <div></div>
   }
 
+  componentWillUnmount() {
+    this.state.channel.leave();
+  }
+
 }
 
 export default Game
