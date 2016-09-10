@@ -95,6 +95,34 @@ So that I can test my specialist knowledge
 I can select different categories of questions
 ```
 
+###Instructions
+fork the repo
+clone the code
+
+setup
+```
+mix deps.get
+```
+```
+npm install
+```
+```
+mix ecto.create
+```
+```
+mix ecto.migrate
+```
+```
+mix run priv/repo/seeds.exs
+```
+
+run the code
+
+```
+mix phoenix.server
+```
+
+got to localhost4000 in your browser and have all the fun!
 
 ###Authors
 [Aga Kowalczuk](https://github.com/agakow), [Becca Pearce](https://github.com/beccapearce), [Jack Oddy](https://github.com/JackOddy), [Sophie Gill](https://github.com/soph-g)
