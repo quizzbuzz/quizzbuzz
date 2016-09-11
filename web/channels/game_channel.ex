@@ -23,7 +23,6 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("ready", payload, socket) do
-    IO.puts payload
     {:noreply, socket} #does response payload need to be in this format?
   end
 

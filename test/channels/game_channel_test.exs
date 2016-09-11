@@ -19,11 +19,11 @@ defmodule Quizzbuzz.GameChannelTest do
 
   end
 
-  test "new question is returned on the reveival of an answer", %{socket: socket} do
+  test "new question is returned on the retreival of an answer", %{socket: socket} do
     push socket, "answer", %{"answer" => "1"}
     assert_push "new_question", %{question:
-                                  %{answer: "1",
-                                  body: "How many roads must a man walk down before he is a man?",
+                                  %{answer: _,
+                                  body: _,
                                   options: [_, _, _, _]}}
   end
 

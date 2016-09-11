@@ -2,8 +2,7 @@ defmodule Quizzbuzz.GameTest do
   use Quizzbuzz.ModelCase
 
   alias Quizzbuzz.Game
-  alias Quizzbuzz.Question
-
+  
   @valid_attrs %{title: "some content", topic: "some content", questions: [
     %{
       body: "How many roads must a man walk down before he is a man?",

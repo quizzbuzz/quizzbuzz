@@ -2,7 +2,6 @@ defmodule Quizzbuzz.GameControllerTest do
   use Quizzbuzz.ConnCase
 
   alias Quizzbuzz.Game
-  alias Quizzbuzz.Question
 
   test "GET /game", %{conn: conn} do
     conn = get conn, "/game"
