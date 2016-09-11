@@ -17,14 +17,17 @@ class Game extends React.Component {
   configureChannel(channel) {
     channel.join()
       .receive("ok", (payload) => {
-        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
         console.log(`Succesfully joined the ${this.state.activeRoom} game room.`)
       })
       .receive("error", () => { console.log(`Unable to join the ${this.state.activeRoom} game room.`)}
     )
     channel.push("ready", {user_id: this.state.user_id })
     channel.on("new_question", payload => {
+      console.log(payload);
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
+     })
+    channel.on("end_game", payload => {
+      document.write(this.state.score)
      })
   }
   componentWillMount() {

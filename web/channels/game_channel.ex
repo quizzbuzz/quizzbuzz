@@ -9,11 +9,10 @@ defmodule Quizzbuzz.GameChannel do
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("answer", payload, socket) do
-    game_id = String.to_char_list(payload["user_id"])
-              |> :erlang.list_to_atom
-    case GenServer.call(game_id, :pop)
+    game_id = get_game_id(payload)
+    case GenServer.call(game_id, :pop) do
+      :end_game -> push socket, "end_game", %{"body" => "Hello"}
       question -> push socket, "new_question", question
-      :end_game -> push socket, "end_game", "finished"
     end
     {:noreply, socket}
   end
@@ -24,9 +23,8 @@ defmodule Quizzbuzz.GameChannel do
 
   def handle_in("ready", payload, socket) do
     game = set_game
-    game_id = String.to_char_list(payload["user_id"]) |> :erlang.list_to_atom
-    IO.inspect game_id
-    {:ok, _} = GenServer.start_link(__MODULE__, game.questions, name: game_id)
+    game_id = get_game_id(payload)
+    {:ok, _} = GenServer.start(__MODULE__, game.questions, name: game_id)
     question = GenServer.call(game_id, :pop)
     push socket, "new_question", question
     {:noreply, socket} #does response payload need to be in this format?
@@ -58,17 +56,16 @@ defmodule Quizzbuzz.GameChannel do
     end)
   end
 
-  # defp game_info(game) do
-  #   %{
-  #     topic: game.topic
-  #   }
-  # end
-
   def handle_call(:pop, _from, []) do
-    {:stop, "End of Game", :end_game, []}
+    {:stop,:end_game, :end_game, []}
   end
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
+  end
+
+  defp get_game_id(payload) do
+    String.to_char_list(payload["user_id"])
+      |> :erlang.list_to_atom
   end
 
   defp last_game do
