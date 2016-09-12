@@ -18,6 +18,7 @@ defmodule Quizzbuzz.Router do
 
     get "/", PageController, :index
     get "/game", GameController, :index
+    get "/leaderboard", BoardController, :index
   end
 
 end
