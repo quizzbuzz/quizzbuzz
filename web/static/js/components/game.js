@@ -12,7 +12,6 @@ class Game extends React.Component {
       answer: '',
       time: 10,
       score: 0,
-      countdown: 10,
       gameEnd: false,
       channel: socket.channel("game:single-player"),
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
@@ -51,6 +50,7 @@ class Game extends React.Component {
     }
   }
   handleTimeOut() {
+    console.log(this.state.score);
     this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
   }
 
@@ -70,7 +70,7 @@ class Game extends React.Component {
       return (
         <div>
           <div className="question">{this.state.question}</div>
-          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onChange={this.handleTimeOut.bind(this)}/>
+          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}

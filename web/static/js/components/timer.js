@@ -11,7 +11,7 @@ class Timer extends React.Component {
     this.setState({secondsRemaining: this.state.secondsRemaining - 1});
     if (this.state.secondsRemaining <= 0) {
       console.log('timout');
-      this.props.onChange()
+      this.props.onZero()
       clearInterval(this.interval);
     }
   }
