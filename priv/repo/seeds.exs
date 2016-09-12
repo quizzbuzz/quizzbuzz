@@ -58,7 +58,7 @@ Quizzbuzz.Repo.insert!(%Quizzbuzz.Game{
         body: "Never gonna...",
         options: ["give you up","let you down","hold you down","desert you"],
         answer: "give you up",
-      }
+      },
       %Quizzbuzz.Question{
         body: "Where is the ponte dei sospiri",
         options: ["Venice","Rome","Reykjavik","Madrid"],
