@@ -1,20 +1,6 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
 
 
-Quizzbuzz.Repo.insert!(%Quizzbuzz.Game{
-    title: "nothing",
-    topic: "nothing",
-    questions: [
-      %Quizzbuzz.Question{
+questions = [%Quizzbuzz.Question{
         body: "What is 1+1?",
         options: ["1","2","3","4"],
         answer: "2"
@@ -72,8 +58,7 @@ Quizzbuzz.Repo.insert!(%Quizzbuzz.Game{
       %Quizzbuzz.Question{
         body: "What year was the NHS formed",
         options: ["1947","1948","1949","1950"],
-        answer: "1948",
-      }
+        answer: "1948"
+      }]
 
-    ]
-  })
+Enum.map(questions, &(Quizzbuzz.Repo.insert!(&1)))

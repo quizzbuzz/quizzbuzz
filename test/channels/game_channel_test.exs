@@ -38,7 +38,7 @@ defmodule Quizzbuzz.GameChannelTest do
 
   test "game is ended after questions are all answered", %{socket: socket} do
     push socket, "answer", %{"user_id" => "888"}
-    assert_push "results", %{:result => "You Win"}
+    assert_push "end_game", %{:result => "You Win"}
 
   end
 

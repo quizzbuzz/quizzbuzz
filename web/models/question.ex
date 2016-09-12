@@ -7,7 +7,7 @@ defmodule Quizzbuzz.Question do
     field :body, :string
     field :options, {:array, :string}
     field :answer, :string
-    belongs_to :game, Quizzbuzz.Game
+    # belongs_to :game, Quizzbuzz.Game
 
     timestamps()
   end

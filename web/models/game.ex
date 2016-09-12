@@ -4,7 +4,7 @@ defmodule Quizzbuzz.Game do
   schema "games" do
     field :title, :string
     field :topic, :string
-    has_many :questions, Quizzbuzz.Question
+    # has_many :questions, Quizzbuzz.Question
 
 
     timestamps()
@@ -16,7 +16,7 @@ defmodule Quizzbuzz.Game do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :topic])
-    |> cast_assoc(:questions, required: true)
+    # |> cast_assoc(:questions, required: true)
     |> validate_required([:title, :topic])
   end
 end
