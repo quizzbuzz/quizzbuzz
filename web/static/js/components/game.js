@@ -1,5 +1,6 @@
 import socket from "../socket"
 import React from 'react'
+import Timer from './timer'
 
 class Game extends React.Component {
   constructor () {
@@ -9,7 +10,9 @@ class Game extends React.Component {
       question: '',
       options: '',
       answer: '',
+      time: 10,
       score: 0,
+      countdown: 10,
       gameEnd: false,
       channel: socket.channel("game:single-player"),
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
@@ -66,6 +69,7 @@ class Game extends React.Component {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
           <div className="score">Score: {this.state.score}</div>
+          <Timer secondsRemaining="10" />
         </div>
       )
     }
