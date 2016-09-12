@@ -27,6 +27,7 @@ defmodule Quizzbuzz.Router do
     post "/register", RegistrationController, :create
     get "/forget-password", PasswordController, :forget_password
     post "/reset-password", PasswordController, :reset_password
+    get "/leaderboard", BoardController, :index
   end
 
 

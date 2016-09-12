@@ -3,7 +3,7 @@ import Game from '../../../../web/static/js/components/game';
 import { mount, shallow } from 'enzyme'
 import sinon from 'sinon'
 import TestUtils from 'react-addons-test-utils'
-import Button from '../../../../web/static/js/components'
+import Button from '../../../../web/static/js/components/option'
 
 describe('Game', () => {
   // const wrapper = shallow(<Game />)
@@ -17,7 +17,7 @@ describe('Game', () => {
 // const wrapper = shallow(<Game />);
 // sinon.stub(Game, 'configureChannel')
 // expect(Game.prototype.componentWillMount().calledOnce).to.equal(true);
-  // const wrapper = mount(<Game />);
+  const wrapper = mount(<Game />);
   //
   // it('should have four option buttons', () => {
   //   wrapper.setState({options: ["A", "B", "C", "D"]})
@@ -30,22 +30,26 @@ describe('Game', () => {
   // });
   //
   it('should call handleClick on a button click', () => {
-    const game = TestUtils.renderIntoDocument(<Game />)
-    game.setState({options: ["A", "B", "C", "D"]})
+    // const game = TestUtils.renderIntoDocument(<Game />)
+    wrapper.setState({options: ["A", "B", "C", "D"]})
     // const event = sinon.mock({
     //   currentTarget: {
     //     textContent: "C"
     //   }
     // })
-    const button = TestUtils.renderIntoDocument(<Button option='A'/>)
-
+    // const button = TestUtils.renderIntoDocument(<Button option='A'/>)
+    console.log(wrapper.children('Option').at(2).simulate('click', {event: {
+                                                      currentTarget : {
+                                                        textContent: "C"
+                                                      }}
+    }));
     // button = TestUtils.findRenderedDOMComponentWithTag('button').getDOMNode()
-    TestUtils.Simulate.click(button)
+    // TestUtils.Simulate.click(button)
 
     // expect()
     //
-    // handleClick = sinon.spy(Game.prototype, "handleClick")
-    // const button = wrapper.children('button').at(2)
+    const handleClick = sinon.spy(Game.prototype, "handleClick")
+    const button = wrapper.children('button').at(2)
     //     console.log(button.props);
     // button.simulate('click')
 
