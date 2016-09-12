@@ -65,21 +65,21 @@ class Game extends React.Component {
       return (
         <div>
           <div className="question">{this.state.question}</div>
+          <Timer secondsRemaining={this.state.time} question={this.state.question}/>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
           <div className="score">Score: {this.state.score}</div>
-          <Timer secondsRemaining="10" />
         </div>
       )
     }
     return <div></div>
   }
-
   componentWillUnmount() {
     this.state.channel.leave();
   }
 
 }
+
 
 export default Game
