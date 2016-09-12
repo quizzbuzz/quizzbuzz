@@ -10,6 +10,8 @@ class Timer extends React.Component {
   tick() {
     this.setState({secondsRemaining: this.state.secondsRemaining - 1});
     if (this.state.secondsRemaining <= 0) {
+      console.log('timout');
+      this.props.onChange()
       clearInterval(this.interval);
     }
   }
@@ -27,6 +29,7 @@ class Timer extends React.Component {
     this.interval = setInterval(this.tick.bind(this), 1000);
     }
   }
+
   render() {
     return (
       <div>{this.state.secondsRemaining}</div>

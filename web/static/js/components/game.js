@@ -19,6 +19,7 @@ class Game extends React.Component {
     }
   }
   configureChannel(channel) {
+
     channel.join()
       .receive("ok", (payload) => {
         console.log(`Succesfully joined the ${this.state.activeRoom} game room.`)
@@ -27,7 +28,6 @@ class Game extends React.Component {
     )
     channel.push("ready", {user_id: this.state.user_id })
     channel.on("new_question", payload => {
-      console.log(payload);
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })
     channel.on("end_game", payload => {
@@ -50,6 +50,9 @@ class Game extends React.Component {
       this.state.score += this.refs.timer.state.secondsRemaining
     }
   }
+  handleTimeOut() {
+    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
+  }
 
   render() {
     if (this.state.gameEnd === true) {
@@ -67,7 +70,7 @@ class Game extends React.Component {
       return (
         <div>
           <div className="question">{this.state.question}</div>
-          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question}/>
+          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onChange={this.handleTimeOut.bind(this)}/>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
