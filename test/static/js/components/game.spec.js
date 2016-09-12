@@ -17,6 +17,7 @@ describe('Game', () => {
 // sinon.stub(Game, 'configureChannel')
 // expect(Game.prototype.componentWillMount().calledOnce).to.equal(true);
   const wrapper = shallow(<Game />);
+
   it('should have four option buttons', () => {
     wrapper.setState({options: ["A", "B", "C", "D"]})
     expect(wrapper.children('button')).to.have.length(4);
@@ -62,7 +63,8 @@ describe('Game', () => {
   it('if game ends expect score to show on the page', () => {
     wrapper.setState({endGame: true, score: 8})
 
-    expect(wrapper.children('.score').text()).to.equal('8')
+    expect(wrapper.contains(<h4 className="finalScore">Final Score: 8 / 10</h4>)).to.be.true
+    expect(wrapper.children('.gameOver').text()).to.equal('Game Over!')
   })
 
 

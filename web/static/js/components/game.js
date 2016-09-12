@@ -28,7 +28,7 @@ class Game extends React.Component {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })
     channel.on("end_game", payload => {
-      document.write(this.state.score)
+      this.setState({gameEnd: true, options: false});
      })
   }
   componentWillMount() {
@@ -47,15 +47,25 @@ class Game extends React.Component {
     console.log(this.state.score);
   }
   render() {
-    if (this.state.options) {
+    if (this.state.gameEnd === true) {
+      return (
+        <div>
+          <h3 className="gameOver"> Game Over! </h3>
+          <h4 className="finalScore">Final Score: {this.state.score} / 10</h4>
+          <form action="/game">
+            <button id="play" class="sizing">Play</button>
+          </form>
+        </div>
+      )
+    }
+    if (this.state.options && this.state.gameEnd === false) {
       return (
         <div>
           <div className="question">{this.state.question}</div>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
-          <div className="score">{this.state.score}</div>
-
+          <div className="score">Score: {this.state.score}</div>
         </div>
       )
     }
