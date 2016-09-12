@@ -1,0 +1,31 @@
+<%= for user <- @users do %>
+  <p><%= user.email%></p>
+<% end %>
+
+
+<center>
+  <div class="page-header">
+    <h1>Leaderboard <small>Highest Scores</small></h1>
+  </div>
+
+  <div class="panel panel-default">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="head-field">#</th>
+          <th class="head-field">User</th>
+          <th class="head-field">Highest Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for user <- @users do %>
+          <tr>
+            <th class="index-row">1</th>
+            <td class="index-field"><%= user.email%></td>
+            <td class="index-field">100</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</center>
