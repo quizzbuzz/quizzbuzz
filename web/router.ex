@@ -1,5 +1,6 @@
 defmodule Quizzbuzz.Router do
   use Quizzbuzz.Web, :router
+  use Passport
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,7 @@ defmodule Quizzbuzz.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :current_user
   end
 
   scope "/", Quizzbuzz do
@@ -18,6 +20,14 @@ defmodule Quizzbuzz.Router do
 
     get "/", PageController, :index
     get "/game", GameController, :index
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    get "/logout", SessionController, :delete
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
+    get "/forget-password", PasswordController, :forget_password
+    post "/reset-password", PasswordController, :reset_password
   end
+
 
 end
