@@ -10,14 +10,12 @@ class Timer extends React.Component {
   tick() {
     this.setState({secondsRemaining: this.state.secondsRemaining - 1});
     if (this.state.secondsRemaining <= 0) {
-      console.log('timout');
       this.props.onZero()
       clearInterval(this.interval);
     }
   }
   componentDidMount() {
-    this.setState({ secondsRemaining: this.props.secondsRemaining });
-    this.interval = setInterval(this.tick.bind(this), 1000);
+    this.updateTimer();
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -25,9 +23,13 @@ class Timer extends React.Component {
   componentWillUpdate(nextProps, nextState) {
     if(this.props.question !== nextProps.question) {
     clearInterval(this.interval);
-    this.setState({ secondsRemaining: this.props.secondsRemaining });
-    this.interval = setInterval(this.tick.bind(this), 1000);
+    this.updateTimer();
     }
+  }
+
+  updateTimer(){
+    this.setState({ secondsRemaining: this.props.secondsRemaining })
+    this.interval = setInterval(this.tick.bind(this), 1000)
   }
 
   render() {
