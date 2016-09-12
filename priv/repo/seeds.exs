@@ -50,7 +50,7 @@ Quizzbuzz.Repo.insert!(%Quizzbuzz.Game{
         answer: "rat",
       },
       %Quizzbuzz.Question{
-        body: "Which pokemon is the first in the origin 150",
+        body: "Which pokemon is the first in the original 150",
         options: ["Bulbasaur","Pikachu","Charmander","Ditto"],
         answer: "Bulbasaur",
       },
