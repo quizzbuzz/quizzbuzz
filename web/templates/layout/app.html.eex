@@ -30,9 +30,9 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Leaderboard <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Sign in</a></li>
-              <li><a href="#">Sign up</a></li>
+              <li class="active"><a href="/leaderboard">Leaderboard <span class="sr-only">(current)</span></a></li>
+              <li><a href="/login">Sign in</a></li>
+              <li><a href="/register">Sign up</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -48,7 +48,6 @@
       </div>
       <!-- <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
-
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>

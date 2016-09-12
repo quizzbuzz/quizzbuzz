@@ -1,7 +1,4 @@
 /* This file is for your main application css. */
-body {
-  background-color: rgb(60, 236, 183);
-}
 
 .sizing {
   display: block;
@@ -25,7 +22,7 @@ button:focus {
 }
 
 div.question {
-  color: white;
+  color: black;
   font-size: 30px;
   margin: 20px
 }
@@ -35,4 +32,46 @@ div.question {
   position: absolute;;
   top: 41%;
   left: 41%;
+}
+
+.table.table-striped {
+  width: 600px;
+  text-align: center;
+}
+
+.page-header {
+  text-align: center;
+}
+
+.panel.panel-default {
+  width: 600px;
+}
+
+.col-sm-3.text-left {
+  text-align: center;
+}
+
+.show-field {
+  width: 150px;
+}
+
+.head-field {
+  text-align: center;
+}
+
+.index-field {
+  width: 250px;
+}
+
+.index-row  {
+  width: 100px;
+  text-align: center;
+}
+
+.form-control {
+  width: 400px;
+}
+
+.form-group {
+  width: 400px;
 }
