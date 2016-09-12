@@ -3,18 +3,17 @@ defmodule Quizzbuzz.GameChannel do
   use GenServer
 
   def join("game:" <> room, _, socket) do
-    game = set_game
-    {:ok, _} = GenServer.start_link(__MODULE__, game.questions, name: :game1)
-    question = GenServer.call(:game1, :pop)
-    {:ok, question, socket}
+    {:ok, socket}
   end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("answer", payload, socket) do
-    question = GenServer.call(:game1, :pop)
-    #do something the payload.answer
-    push socket, "new_question", question
+    game_id = get_game_id(payload)
+    case GenServer.call(game_id, :pop) do
+      :end_game -> push socket, "end_game", %{"body" => "Hello"}
+      question -> push socket, "new_question", question
+    end
     {:noreply, socket}
   end
 
@@ -23,6 +22,11 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("ready", payload, socket) do
+    game = set_game
+    game_id = get_game_id(payload)
+    {:ok, _} = GenServer.start(__MODULE__, game.questions, name: game_id)
+    question = GenServer.call(game_id, :pop)
+    push socket, "new_question", question
     {:noreply, socket} #does response payload need to be in this format?
   end
 
@@ -52,14 +56,16 @@ defmodule Quizzbuzz.GameChannel do
     end)
   end
 
-  # defp game_info(game) do
-  #   %{
-  #     topic: game.topic
-  #   }
-  # end
-
+  def handle_call(:pop, _from, []) do
+    {:stop,:end_game, :end_game, []}
+  end
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
+  end
+
+  defp get_game_id(payload) do
+    String.to_char_list(payload["user_id"])
+      |> :erlang.list_to_atom
   end
 
   defp last_game do

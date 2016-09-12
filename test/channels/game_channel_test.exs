@@ -13,18 +13,28 @@ defmodule Quizzbuzz.GameChannelTest do
       |> subscribe_and_join(GameChannel, "game:lobby")
 
     {:ok, game_info: game, socket: socket}
-  end
-
-  test "game info is returned on join of the lobby" do
 
   end
 
-  test "new question is returned on the retreival of an answer", %{socket: socket} do
-    push socket, "answer", %{"answer" => "1"}
+  test "new question is returned when player is ready", %{socket: socket} do
+    push socket, "ready", %{"user_id" => "888"}
     assert_push "new_question", %{question:
                                   %{answer: _,
                                   body: _,
                                   options: [_, _, _, _]}}
+  end
+
+  test "new question is returned when an answer is received", %{socket: socket} do
+    push socket, "answer", %{"user_id" => "888"}
+    assert_push "new_question", %{question:
+                                  %{answer: _,
+                                  body: _,
+                                  options: [_, _, _, _]}}
+  end
+
+  test "game is ended after questions are all answered", %{socket: socket} do
+    push socket, "answer", %{"user_id" => "888"}
+    assert_push "end_game", %{"body" => "Hello"}
   end
 
 
