@@ -13,6 +13,7 @@ defmodule Quizzbuzz.RegistrationController do
     changeset = User.registration_changeset(%User{}, registration_params)
     case Repo.insert(changeset) do
       {:ok, user} ->
+        Quizzbuzz.SessionController.create(conn, %{"session" => %{"email" => user.email, "password" => user.password}})
         conn
         |> put_flash(:info, "Account created!")
         |> redirect(to: page_path(conn, :index))
