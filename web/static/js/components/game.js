@@ -42,12 +42,12 @@ class Game extends React.Component {
   handleClick(event) {
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
-    this.state.channel.push("answer", {body: answer, user_id: this.state.user_id})
+    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
   }
 
   checkAnswer(answer) {
     if (this.state.answer === answer) {
-      this.state.score++
+      this.state.score += this.refs.timer.state.secondsRemaining
     }
   }
 
@@ -56,9 +56,9 @@ class Game extends React.Component {
       return (
         <div>
           <h3 className="gameOver"> Game Over! </h3>
-          <h4 className="finalScore">Final Score: {this.state.score} / 10</h4>
+          <h4 className="finalScore">Final Score: {this.state.score} / 100</h4>
           <form action="/game">
-            <button id="play" class="sizing">Play</button>
+            <button id="play" className="sizing">Play</button>
           </form>
         </div>
       )
@@ -67,7 +67,7 @@ class Game extends React.Component {
       return (
         <div>
           <div className="question">{this.state.question}</div>
-          <Timer secondsRemaining={this.state.time} question={this.state.question}/>
+          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question}/>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
