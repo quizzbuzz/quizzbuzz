@@ -50,7 +50,7 @@ class Game extends React.Component {
       this.state.score++
     }
   }
-  
+
   render() {
     if (this.state.gameEnd === true) {
       return (
@@ -78,7 +78,6 @@ class Game extends React.Component {
     }
     return <div></div>
   }
-
 
   componentWillUnmount() {
     this.state.channel.leave();
