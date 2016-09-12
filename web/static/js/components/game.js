@@ -34,21 +34,23 @@ class Game extends React.Component {
       this.setState({gameEnd: true, options: false});
      })
   }
+
   componentWillMount() {
     this.configureChannel(this.state.channel)
   }
+
   handleClick(event) {
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {body: answer, user_id: this.state.user_id})
-    console.log("clicked " + answer);
   }
+
   checkAnswer(answer) {
     if (this.state.answer === answer) {
       this.state.score++
     }
-    console.log(this.state.score);
   }
+
   render() {
     if (this.state.gameEnd === true) {
       return (
@@ -75,6 +77,7 @@ class Game extends React.Component {
     }
     return <div></div>
   }
+
   componentWillUnmount() {
     this.state.channel.leave();
   }
