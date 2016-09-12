@@ -35,7 +35,7 @@
                 <li><a href="/logout">Sign out</a></li>
               <% else %>
                 <li><a href="/login">Sign in</a></li>
-                <li><a href="/register">Sign up</a></li>
+                <li><a href="/join">Sign up</a></li>
               <% end %>
             </ul>
 
