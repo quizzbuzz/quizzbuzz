@@ -34,21 +34,23 @@ class Game extends React.Component {
       this.setState({gameEnd: true, options: false});
      })
   }
+
   componentWillMount() {
     this.configureChannel(this.state.channel)
   }
+
   handleClick(event) {
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {body: answer, user_id: this.state.user_id})
-    console.log("clicked " + answer);
   }
+
   checkAnswer(answer) {
     if (this.state.answer === answer) {
       this.state.score++
     }
-    console.log(this.state.score);
   }
+  
   render() {
     if (this.state.gameEnd === true) {
       return (
@@ -64,17 +66,19 @@ class Game extends React.Component {
     if (this.state.options && this.state.gameEnd === false) {
       return (
         <div>
-          <div className="question">{this.state.question}</div>
+          <div className="question" onChange={this.setTimer}>{this.state.question}</div>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
           <div className="score">Score: {this.state.score}</div>
-          <Timer secondsRemaining="10" />
+
+          <Timer secondsRemaining={this.state.time} />
         </div>
       )
     }
     return <div></div>
   }
+
 
   componentWillUnmount() {
     this.state.channel.leave();
