@@ -30,7 +30,7 @@ Quizzbuzz.Repo.insert!(%Quizzbuzz.Game{
         answer: "a lot",
       },
       %Quizzbuzz.Question{
-        body: "What was four legs a dawn, two at midday and three at sunset?",
+        body: "What has four legs at dawn, two at midday and three at sunset?",
         options: ["an orange","a dog","a man","a cat"],
         answer: "a man",
       }
