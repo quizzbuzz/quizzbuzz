@@ -1,9 +1,12 @@
 defmodule Quizzbuzz.GameChannelTest do
+  use ExUnit.Case, async: false
   use Quizzbuzz.ChannelCase
 
   import Quizzbuzz.Factory
 
   alias Quizzbuzz.GameChannel
+
+
 
   setup do
 
@@ -15,6 +18,7 @@ defmodule Quizzbuzz.GameChannelTest do
     {:ok, game_info: game, socket: socket}
 
   end
+
 
   test "new question is returned when player is ready", %{socket: socket} do
     push socket, "ready", %{"user_id" => "888"}
@@ -34,22 +38,8 @@ defmodule Quizzbuzz.GameChannelTest do
 
   test "game is ended after questions are all answered", %{socket: socket} do
     push socket, "answer", %{"user_id" => "888"}
-    assert_push "end_game", %{"body" => "Hello"}
+    assert_push "results", %{:result => "You Win"}
+
   end
 
-
-  test "ping replies with status ok", %{socket: socket} do
-    ref = push socket, "ping", %{"hello" => "there"}
-    assert_reply ref, :ok, %{"hello" => "there"}
-  end
-
-  test "shout broadcasts to game:lobby", %{socket: socket} do
-    push socket, "shout", %{"hello" => "all"}
-    assert_broadcast "shout", %{"hello" => "all"}
-  end
-
-  test "broadcasts are pushed to the client", %{socket: socket} do
-    broadcast_from! socket, "broadcast", %{"some" => "data"}
-    assert_push "broadcast", %{"some" => "data"}
-  end
 end

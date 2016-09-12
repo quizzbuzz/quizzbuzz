@@ -11,14 +11,10 @@ defmodule Quizzbuzz.GameChannel do
   def handle_in("answer", payload, socket) do
     game_id = get_game_id(payload)
     case GenServer.call(game_id, :pop) do
-      :end_game -> push socket, "end_game", %{"body" => "Hello"}
+      :end_game -> calculate_results(payload, socket)
       question -> push socket, "new_question", question
     end
     {:noreply, socket}
-  end
-
-  def handle_in("ping", payload, socket) do
-    {:reply, {:ok, payload}, socket} #does response payload need to be in this format?
   end
 
   def handle_in("ready", payload, socket) do
@@ -33,11 +29,11 @@ defmodule Quizzbuzz.GameChannel do
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (game:lobby).
-  def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
-    {:noreply, socket}
-  end
 
+  defp calculate_results(payload, socket) do
+    game_id = get_game_id(payload)
+    push socket, "results", %{result: "You Win"}
+  end
 
   defp set_game do
     game = last_game
@@ -57,7 +53,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_call(:pop, _from, []) do
-    {:stop,:end_game, :end_game, []}
+    {:reply,:end_game, []}
   end
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
