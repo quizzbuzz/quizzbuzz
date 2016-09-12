@@ -55,8 +55,15 @@ describe('Game', () => {
     expect(wrapper.children('button').at(3).text()).to.equal("D")
   });
 
+  it('endGame should initialy be false', () => {
+    expect(wrapper.state('endGame')).to.be.false
+  })
 
+  it('if game ends expect score to show on the page', () => {
+    wrapper.setState({endGame: true, score: 8})
 
+    expect(wrapper.children('.score').text()).to.equal('8')
+  })
 
 
 });

@@ -10,6 +10,7 @@ class Game extends React.Component {
       options: '',
       answer: '',
       score: 0,
+      gameEnd: false,
       channel: socket.channel("game:single-player"),
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
@@ -53,6 +54,8 @@ class Game extends React.Component {
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
+          <div className="score">{this.state.score}</div>
+
         </div>
       )
     }
