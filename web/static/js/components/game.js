@@ -62,8 +62,7 @@ class Game extends React.Component {
   render() {
     if (this.state.gameEnd === true) {
       return <Gameover finalScore={this.state.score} />
-    }
-    if (this.state.options && this.state.gameEnd === false) {
+    } else if (this.state.options) {
       return (
         <div>
           <Question question={this.state.question} />
