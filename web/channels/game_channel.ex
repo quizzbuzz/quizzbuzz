@@ -36,8 +36,8 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   defp set_game do
-    game = last_game
-    questions = shuffle(game.questions)
+    game = build_game
+    questions = shuffle(game)
     %{questions: questions}
   end
 
@@ -64,11 +64,8 @@ defmodule Quizzbuzz.GameChannel do
       |> :erlang.list_to_atom
   end
 
-  defp last_game do
-    Repo.one(from games in Quizzbuzz.Game,
-                  preload: [:questions],
-                    order_by: [desc: games.id],
-                    limit: 1)
+  defp build_game do
+    Quizzbuzz.Question.random
   end
   # Add authorization logic here as required.
 end

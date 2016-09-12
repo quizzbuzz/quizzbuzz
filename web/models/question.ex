@@ -1,5 +1,7 @@
 defmodule Quizzbuzz.Question do
+
   use Quizzbuzz.Web, :model
+  require Ecto.Query
 
   schema "questions" do
     field :body, :string
@@ -18,4 +20,9 @@ defmodule Quizzbuzz.Question do
     |> cast(params, [:body, :options, :answer])
     |> validate_required([:body, :options, :answer])
   end
+
+  def random do
+    Ecto.Query.from(q in Quizzbuzz.Question, order_by: fragment("RANDOM()"), limit: 10, select: q)
+    |> Quizzbuzz.Repo.all
+   end
 end
