@@ -6,6 +6,7 @@ defmodule Quizzbuzz.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :high_score, :integer
 
     timestamps
   end
@@ -31,5 +32,11 @@ defmodule Quizzbuzz.User do
           changeset
     end
   end
+
+  def all_high_scores do
+    Ecto.Query.from(u in Quizzbuzz.User, order_by: [desc: u.high_score], limit: 20, select: u)
+    |> Quizzbuzz.Repo.all
+  end
+
 
 end
