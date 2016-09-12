@@ -66,13 +66,12 @@ class Game extends React.Component {
     if (this.state.options && this.state.gameEnd === false) {
       return (
         <div>
-          <div className="question" onChange={this.setTimer}>{this.state.question}</div>
+          <div className="question">{this.state.question}</div>
+          <Timer secondsRemaining={this.state.time} question={this.state.question}/>
           {this.state.options.map((option, index )=> {
             return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
           })}
           <div className="score">Score: {this.state.score}</div>
-
-          <Timer secondsRemaining={this.state.time} />
         </div>
       )
     }
@@ -84,5 +83,6 @@ class Game extends React.Component {
   }
 
 }
+
 
 export default Game

@@ -20,6 +20,13 @@ class Timer extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+  componentWillUpdate(nextProps, nextState) {
+    if(this.props.question !== nextProps.question) {
+    clearInterval(this.interval);
+    this.setState({ secondsRemaining: this.props.secondsRemaining });
+    this.interval = setInterval(this.tick.bind(this), 1000);
+    }
+  }
   render() {
     return (
       <div>{this.state.secondsRemaining}</div>
