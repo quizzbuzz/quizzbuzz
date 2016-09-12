@@ -1,6 +1,9 @@
 import socket from "../socket"
 import React from 'react'
 import Timer from './timer'
+import Question from './question'
+import Gameover from './gameover'
+import Option from './option'
 
 class Game extends React.Component {
   constructor () {
@@ -17,6 +20,8 @@ class Game extends React.Component {
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
   }
+
+
   configureChannel(channel) {
 
     channel.join()
@@ -56,23 +61,15 @@ class Game extends React.Component {
 
   render() {
     if (this.state.gameEnd === true) {
-      return (
-        <div>
-          <h3 className="gameOver"> Game Over! </h3>
-          <h4 className="finalScore">Final Score: {this.state.score} / 100</h4>
-          <form action="/game">
-            <button id="play" className="sizing">Play</button>
-          </form>
-        </div>
-      )
+      return <Gameover finalScore={this.state.score} />
     }
     if (this.state.options && this.state.gameEnd === false) {
       return (
         <div>
-          <div className="question">{this.state.question}</div>
+          <Question question={this.state.question} />
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
           {this.state.options.map((option, index )=> {
-            return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
+            return <Option index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
           <div className="score">Score: {this.state.score}</div>
         </div>
