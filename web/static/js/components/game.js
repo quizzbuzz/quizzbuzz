@@ -1,6 +1,9 @@
 import socket from "../socket"
 import React from 'react'
 import Timer from './timer'
+import Question from './question'
+import Gameover from './gameover'
+import Option from './option'
 
 class Game extends React.Component {
   constructor () {
@@ -12,13 +15,15 @@ class Game extends React.Component {
       answer: '',
       time: 10,
       score: 0,
-      countdown: 10,
       gameEnd: false,
       channel: socket.channel("game:single-player"),
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
   }
+
+
   configureChannel(channel) {
+
     channel.join()
       .receive("ok", (payload) => {
         console.log(`Succesfully joined the ${this.state.activeRoom} game room.`)
@@ -27,49 +32,45 @@ class Game extends React.Component {
     )
     channel.push("ready", {user_id: this.state.user_id })
     channel.on("new_question", payload => {
-      console.log(payload);
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })
     channel.on("end_game", payload => {
       this.setState({gameEnd: true, options: false});
      })
   }
+
   componentWillMount() {
     this.configureChannel(this.state.channel)
   }
+
   handleClick(event) {
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
-    this.state.channel.push("answer", {body: answer, user_id: this.state.user_id})
-    console.log("clicked " + answer);
+    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
   }
+
   checkAnswer(answer) {
     if (this.state.answer === answer) {
-      this.state.score++
+      this.state.score += this.refs.timer.state.secondsRemaining
     }
-    console.log(this.state.score);
   }
+  handleTimeOut() {
+    console.log(this.state.score);
+    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
+  }
+
   render() {
     if (this.state.gameEnd === true) {
+      return <Gameover finalScore={this.state.score} />
+    } else if (this.state.options) {
       return (
         <div>
-          <h3 className="gameOver"> Game Over! </h3>
-          <h4 className="finalScore">Final Score: {this.state.score} / 10</h4>
-          <form action="/game">
-            <button id="play" class="sizing">Play</button>
-          </form>
-        </div>
-      )
-    }
-    if (this.state.options && this.state.gameEnd === false) {
-      return (
-        <div>
-          <div className="question">{this.state.question}</div>
+          <Question question={this.state.question} />
+          <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
           {this.state.options.map((option, index )=> {
-            return <button className="sizing" key={index} onClick={this.handleClick.bind(this)}>{option}</button>
+            return <Option index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
           <div className="score">Score: {this.state.score}</div>
-          <Timer secondsRemaining="10" />
         </div>
       )
     }
@@ -81,5 +82,6 @@ class Game extends React.Component {
   }
 
 }
+
 
 export default Game
