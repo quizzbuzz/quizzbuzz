@@ -25,8 +25,12 @@ defmodule Quizzbuzz.GameChannel do
     questions = build_game
     game_id = get_game_id(socket)
 
-    {:ok, _} = GenServer.start(__MODULE__, questions, name: game_id)
-    {:ok, GenServer.call(game_id, :pop)}
+    case GenServer.start(__MODULE__, questions, name: game_id) do
+      {:ok, _} -> {:ok, GenServer.call(game_id, :pop)}
+      {:error, _} ->
+        GenServer.stop(game_id, "New Game being made")
+        start_new_game(socket)
+    end
   end
 
   defp report_results(payload, socket) do
