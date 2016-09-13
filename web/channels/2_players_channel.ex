@@ -7,8 +7,8 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
     try do
       GenServer.start_link(__MODULE__, [], name: queue_name)
     catch
-      {error: _} -> IO.puts "Server already started, error handled"
-  catch
+      {:error, _} -> IO.puts "Server already started, error handled"
+    end
     {:ok, Phoenix.Socket.assign(socket, %{game_id: game_id})}
   end
 
