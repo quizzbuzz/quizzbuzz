@@ -26,8 +26,12 @@ defmodule Quizzbuzz.GameLobbyChannel do
   def handle_call({:push, socket}, _from, list) do
     players = [socket | list]
     game_id = hash_id(players)
-    Enum.each(players, &( push, &1, "game_ready", %{game_id: "two_player:#{game_id}"} ))
+    Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
     {:reply, :wait, []}
+  end
+
+  defp send_game_id(players) do
+
   end
 
   def hash_id(sockets) do
