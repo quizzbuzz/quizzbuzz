@@ -15,7 +15,7 @@ class Game extends React.Component {
       time: 10,
       score: 0,
       gameEnd: false,
-      channel: socket.channel("game:" + this.props.channel),
+      channel: socket.channel(this.props.channel),
       user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
   }
@@ -30,6 +30,7 @@ class Game extends React.Component {
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
      })
+
     channel.on("end_game", payload => {
       this.setState({gameEnd: true, options: false});
      })
