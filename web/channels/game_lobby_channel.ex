@@ -1,5 +1,6 @@
 defmodule Quizzbuzz.GameLobbyChannel do
   use Quizzbuzz.Web, :channel
+  use GenServer
 
   GenServer.start(__MODULE__, [], name: :two_player_queue)
 
@@ -28,10 +29,6 @@ defmodule Quizzbuzz.GameLobbyChannel do
     game_id = hash_id(players)
     Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
     {:reply, :wait, []}
-  end
-
-  defp send_game_id(players) do
-
   end
 
   def hash_id(sockets) do
