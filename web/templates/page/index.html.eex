@@ -1,3 +1,16 @@
-<form action="/game">
-  <button id="play" class="sizing">Play</button>
-</form>
+
+
+<h3> Quizzbuzz </h3>
+
+<%= if @current_user do %>
+  <form action="/game">
+    <button id="play" class="sizing">Play</button>
+  </form>
+<% else %>
+  <form action="/login">
+    <button id="login" class="sizing">Sign in</button>
+  </form>
+  <form action="/join">
+    <button id="join" class="sizing">Sign up</button>
+  </form>
+<% end %>

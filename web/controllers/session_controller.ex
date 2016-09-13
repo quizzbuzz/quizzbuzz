@@ -27,6 +27,6 @@ defmodule Quizzbuzz.SessionController do
     conn
     |> Session.logout()
     |> put_flash(:info, "You have been logged out")
-    |> redirect(to: session_path(conn, :new))
+    |> redirect(to: page_path(conn, :index))
   end
 end
