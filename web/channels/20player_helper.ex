@@ -1,4 +1,4 @@
-defmodule TwoPlayerServer do
+defmodule TwentyPlayerServer do
   use GenServer
 
   def start(name) do

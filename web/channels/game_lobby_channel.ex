@@ -6,6 +6,7 @@ defmodule Quizzbuzz.GameLobbyChannel do
   def join("game_lobby", payload, socket) do
     try do
       GenServer.start(__MODULE__, [], name: :two_player_queue)
+      GenServer.start(__MODULE__, [], name: :twenty_player_queue)
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
@@ -15,36 +16,41 @@ defmodule Quizzbuzz.GameLobbyChannel do
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("join_two_player_queue", payload, socket) do
-    GenServer.call(:two_player_queue, {:push, socket})
+    GenServer.call(:two_player_queue, {:push_two, socket})
     {:noreply, socket}
   end
+  def handle_in("join_twenty_player_queue", payload, socket) do
+    GenServer.call(:twenty_player_queue, {:push_twenty, socket})
+    {:noreply, socket}
+  end
+
   def handle_in("join_one_player_game", payload, socket) do
     game_id = hash_id([socket, socket, socket])
     push socket,"game_ready", %{game_id: "one_player:#{game_id}"}
     {:noreply, socket}
   end
 
-  def handle_call({:push, socket}, _from, []) do
-    IO.puts "================"
-    IO.puts "1 a single player joined an empty queue in lobby"
-    IO.puts "================"
+  def handle_call({:push_two, socket}, _from, []) do
     {:reply, :wait, [socket]}
   end
 
-  def handle_call({:push, socket}, _from, list) do
-    IO.puts "================"
-    IO.puts "=======QUEUE========="
-    IO.inspect list
-    IO.puts "================"
-    IO.puts "================"
-    IO.puts "================"
-    IO.puts "2 another player joins the queue and they are sent thier game_id"
-    IO.puts "================"
+  def handle_call({:push_two, socket}, _from, list) do
     players = [socket | list]
     game_id = hash_id(players)
     Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
     {:reply, :go, []}
   end
+
+  def handle_call({:push_twenty, socket}, _from, list) do
+    players = [socket | list]
+    if length(players) == 20 do
+      game_id = hash_id(players)
+      Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
+      {:reply, :go, []}
+    else
+      {:reply, :wait, [players]}
+  end
+
 
   def hash_id(sockets) do
     Enum.map(sockets, &( &1.assigns.current_user.email))

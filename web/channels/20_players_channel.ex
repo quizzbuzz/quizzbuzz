@@ -94,8 +94,4 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
           IO.puts "something else"
     end
   end
-
-
-
-
 end
