@@ -31,7 +31,9 @@ class Game extends React.Component {
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
      })
-    channel.on("waiting", payload => { this.setState( {waiting: true} ) })
+    channel.on("waiting", payload => {
+      this.setState( {waiting: true} )
+    })
     channel.on("end_game", payload => {
       this.setState({gameEnd: true, options: false});
      })
@@ -40,6 +42,7 @@ class Game extends React.Component {
     this.configureChannel(this.state.channel)
   }
   handleClick(event) {
+    this.setState({options: '', waiting: true})
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
@@ -60,10 +63,15 @@ class Game extends React.Component {
       return (
         <div>
           <Question question={this.state.question} />
+
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
+
+
           {this.state.options.map((option, index )=> {
             return <Option key={index} index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
+
+
           <div className="score">Score: {this.state.score}</div>
         </div>
       )
