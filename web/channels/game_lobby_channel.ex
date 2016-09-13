@@ -13,17 +13,26 @@ defmodule Quizzbuzz.GameLobbyChannel do
     GenServer.call(:two_player_queue, {:push, socket})
     {:noreply, socket}
   end
+  def handle_in("join_one_player_game", payload, socket) do
+    game_id = hash_id([socket])
+    push socket,"game_ready", %{game_id: "one_player:#{game_id}"}
+    {:noreply, socket}
+  end
 
   def handle_call({:push, socket}, _from, []) do
+    #push socket added_to_queue
     {:reply, :wait, [socket]}
   end
   def handle_call({:push, socket}, _from, list) do
-    Enum.each(list, &( push, &1, "game_ready", %{game_id: HASHED_ID GOES HERE} ))
+    players = [socket | list]
+    game_id = hash_id(players)
+    Enum.each(players, &( push, &1, "game_ready", %{game_id: "two_player:#{game_id}"} ))
     {:reply, :wait, []}
   end
 
-  def hash_id do
-    
+  def hash_id(sockets) do
+    Enum.map(sockets, &( &1.assigns.current_user.email))
+      |> to_string |> Base.url_encode64 |> binary_part(0, 20)
   end
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (game_lobby:lobby).

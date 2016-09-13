@@ -2,7 +2,7 @@ defmodule Quizzbuzz.GameChannel do
   use Quizzbuzz.Web, :channel
   use GenServer
 
-  def join("game:" <> room, _, socket) do
+  def join("one_player:" <> room, _, socket) do
     {:ok, socket}
   end
 
