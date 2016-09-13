@@ -17,5 +17,11 @@ describe('Gameover', () => {
     expect(wrapper.find("h4").text()).to.be.equal("Final Score: 90 / 100");
   })
 
+  it('gives the user the option to play again', () => {
+    expect(wrapper.find("form").text()).to.be.equal("Play");
+  })
+
+  // TODO Would like to add a check to make sure that clicking Play takes the user back to the play again page
+
 
 })
