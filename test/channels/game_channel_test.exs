@@ -10,7 +10,8 @@ defmodule Quizzbuzz.GameChannelTest do
 
   setup do
 
-    insert(:game)
+    insert(:question)
+    insert(:question)
     {:ok, game, socket} =
       socket("game", %{some: :assign})
       |> subscribe_and_join(GameChannel, "game:lobby")
