@@ -1,9 +1,14 @@
 defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   use Quizzbuzz.Web, :channel
+  use GenServer
 
   def join("two_player:" <> game_id, payload, socket) do
     queue_name = to_atom( "queue#{game_id}" )
-    GenServer.start(__MODULE__, [], name: queue_name) #extract into on readyx2
+    try do
+      GenServer.start_link(__MODULE__, [], name: queue_name)
+    catch
+      {error: _} -> IO.puts "Server already started, error handled"
+  catch
     {:ok, Phoenix.Socket.assign(socket, %{game_id: game_id})}
   end
 
@@ -41,9 +46,9 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   end
 
   defp report_results(players) do
-     #add sorting
-    update_score(players)
-      case players do
+    sort_results(players)
+    |> update_scores
+    case players do
       [h | t] -> fn(h,t) -> push h.socket, "end_game", %{result: "You Win", winner_score: h.payload["score"]}
         Enum.each(t, &( push &1.socket, "end_game",  %{result: "You Lose", winner_score: h.payload["score"]}))
       end
@@ -76,7 +81,7 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   end
 
   defp update_scores(players) do
-    Enum.each(players, update_score)
+    Enum.each(players, fn(player) -> update_score(player) end)
   end
 
   defp update_score(player) do
