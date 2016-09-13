@@ -13,6 +13,7 @@ class Game extends React.Component {
       options: '',
       answer: '',
       time: 10,
+      waiting: false,
       score: 0,
       gameEnd: false,
       channel: socket.channel(this.props.channel),
@@ -28,9 +29,9 @@ class Game extends React.Component {
     )
     channel.push("ready", {user_id: this.state.user_id })
     channel.on("new_question", payload => {
-       this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer})
+       this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
      })
-
+    channel.on("waiting", payload => { this.setState( {waiting: true} ) })
     channel.on("end_game", payload => {
       this.setState({gameEnd: true, options: false});
      })
@@ -66,8 +67,14 @@ class Game extends React.Component {
           <div className="score">Score: {this.state.score}</div>
         </div>
       )
+    } else if(this.state.waiting) {
+
+      return <div>Waiting for opponent</div>
+
+    } else {
+
+      return <div></div>
     }
-    return <div></div>
   }
 
   componentWillUnmount() {

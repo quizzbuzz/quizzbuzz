@@ -31,7 +31,6 @@ class Lobby extends React.Component {
         this.setState({channel: payload.game_id})
         console.log(payload.game_id);
     })
-
   }
 
   componentWillMount() {
