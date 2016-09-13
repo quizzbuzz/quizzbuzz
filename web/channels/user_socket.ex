@@ -1,6 +1,8 @@
 defmodule Quizzbuzz.UserSocket do
   use Phoenix.Socket
 
+  alias Quizzbuzz.{Repo, User}
+
   ## Channels
   # channel "room:*", Quizzbuzz.RoomChannel
   channel "game:*", Quizzbuzz.GameChannel
@@ -19,7 +21,12 @@ defmodule Quizzbuzz.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
+  def connect(%{"token" => token }, socket) do
+    case Phoenix.Token.verify(socket, "user", token, max_age: 86400) do
+      {:ok, user_id} ->
+        socket = assign(socket, :current_user, Repo.get!(User, user_id))
+        {:ok, socket}
+    end
     {:ok, socket}
   end
 

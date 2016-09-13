@@ -7,7 +7,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("answer", payload, socket) do
-    game_id = get_game_id(payload)
+    game_id = get_game_id(socket)
     case GenServer.call(game_id, :pop) do
       :end_game -> report_results(payload, socket)
       question -> push socket, "new_question", question
@@ -16,25 +16,25 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("ready", payload, socket) do
-    {:ok, question} = start_new_game(payload)
+    {:ok, question} = start_new_game(socket)
     push socket, "new_question", question
     {:noreply, socket}
   end
 
-  defp start_new_game(payload) do
+  defp start_new_game(socket) do
     questions = build_game
-    game_id = get_game_id(payload)
+    game_id = get_game_id(socket)
+
     {:ok, _} = GenServer.start(__MODULE__, questions, name: game_id)
     {:ok, GenServer.call(game_id, :pop)}
   end
 
   defp report_results(payload, socket) do
-    game_id = get_game_id(payload)
     push socket, "end_game", %{result: "You Win"}
   end
 
-  defp get_game_id(payload) do
-    String.to_char_list(payload["user_id"])
+  defp get_game_id(socket) do
+    String.to_char_list(socket.assigns.current_user.email)
     |> :erlang.list_to_atom
   end
 
@@ -55,7 +55,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_call(:pop, _from, []) do
-    {:reply,:end_game, []}
+    {:stop,:end_game, :end_game, []}
   end
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
