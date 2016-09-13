@@ -2,9 +2,13 @@ defmodule Quizzbuzz.GameLobbyChannel do
   use Quizzbuzz.Web, :channel
   use GenServer
 
-  GenServer.start(__MODULE__, [], name: :two_player_queue)
 
   def join("game_lobby", payload, socket) do
+    try do
+      GenServer.start(__MODULE__, [], name: :two_player_queue)
+    catch
+      {:error, _} -> IO.puts "Server already started, error handled"
+    end
     {:ok, socket}
   end
 
@@ -21,14 +25,25 @@ defmodule Quizzbuzz.GameLobbyChannel do
   end
 
   def handle_call({:push, socket}, _from, []) do
-    #push socket added_to_queue
+    IO.puts "================"
+    IO.puts "1 a single player joined an empty queue in lobby"
+    IO.puts "================"
     {:reply, :wait, [socket]}
   end
+
   def handle_call({:push, socket}, _from, list) do
+    IO.puts "================"
+    IO.puts "=======QUEUE========="
+    IO.inspect list
+    IO.puts "================"
+    IO.puts "================"
+    IO.puts "================"
+    IO.puts "2 another player joins the queue and they are sent thier game_id"
+    IO.puts "================"
     players = [socket | list]
     game_id = hash_id(players)
     Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
-    {:reply, :wait, []}
+    {:reply, :go, []}
   end
 
   def hash_id(sockets) do
