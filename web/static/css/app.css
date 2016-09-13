@@ -1,7 +1,6 @@
 /* This file is for your main application css. */
 
 .sizing {
-  display: block;
   height: 50px;
   width: 200px;
   margin: 10px;
@@ -12,9 +11,8 @@
   border-radius: 10px;
 }
 
-button:hover {
-  background-color: white;
-  color: black;
+.sizing:hover {
+  background-color: rgb(157, 135, 227);
 }
 
 button:focus {
@@ -25,6 +23,15 @@ div.question {
   color: black;
   font-size: 30px;
   margin: 20px
+}
+
+#login {
+  display:inline-block;
+  margin-right:10px;
+}
+
+#join {
+  display:inline-block;
 }
 
 
@@ -74,4 +81,10 @@ div.question {
 
 .form-group {
   width: 400px;
+}
+
+.title {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 50pt;
 }
