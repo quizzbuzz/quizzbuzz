@@ -38,11 +38,12 @@ describe('Game', () => {
     //   }
     // })
     // const button = TestUtils.renderIntoDocument(<Button option='A'/>)
-    console.log(wrapper.children('Option').at(2).simulate('click', {event: {
-                                                      currentTarget : {
-                                                        textContent: "C"
-                                                      }}
-    }));
+    // console.log(wrapper.children('Option').at(2).simulate('click', {event: {
+    //                                                   currentTarget : {
+    //                                                     textContent: "C"
+    //                                                   }}
+  // }
+// ));
     // button = TestUtils.findRenderedDOMComponentWithTag('button').getDOMNode()
     // TestUtils.Simulate.click(button)
 
