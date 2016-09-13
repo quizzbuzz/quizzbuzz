@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <%= if @current_user do %>
+    <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", @current_user.id) %>
+    <%= end %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +34,9 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="active"><a href="/leaderboard">Leaderboard <span class="sr-only">(current)</span></a></li>
-              <li><a href="/login">Sign in</a></li>
-              <li><a href="/register">Sign up</a></li>
+              <%= if @current_user do %>
+                <li><a href="/logout">Sign out</a></li>
+              <% end %>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -46,6 +50,7 @@
     <center>
       <div class="header">
       </div>
+
       <!-- <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p> -->
       <main role="main">

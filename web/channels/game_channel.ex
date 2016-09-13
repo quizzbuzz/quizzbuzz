@@ -7,7 +7,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("answer", payload, socket) do
-    game_id = get_game_id(payload)
+    game_id = get_game_id(socket)
     case GenServer.call(game_id, :pop) do
       :end_game -> report_results(payload, socket)
       question -> push socket, "new_question", question
@@ -16,25 +16,45 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_in("ready", payload, socket) do
-    {:ok, question} = start_new_game(payload)
+    {:ok, question} = start_new_game(socket)
     push socket, "new_question", question
     {:noreply, socket}
   end
 
-  defp start_new_game(payload) do
+  defp start_new_game(socket) do
     questions = build_game
-    game_id = get_game_id(payload)
-    {:ok, _} = GenServer.start(__MODULE__, questions, name: game_id)
-    {:ok, GenServer.call(game_id, :pop)}
+    game_id = get_game_id(socket)
+
+    case GenServer.start(__MODULE__, questions, name: game_id) do
+      {:ok, _} -> {:ok, GenServer.call(game_id, :pop)}
+      {:error, _} ->
+        GenServer.stop(game_id, "New Game being made")
+        start_new_game(socket)
+    end
   end
 
   defp report_results(payload, socket) do
-    game_id = get_game_id(payload)
+    update_score(payload,socket)
     push socket, "end_game", %{result: "You Win"}
   end
 
-  defp get_game_id(payload) do
-    String.to_char_list(payload["user_id"])
+  defp update_score(payload, socket) do
+    score = payload["score"]
+    user_id = socket.assigns.current_user.id
+    user =  Quizzbuzz.Repo.get!(Quizzbuzz.User, user_id)
+    cond do
+      user.high_score < score ->
+        Quizzbuzz.User.update_score(score, user_id)
+      user.high_score == nil ->
+        Quizzbuzz.User.update_score(score, user_id)
+      true ->
+          IO.puts "something else"
+    end
+
+  end
+
+  defp get_game_id(socket) do
+    String.to_char_list(socket.assigns.current_user.email)
     |> :erlang.list_to_atom
   end
 
@@ -55,7 +75,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   def handle_call(:pop, _from, []) do
-    {:reply,:end_game, []}
+    {:stop,:end_game, :end_game, []}
   end
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}

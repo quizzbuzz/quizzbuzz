@@ -18,5 +18,5 @@
     <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
   </div>
 
-  <%= submit "Register", class: "btn btn-primary" %>
+  <%= submit "Register", class: "sizing" %>
 <% end %>

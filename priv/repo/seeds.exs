@@ -62,3 +62,71 @@ questions = [%Quizzbuzz.Question{
       }]
 
 Enum.map(questions, &(Quizzbuzz.Repo.insert!(&1)))
+
+users = [%Quizzbuzz.User{
+    email: "wawa@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 192
+  },
+  %Quizzbuzz.User{
+    email: "solo@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 1222
+  },
+  %Quizzbuzz.User{
+    email: "didi@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 373
+  },
+  %Quizzbuzz.User{
+    email: "dada@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 123
+  },
+  %Quizzbuzz.User{
+    email: "lolo@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 568
+  },
+  %Quizzbuzz.User{
+    email: "mama@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 654
+  },
+  %Quizzbuzz.User{
+    email: "momo@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 789
+  },
+  %Quizzbuzz.User{
+    email: "kaka@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 194
+  },
+  %Quizzbuzz.User{
+    email: "haha@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 194
+  },
+  %Quizzbuzz.User{
+    email: "yaya@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 267
+  },
+  %Quizzbuzz.User{
+    email: "lili@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 111
+  },
+  %Quizzbuzz.User{
+    email: "fofo@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 1298
+  },
+  %Quizzbuzz.User{
+    email: "zozo@email.com",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 766
+  }]
+
+Enum.map(users, &(Quizzbuzz.Repo.insert!(&1)))

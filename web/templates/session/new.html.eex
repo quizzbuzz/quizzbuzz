@@ -6,5 +6,5 @@
   <div class="form-group">
     <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
   </div>
-  <%= submit "Log in", class: "btn btn-primary" %>
+  <%= submit "Log in", class: "sizing" %>
 <% end %>

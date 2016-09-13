@@ -6,6 +6,7 @@ defmodule Quizzbuzz.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :high_score, :integer
 
     timestamps
   end
@@ -15,6 +16,19 @@ defmodule Quizzbuzz.User do
     |> validate_length(:email, min: 1, max: 150)
     |> unique_constraint(:email)
   end
+
+  def update_score(score, user_id) do
+    user = Quizzbuzz.Repo.get!(Quizzbuzz.User, user_id)
+    IO.inspect user
+    changeset = score_changeset(user, %{high_score: score})
+    Quizzbuzz.Repo.update(changeset)
+  end
+
+  def score_changeset(model, params \\ :empty) do model
+    |> cast(params, [:high_score])
+  end
+
+
 
   def registration_changeset(model, params) do model
     |> changeset(params)
@@ -31,5 +45,11 @@ defmodule Quizzbuzz.User do
           changeset
     end
   end
+
+  def all_high_scores do
+    Ecto.Query.from(u in Quizzbuzz.User, order_by: [desc: u.high_score], limit: 20, select: u)
+    |> Quizzbuzz.Repo.all
+  end
+
 
 end

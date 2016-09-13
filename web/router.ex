@@ -8,11 +8,11 @@ defmodule Quizzbuzz.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :current_user
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :current_user
   end
 
   scope "/", Quizzbuzz do
@@ -21,12 +21,12 @@ defmodule Quizzbuzz.Router do
     get "/", PageController, :index
     get "/game", GameController, :index
     get "/login", SessionController, :new
-    post "/login", SessionController, :create
+    post "/session", SessionController, :create
     get "/logout", SessionController, :delete
-    get "/register", RegistrationController, :new
+    get "/join", RegistrationController, :new
     post "/register", RegistrationController, :create
-    get "/forget-password", PasswordController, :forget_password
-    post "/reset-password", PasswordController, :reset_password
+    get "/passwords/new", PasswordController, :new
+    post "/passwords", PasswordController, :reset
     get "/leaderboard", BoardController, :index
   end
 
