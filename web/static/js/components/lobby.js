@@ -53,8 +53,8 @@ class Lobby extends React.Component {
 
       return (
         <div>
-          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player</button>
-          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Multiplayer</button>
+          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button>
+          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button>
         </div>
       )
 

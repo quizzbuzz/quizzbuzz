@@ -42,7 +42,9 @@ class Game extends React.Component {
     this.configureChannel(this.state.channel)
   }
   handleClick(event) {
-    this.setState({options: '', waiting: true})
+    if(!this.props.channel.includes("one_player")) {
+      this.setState({options: '', waiting: true})
+    }
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
