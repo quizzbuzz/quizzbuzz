@@ -1,6 +1,7 @@
 /* This file is for your main application css. */
 
 .sizing {
+  display: block;
   height: 50px;
   width: 200px;
   margin: 10px;
@@ -39,6 +40,10 @@ div.question {
   position: absolute;;
   top: 41%;
   left: 41%;
+}
+
+#filler {
+  height: 50px;
 }
 
 .table.table-striped {
@@ -86,5 +91,32 @@ div.question {
 .title {
   padding-top: 50px;
   padding-bottom: 50px;
-  font-size: 50pt;
+  font-size: 80pt;
 }
+
+.navbar-custom {
+    background-color:rgb(106, 75, 213);
+    color: white;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: white;
+}
+.navbar-custom .navbar-nav:hover > li > a {
+  background-color: none;
+}
+.navbar-custom .navbar-brand {
+    color: white;
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+  text-decoration: none;
+  background-color: rgb(157, 135, 227);
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+   text-decoration: none;
+   background-color: rgb(157, 135, 227); /*Change rollover cell color here*/
+ }
