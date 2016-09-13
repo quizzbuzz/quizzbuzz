@@ -6,14 +6,9 @@ defmodule Quizzbuzz.GameLobbyChannelTest do
   setup do
     {:ok, _, socket} =
       socket("user_id", %{some: :assign})
-      |> subscribe_and_join(GameLobbyChannel, "game_lobby:lobby")
+      |> subscribe_and_join(GameLobbyChannel, "game_lobby")
 
     {:ok, socket: socket}
-  end
-
-  test "ping replies with status ok", %{socket: socket} do
-    ref = push socket, "ping", %{"hello" => "there"}
-    assert_reply ref, :ok, %{"hello" => "there"}
   end
 
   test "shout broadcasts to game_lobby:lobby", %{socket: socket} do

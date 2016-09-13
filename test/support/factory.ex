@@ -15,6 +15,7 @@ defmodule Quizzbuzz.Factory do
     %User{
       email: "test@test.com",
       password: "password",
+      id: 888
     }
   end
 end

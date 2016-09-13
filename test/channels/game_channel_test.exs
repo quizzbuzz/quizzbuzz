@@ -1,20 +1,21 @@
 defmodule Quizzbuzz.GameChannelTest do
   use ExUnit.Case, async: false
   use Quizzbuzz.ChannelCase
+  use Phoenix.Socket
 
   import Quizzbuzz.Factory
 
   alias Quizzbuzz.GameChannel
 
-
-
   setup do
 
     insert(:question)
     insert(:question)
+    user = insert(:user)
+
     {:ok, game, socket} =
-      socket("game", %{some: :assign})
-      |> subscribe_and_join(GameChannel, "game:lobby")
+      socket("game", %{current_user: %{email: user.email, id: user.id}})
+      |> subscribe_and_join(GameChannel, "one_player:lobby")
 
     {:ok, game_info: game, socket: socket}
 
