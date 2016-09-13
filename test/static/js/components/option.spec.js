@@ -7,11 +7,16 @@ import Option from '../../../../web/static/js/components/option';
 
 describe("Option", () => {
 
-  const wrapper = shallow(<Option key="1" option="Answer A"/>)
+  const handleClick = sinon.spy();
+  const option = shallow(<Option key="1" option="Answer A" onClick={handleClick}/>);
 
   it("Allows the user to choose an answer option", () => {
-    expect(wrapper.find("button").text()).to.be.equal("Answer A")
-  })
+    expect(option.find("button").text()).to.be.equal("Answer A")
+  });
 
+  it('should call handleClick on a button click', () => {
+    option.find('button').simulate('click')
+    expect(handleClick.calledOnce).to.be.true
+  });
 
-})
+});

@@ -7,10 +7,10 @@ import Question from '../../../../web/static/js/components/question';
 
 describe("Question", () => {
 
-  const wrapper = shallow(<Question question="Is this test passing?"/>)
+  const question = shallow(<Question question="Is this test passing?"/>)
 
   it('presents a question to the user', () => {
-    expect(wrapper.find("div").text()).to.be.equal("Is this test passing?");
+    expect(question.find("div").text()).to.be.equal("Is this test passing?");
   })
 
 })
