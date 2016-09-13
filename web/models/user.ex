@@ -17,6 +17,19 @@ defmodule Quizzbuzz.User do
     |> unique_constraint(:email)
   end
 
+  def update_score(score, user_id) do
+    user = Quizzbuzz.Repo.get!(Quizzbuzz.User, user_id)
+    IO.inspect user
+    changeset = score_changeset(user, %{high_score: score})
+    Quizzbuzz.Repo.update(changeset)
+  end
+
+  def score_changeset(model, params \\ :empty) do model
+    |> cast(params, [:high_score])
+  end
+
+
+
   def registration_changeset(model, params) do model
     |> changeset(params)
     |> cast(params, ~w(password), [])

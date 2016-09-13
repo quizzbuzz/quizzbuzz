@@ -34,7 +34,23 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   defp report_results(payload, socket) do
+    update_score(payload,socket)
     push socket, "end_game", %{result: "You Win"}
+  end
+
+  defp update_score(payload, socket) do
+    score = payload["score"]
+    user_id = socket.assigns.current_user.id
+    user =  Quizzbuzz.Repo.get!(Quizzbuzz.User, user_id)
+    cond do
+      user.high_score < score ->
+        Quizzbuzz.User.update_score(score, user_id)
+      user.high_score == nil ->
+        Quizzbuzz.User.update_score(score, user_id)
+      true ->
+          IO.puts "something else"
+    end
+
   end
 
   defp get_game_id(socket) do
