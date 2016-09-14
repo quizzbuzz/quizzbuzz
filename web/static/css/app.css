@@ -298,9 +298,22 @@ form.play-form{
 }
 
 .timeandscore{
+  display: flex;
+  flex-direction: row;
+}
 
+#game{
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .options{
-
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 40%
 }
