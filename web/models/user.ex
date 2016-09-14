@@ -38,6 +38,7 @@ defmodule Quizzbuzz.User do
     |> cast(params, ~w(username), [])
     |> validate_length(:username, min: 4, max: 60)
     |> unique_constraint(:username)
+
   end
 
   defp put_hashed_password(changeset) do
@@ -50,7 +51,7 @@ defmodule Quizzbuzz.User do
   end
 
   def all_high_scores do
-    Ecto.Query.from(u in Quizzbuzz.User, order_by: [desc: u.high_score], limit: 20, select: u)
+    Ecto.Query.from(u in Quizzbuzz.User, where: not(is_nil(u.high_score)), order_by: [desc: u.high_score], limit: 20, select: u)
     |> Quizzbuzz.Repo.all
   end
 
