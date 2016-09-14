@@ -26,6 +26,7 @@ defmodule Quizzbuzz.GameLobbyChannel do
 
   def handle_in("join_one_player_game", payload, socket) do
     game_id = hash_id([socket, socket, socket])
+    IO.puts game_id
     push socket,"game_ready", %{game_id: "one_player:#{game_id}"}
     {:noreply, socket}
   end
