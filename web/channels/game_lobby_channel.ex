@@ -45,10 +45,11 @@ defmodule Quizzbuzz.GameLobbyChannel do
     players = [socket | list]
     if length(players) == 20 do
       game_id = hash_id(players)
-      Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
+      Enum.each players, &(push &1, "game_ready", %{game_id: "twenty_player:#{game_id}"})
       {:reply, :go, []}
     else
-      {:reply, :wait, [players]}
+      {:reply, :wait, players}
+    end
   end
 
 
