@@ -3,9 +3,11 @@
 <h1 class="title"> Quizzbuzz </h1>
 
 <%= if @current_user do %>
-  <form action="/game">
+<center>
+  <form class="play-form" action="/game">
     <button id="play" class="sizing">Play</button>
   </form>
+</center>
 <% else %>
   <form action="/login" id="login">
     <button id="login" class="sizing">Sign in</button>

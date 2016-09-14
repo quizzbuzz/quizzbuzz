@@ -1,7 +1,6 @@
 /* This file is for your main application css. */
 
 .sizing {
-  display: block;
   height: 50px;
   width: 200px;
   margin: 10px;
@@ -11,6 +10,7 @@
   border: none;
   border-radius: 10px;
 }
+
 
 .sizing:hover {
   background-color: rgb(157, 135, 227);
@@ -33,13 +33,6 @@ div.question {
 
 #join {
   display:inline-block;
-}
-
-
-#play {
-  position: absolute;;
-  top: 41%;
-  left: 41%;
 }
 
 #filler {
@@ -89,6 +82,7 @@ div.question {
 }
 
 .title {
+  text-align: center;
   padding-top: 50px;
   padding-bottom: 50px;
   font-size: 80pt;
@@ -120,3 +114,53 @@ div.question {
    text-decoration: none;
    background-color: rgb(157, 135, 227); /*Change rollover cell color here*/
  }
+
+
+
+/* CHAT */
+
+
+.messageInput {
+    width: 230px;
+    border-radius: 4px;
+    color: black;
+    padding-top: 10px;
+
+}
+
+.messages {
+  width: 230px;
+  height: 335px;
+  border-radius: 4px;
+  color: black;
+  background-color: white;
+  margin-bottom: 10px;
+  overflow:auto;
+}
+#chat {
+  width:250px;
+  margin: 10px;
+  float: right;
+}
+
+.chat {
+  border-radius: 4px;
+  width: 250px;
+  height: 400px;
+  background-color: rgb(106, 75, 213);
+  color: white;
+  padding: 10px;
+  float: right;
+
+}
+.chat-button {
+  background-color: rgb(106, 75, 213);
+  color: white;
+  text-align: center;
+  width: 100px;
+  border-radius: 4px;
+  padding: 10px;
+  margin-left: 75px;
+  margin-right: 75px;
+  margin-bottom: 10px;
+}

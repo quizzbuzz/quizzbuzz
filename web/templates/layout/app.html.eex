@@ -47,7 +47,6 @@
         </div><!-- /.container-fluid -->
       </nav>
 <!-- NAVBAR -->
-    <center>
       <div class="header">
       </div>
 
@@ -58,6 +57,5 @@
       </main>
     <div class="footer navbar-fixed-bottom"></div>
     <script src="<%= static_path(@conn, "/js/bundle.js") %>"></script>
-  </center>
   </body>
 </html>

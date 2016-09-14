@@ -6,7 +6,7 @@ import Gameover from './gameover'
 import Option from './option'
 import Chat from './chat'
 
-class Game extends React.Component {
+class SingleGame extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -14,10 +14,7 @@ class Game extends React.Component {
       options: '',
       answer: '',
       time: 10,
-      messages: [],
-      waiting: false,
       score: 0,
-      chatVisible: false,
       gameEnd: false,
       channel: socket.channel(this.props.channel),
     }
@@ -33,14 +30,7 @@ class Game extends React.Component {
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
      })
-    channel.on("waiting", payload => {
-      this.setState( {waiting: true} )
-    })
-    channel.on("message", payload => {
-      this.setState({messages: this.state.messages.concat([payload.body])})
-    })
     channel.on("end_game", payload => {
-      console.log(payload.winner);
       this.setState({gameEnd: true, options: false});
      })
   }
@@ -48,9 +38,6 @@ class Game extends React.Component {
     this.configureChannel(this.state.channel)
   }
   handleClick(event) {
-    if(!this.props.channel.includes("one_player")) {
-      this.setState({options: '', waiting: true})
-    }
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {score: this.state.score})
@@ -60,25 +47,15 @@ class Game extends React.Component {
       this.state.score += this.refs.timer.state.secondsRemaining
     }
   }
-  toggleChat() {
-    this.setState({chatVisible: !this.state.chatVisible});
-  }
   handleTimeOut() {
     console.log(this.state.score);
     this.state.channel.push("answer", {score: this.state.score})
-  }
-  sendMessage(message) {
-    this.state.channel.push("message", {body: message})
   }
   render() {
     if (this.state.gameEnd === true) {
       return (
         <div>
           <Gameover finalScore={this.state.score} />
-          <div id="chat">
-            <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
-          </div>
         </div>
       )
     } else if (this.state.options) {
@@ -95,24 +72,8 @@ class Game extends React.Component {
           })}
 
           <div className="score">Score: {this.state.score}</div>
-          <div id="chat">
-            <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
-          </div>
         </div>
       )
-    } else if(this.state.waiting) {
-
-      return (
-        <div>
-          <div>Waiting for opponent</div>
-          <div id="chat">
-            <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
-          </div>
-        </div>
-      )
-
     } else {
       return <div></div>
     }
@@ -126,4 +87,4 @@ class Game extends React.Component {
 }
 
 
-export default Game
+export default SingleGame

@@ -1,6 +1,7 @@
 import socket from "../socket"
 import React from 'react'
-import Game from './game'
+import SingleGame from './SingleGame'
+import MultiGame from './game'
 import Chat from './chat'
 
 class Lobby extends React.Component {
@@ -10,10 +11,13 @@ class Lobby extends React.Component {
       gameChoice: '',
       channel: '',
       messages: [],
+      chatVisible: false,
       lobby: socket.channel("game_lobby")
     }
   }
-
+  toggleChat() {
+    this.setState({chatVisible: !this.state.chatVisible});
+  }
   handleClick(event) {
     const room = event.currentTarget.attributes.getNamedItem('name').value
     this.setState({gameChoice: room })
@@ -45,10 +49,16 @@ class Lobby extends React.Component {
   }
 
   render() {
-    if(this.state.channel) {
+    if(this.state.channel.includes("one_player")) {
 
       return (
-        <Game channel={this.state.channel} />
+        <SingleGame channel={this.state.channel} />
+        )
+
+    } else if(this.state.channel) {
+
+      return (
+        <MultiGame channel={this.state.channel} />
         )
 
     } else if(this.state.gameChoice) {
@@ -60,10 +70,13 @@ class Lobby extends React.Component {
 
       return (
         <div>
+          <div id="chat">
+            <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
+            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
+          </div>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
-          <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/>
         </div>
       )
 
