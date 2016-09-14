@@ -19,14 +19,15 @@ defmodule Quizzbuzz.GameLobbyChannel do
     GenServer.call(:two_player_queue, {:push_two, socket})
     {:noreply, socket}
   end
-  def handle_in("join_twenty_player_queue", payload, socket) do
-    GenServer.call(:twenty_player_queue, {:push_twenty, socket})
-    {:noreply, socket}
-  end
 
   def handle_in("join_one_player_game", payload, socket) do
     game_id = hash_id([socket, socket, socket])
     push socket,"game_ready", %{game_id: "one_player:#{game_id}"}
+    {:noreply, socket}
+  end
+
+  def handle_in("message", %{"body" => body}, socket) do
+    broadcast! socket, "message", %{body: body}
     {:noreply, socket}
   end
 
@@ -43,15 +44,14 @@ defmodule Quizzbuzz.GameLobbyChannel do
 
   def handle_call({:push_twenty, socket}, _from, list) do
     players = [socket | list]
-    if length(players) == 20 do
+    if length(players) == 3 do
       game_id = hash_id(players)
-      Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
+      Enum.each players, &(push &1, "game_ready", %{game_id: "twenty_player:#{game_id}"})
       {:reply, :go, []}
     else
       {:reply, :wait, [players]}
     end
   end
-
 
   def hash_id(sockets) do
     Enum.map(sockets, &( &1.assigns.current_user.email))

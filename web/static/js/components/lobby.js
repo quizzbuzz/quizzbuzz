@@ -1,6 +1,7 @@
 import socket from "../socket"
 import React from 'react'
 import Game from './game'
+import Chat from './chat'
 
 class Lobby extends React.Component {
   constructor () {
@@ -8,6 +9,7 @@ class Lobby extends React.Component {
     this.state = {
       gameChoice: '',
       channel: '',
+      messages: [],
       lobby: socket.channel("game_lobby")
     }
   }
@@ -30,9 +32,14 @@ class Lobby extends React.Component {
     lobby.on("game_ready", payload => {
         this.setState({channel: payload.game_id})
         console.log(payload.game_id);
+      })
+    lobby.on("message", payload => {
+      this.setState({messages: this.state.messages.concat([payload.body])})
     })
   }
-
+  sendMessage(message) {
+    this.state.lobby.push("message", {body: message})
+  }
   componentWillMount() {
     this.configureChannel(this.state.lobby)
   }
@@ -55,6 +62,7 @@ class Lobby extends React.Component {
         <div>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button>
+          <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/>
         </div>
       )
 

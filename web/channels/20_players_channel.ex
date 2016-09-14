@@ -1,10 +1,10 @@
 defmodule Elixir.Quizzbuzz.TwentyPlayersChannel do
   use Quizzbuzz.Web, :channel
 
-  def join("two_player:" <> game_id, payload, socket) do
+  def join("twenty_player:" <> game_id, payload, socket) do
     queue_name = to_atom( "queue#{game_id}" )
     try do
-      TwoPlayerServer.start(queue_name)
+      TwentyPlayerServer.start(queue_name)
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
@@ -14,7 +14,7 @@ defmodule Elixir.Quizzbuzz.TwentyPlayersChannel do
   def handle_in("ready", payload, socket) do
     queue_name = to_atom( "queue#{socket.assigns.game_id}" )
 
-    case TwoPlayerServer.add_to_queue(queue_name, payload, socket) do
+    case TwentyPlayerServer.add_to_queue(queue_name, payload, socket) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
                   IO.puts "In the broadcast function"
@@ -27,9 +27,9 @@ defmodule Elixir.Quizzbuzz.TwentyPlayersChannel do
   def handle_in("answer", payload, socket) do
     game_id = to_atom(socket.assigns.game_id)
     queue_name = to_atom( "queue#{socket.assigns.game_id}" )
-    case TwoPlayerServer.add_to_queue(queue_name, payload, socket) do
+    case TwentyPlayerServer.add_to_queue(queue_name, payload, socket) do
       :wait -> push socket, "waiting", %{}
-      players = [head | tail] -> case TwoPlayerServer.pop(game_id) do
+      players = [head | tail] -> case TwentyPlayerServer.pop(game_id) do
         :end_game ->
           report_results(players)
         question -> broadcast! head.socket, "new_question", question
@@ -42,8 +42,8 @@ defmodule Elixir.Quizzbuzz.TwentyPlayersChannel do
   defp start_new_game(socket) do
     questions = build_game
     game_id = to_atom( socket.assigns.game_id )
-    {:ok, _} = TwoPlayerServer.start_new_game(game_id, questions)
-    {:ok, TwoPlayerServer.pop(game_id)}
+    {:ok, _} = TwentyPlayerServer.start_new_game(game_id, questions)
+    {:ok, TwentyPlayerServer.pop(game_id)}
   end
 
   defp report_results(players) do
