@@ -62,7 +62,9 @@ class SingleGame extends React.Component {
 
       return (
         <div>
+
           <Question question={this.state.question} />
+          <div className="score">Score: {this.state.score}</div>
 
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
 
@@ -70,8 +72,6 @@ class SingleGame extends React.Component {
           {this.state.options.map((option, index )=> {
             return <Option key={index} index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
-
-          <div className="score">Score: {this.state.score}</div>
         </div>
       )
     } else {

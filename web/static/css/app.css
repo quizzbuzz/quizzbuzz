@@ -121,7 +121,9 @@ div.question {
    background-color: rgb(157, 135, 227); /*Change rollover cell color here*/
  }
 
-
+.question {
+  text-align: center;
+}
 
 /* CHAT */
 
