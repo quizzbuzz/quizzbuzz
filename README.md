@@ -44,18 +44,13 @@ I can choose to play again
 
 ```
 As a User
-So that I can save my scores
+So that my highest score is saved
 I can create an account
 ```
 ```
 As a User
-So that I can keep my scores secret
+So that my score is my own
 I can sign in and sign out
-```
-```
-As a User
-So that I can track my scores
-I can view my scores from previous games
 ```
 ```
 As a User
@@ -76,13 +71,30 @@ As a User
 So that I can test my skills against others
 I can play against a randomly selected player
 ```
-
+```
+As a User
+So that I can interact with other players
+I can chat to players before and during games
+```
 
 ####Version 4
+
 ```
 As a User
 So that I can test my skills against others
 I can play against groups of other players
+```
+
+
+
+####Optional Extras
+
+These features could be added in future versions:
+
+```
+As a User
+So that I can track my scores
+I can view my scores from previous games
 ```
 ```
 As a User
@@ -94,6 +106,12 @@ As a User
 So that I can test my specialist knowledge
 I can select different categories of questions
 ```
+```
+As an Administrator
+So that the games are interesting
+I can add new questions together with the answer choices
+```
+
 
 ###Instructions
 fork the repo
