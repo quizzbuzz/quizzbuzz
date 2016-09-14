@@ -8,6 +8,7 @@ defmodule Quizzbuzz.UserSocket do
   channel "game_lobby", Quizzbuzz.GameLobbyChannel
   channel "two_player:*", Quizzbuzz.TwoPlayersChannel
   channel "one_player:*", Quizzbuzz.OnePlayerChannel
+  channel "twenty_player:*", Quizzbuzz.TwentyPlayerChannel
 
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll

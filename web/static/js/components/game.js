@@ -39,6 +39,7 @@ class Game extends React.Component {
       this.setState({messages: this.state.messages.concat([payload.body])})
     })
     channel.on("end_game", payload => {
+      console.log(payload.winner);
       this.setState({gameEnd: true, options: false});
      })
   }
