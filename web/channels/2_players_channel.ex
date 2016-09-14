@@ -41,7 +41,7 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   end
 
   def handle_in("message", %{"body" => body}, socket) do
-    broadcast! socket, "message", %{body: body, username: socket.assigns.current_user.username}
+    broadcast! socket, "message", %{body: body}
     {:noreply, socket}
   end
 
