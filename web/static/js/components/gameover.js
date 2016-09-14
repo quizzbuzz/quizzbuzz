@@ -9,7 +9,7 @@ class Gameover extends React.Component {
         <h3 className="outcome">{this.props.outcome}</h3>
         <h4 className="finalScore">Your Score: {this.props.finalScore} / 100</h4>
         <form action="/game">
-          <button id="play" className="sizing">Play</button>
+          <button id="play" className="sizing">Play Again</button>
         </form>
       </div>
     )
