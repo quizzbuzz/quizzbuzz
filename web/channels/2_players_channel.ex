@@ -2,9 +2,9 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   use Quizzbuzz.Web, :channel
 
   def join("two_player:" <> game_id, payload, socket) do
-    queue_name = to_atom( "queue#{game_id}" )
+    queue_id = to_atom( "queue#{game_id}" )
     try do
-      TwoPlayerServer.start(queue_name)
+      TwoPlayerServer.start(queue_id)
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
@@ -12,9 +12,9 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   end
 
   def handle_in("ready", payload, socket) do
-    queue_name = to_atom( "queue#{socket.assigns.game_id}" )
+    queue_id = to_atom( "queue#{socket.assigns.game_id}" )
 
-    case TwoPlayerServer.add_to_queue(queue_name, payload, socket) do
+    case TwoPlayerServer.add_to_queue(queue_id, payload, socket) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
                   IO.puts "In the broadcast function"
@@ -26,12 +26,13 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
 
   def handle_in("answer", payload, socket) do
     game_id = to_atom(socket.assigns.game_id)
-    queue_name = to_atom( "queue#{socket.assigns.game_id}" )
-    case TwoPlayerServer.add_to_queue(queue_name, payload, socket) do
+    queue_id = to_atom( "queue#{socket.assigns.game_id}" )
+    case TwoPlayerServer.add_to_queue(queue_id, payload, socket) do
       :wait -> push socket, "waiting", %{}
       players = [head | tail] -> case TwoPlayerServer.pop(game_id) do
         :end_game ->
           report_results(players)
+          TwoPlayerServer.end_game([game_id, queue_id])
         question -> broadcast! head.socket, "new_question", question
       end
     end
