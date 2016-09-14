@@ -164,3 +164,7 @@ div.question {
   margin-right: 75px;
   margin-bottom: 10px;
 }
+
+li#greeting {
+    padding: 15px;
+}
