@@ -19,6 +19,7 @@ class Game extends React.Component {
       score: 0,
       chatVisible: false,
       gameEnd: false,
+      outcome: '',
       channel: socket.channel(this.props.channel),
     }
   }
@@ -41,7 +42,7 @@ class Game extends React.Component {
     })
     channel.on("end_game", payload => {
       console.log(payload.winner);
-      this.setState({gameEnd: true, options: false});
+      this.setState({gameEnd: true, options: false, outcome: payload.result});
      })
   }
   componentWillMount() {
@@ -74,7 +75,7 @@ class Game extends React.Component {
     if (this.state.gameEnd === true) {
       return (
         <div>
-          <Gameover finalScore={this.state.score} />
+          <Gameover finalScore={this.state.score} outcome={this.state.outcome} />
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
             {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }

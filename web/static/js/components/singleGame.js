@@ -55,7 +55,7 @@ class SingleGame extends React.Component {
     if (this.state.gameEnd === true) {
       return (
         <div>
-          <Gameover finalScore={this.state.score} />
+          <SingleGameover finalScore={this.state.score} />
         </div>
       )
     } else if (this.state.options) {
