@@ -14,7 +14,7 @@ defmodule Quizzbuzz.BoardController do
 
   def format_scores(users) do
     Enum.map users, fn(user)->
-      ["#{user.email}",
+      ["#{user.username}",
       "#{user.high_score}"]
 
     end

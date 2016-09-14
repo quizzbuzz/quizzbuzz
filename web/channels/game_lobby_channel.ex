@@ -49,6 +49,7 @@ defmodule Quizzbuzz.GameLobbyChannel do
       {:reply, :go, []}
     else
       {:reply, :wait, [players]}
+    end
   end
 
 

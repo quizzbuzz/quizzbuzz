@@ -7,6 +7,7 @@ defmodule Quizzbuzz.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :high_score, :integer
+    field :username, :string
 
     timestamps
   end
@@ -28,6 +29,12 @@ defmodule Quizzbuzz.User do
     |> cast(params, [:high_score])
   end
 
+  def username_changeset(model, params) do model
+    |> changeset(params)
+    |> cast(params, ~w(username), [])
+    |> validate_length(:username, min: 6, max: 60)
+    |> unique_constraint(:username)
+  end
 
 
   def registration_changeset(model, params) do model
