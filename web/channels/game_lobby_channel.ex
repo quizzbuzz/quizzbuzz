@@ -1,7 +1,11 @@
 defmodule Quizzbuzz.GameLobbyChannel do
   use Quizzbuzz.Web, :channel
+  alias Quizzbuzz.ChannelMonitor
 
   def join("game_lobby", payload, socket) do
+    current_user = socket.assigns.current_user
+    users = ChannelMonitor.user_joined("game_lobby", current_user)["game_lobby"]
+    send self, {:after_join, users}
     LobbyQueue.start
     {:ok, socket}
   end
@@ -36,6 +40,27 @@ defmodule Quizzbuzz.GameLobbyChannel do
   def handle_in("message", %{"body" => body}, socket) do
     broadcast! socket, "message", %{body: body}
     {:noreply, socket}
+  end
+
+  def terminate(_reason, socket) do
+    user_id = socket.assigns.current_user.id
+    users = ChannelMonitor.user_left("game:lobby", user_id)["game:lobby"]
+    lobby_update(socket, users)
+    :ok
+  end
+
+  def handle_info({:after_join, users}, socket) do
+    lobby_update(socket, users)
+    {:noreply, socket}
+  end
+
+  defp lobby_update(socket, users) do
+    broadcast! socket, "lobby_update", %{ users: get_usernames(users) }
+  end
+
+  defp get_usernames(nil), do: []
+  defp get_usernames(users) do
+    Enum.map users, &(&1.username)
   end
 
 

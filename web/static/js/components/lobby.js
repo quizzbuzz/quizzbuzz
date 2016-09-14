@@ -11,6 +11,7 @@ class Lobby extends React.Component {
       gameChoice: '',
       channel: '',
       messages: [],
+      players: [],
       chatVisible: false,
       lobby: socket.channel("game_lobby")
     }
@@ -35,11 +36,20 @@ class Lobby extends React.Component {
       console.log(lobby);
     lobby.on("game_ready", payload => {
         this.setState({channel: payload.game_id})
-        console.log(payload.game_id);
       })
     lobby.on("message", payload => {
       this.setState({messages: this.state.messages.concat([payload.body])})
     })
+    lobby.on('lobby_update', response => {
+      this.setState({players: response.users})
+    console.log(JSON.stringify(response.users));
+    });
+    lobby.on('game_invite', response => {
+      console.log('You were invited to join a game by', response.username);
+    });
+    window.invitePlayer = username => {
+      lobby.push('game_invite', {username: username});
+    };
   }
   sendMessage(message) {
     this.state.lobby.push("message", {body: message})
@@ -62,6 +72,7 @@ class Lobby extends React.Component {
         )
 
     } else if(this.state.gameChoice) {
+
       return (
         <div>Waiting for Opponent</div>
       )
@@ -77,6 +88,9 @@ class Lobby extends React.Component {
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button>
           <button className="sizing" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
+          <div className="PlayerCount">
+            <div>Player Count: {this.state.players.length}</div>
+          </div>
         </div>
       )
 

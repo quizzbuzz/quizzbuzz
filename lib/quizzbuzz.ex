@@ -12,6 +12,7 @@ defmodule Quizzbuzz do
       supervisor(Quizzbuzz.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Quizzbuzz.Endpoint, []),
+      worker(Quizzbuzz.ChannelMonitor, [%{}])
       # Start your own worker by calling: Quizzbuzz.Worker.start_link(arg1, arg2, arg3)
       # worker(Quizzbuzz.Worker, [arg1, arg2, arg3]),
     ]
