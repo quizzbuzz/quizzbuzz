@@ -138,7 +138,7 @@ questions = [%Quizzbuzz.Question{
       %Quizzbuzz.Question{
         body: "Which tube line has the most stations?",
         options: ["Central Line","Picadilly Line","District Line","Circle Line"],
-        answer: "Distric Line"
+        answer: "District Line"
       },
       %Quizzbuzz.Question{
         body: "Ring-tailed Lemurs are native to which country?",
