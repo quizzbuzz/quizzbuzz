@@ -1,4 +1,4 @@
-defmodule Elixir.Quizzbuzz.TwentyPlayersChannel do
+defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
   use Quizzbuzz.Web, :channel
 
   def join("twenty_player:" <> game_id, payload, socket) do

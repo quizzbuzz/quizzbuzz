@@ -1,9 +1,9 @@
-defmodule Quizzbuzz.GameChannel do
+defmodule Quizzbuzz.OnePlayerChannel do
   use Quizzbuzz.Web, :channel
   use GenServer
 
-  def join("one_player:" <> room, _, socket) do
-    {:ok, socket}
+  def join("one_player:" <> game_id, _, socket) do
+    {:ok, Phoenix.Socket.assign(socket, :game_id, game_id)}
   end
 
   def handle_in("answer", payload, socket) do
@@ -54,7 +54,7 @@ defmodule Quizzbuzz.GameChannel do
   end
 
   defp get_game_id(socket) do
-    String.to_char_list(socket.assigns.current_user.email)
+    String.to_char_list(socket.assigns.game_id)
     |> :erlang.list_to_atom
   end
 

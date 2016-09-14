@@ -6,8 +6,9 @@ defmodule Quizzbuzz.UserSocket do
   ## Channels
   # channel "room:*", Quizzbuzz.RoomChannel
   channel "game_lobby", Quizzbuzz.GameLobbyChannel
-  channel "one_player:*", Quizzbuzz.GameChannel
   channel "two_player:*", Quizzbuzz.TwoPlayersChannel
+  channel "one_player:*", Quizzbuzz.OnePlayerChannel
+  channel "twenty_player:*", Quizzbuzz.TwentyPlayerChannel
 
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
@@ -24,12 +25,14 @@ defmodule Quizzbuzz.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(%{"token" => token }, socket) do
+    return_socket =
     case Phoenix.Token.verify(socket, "user", token, max_age: 86400) do
       {:ok, user_id} ->
-        socket = assign(socket, :current_user, Repo.get!(User, user_id))
-        {:ok, socket}
+        assign(socket, :current_user, Repo.get!(User, user_id))
+      {:error, _} ->
+        socket
     end
-    {:ok, socket}
+    {:ok, return_socket}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
