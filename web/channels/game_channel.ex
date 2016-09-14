@@ -1,4 +1,4 @@
-defmodule Quizzbuzz.GameChannel do
+defmodule Quizzbuzz.OnePlayerChannel do
   use Quizzbuzz.Web, :channel
   use GenServer
 
