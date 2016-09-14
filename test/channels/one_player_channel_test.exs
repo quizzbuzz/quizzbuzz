@@ -1,11 +1,11 @@
-defmodule Quizzbuzz.GameChannelTest do
+defmodule Quizzbuzz.OnePlayerChannelTest do
   use ExUnit.Case, async: false
   use Quizzbuzz.ChannelCase
   use Phoenix.Socket
 
   import Quizzbuzz.Factory
 
-  alias Quizzbuzz.GameChannel
+  alias Quizzbuzz.OnePlayerChannel
 
   setup do
 
@@ -15,7 +15,7 @@ defmodule Quizzbuzz.GameChannelTest do
 
     {:ok, game, socket} =
       socket("game", %{current_user: %{email: user.email, id: user.id}})
-      |> subscribe_and_join(GameChannel, "one_player:lobby")
+      |> subscribe_and_join(OnePlayerChannel, "one_player:lobby")
 
     {:ok, game_info: game, socket: socket}
 
@@ -41,7 +41,24 @@ defmodule Quizzbuzz.GameChannelTest do
   test "game is ended after questions are all answered", %{socket: socket} do
     push socket, "answer", %{"user_id" => "888"}
     assert_push "end_game", %{:result => "You Win"}
+  end
+
+  test "when a game ends with a new high score it is added to the user" do
 
   end
+
+  test "when a game ends without a new high score it is not added to the user" do
+
+  end
+
+  test "when a players first game ends a new high score is added" do
+
+  end
+
+  test "if a user has a previously unfinished game the server restarts" do
+
+  end
+
+
 
 end

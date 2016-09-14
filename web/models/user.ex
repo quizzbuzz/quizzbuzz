@@ -36,7 +36,7 @@ defmodule Quizzbuzz.User do
     |> validate_length(:password, min: 6, max: 100)
     |> put_hashed_password()
     |> cast(params, ~w(username), [])
-    |> validate_length(:username, min: 6, max: 60)
+    |> validate_length(:username, min: 4, max: 60)
     |> unique_constraint(:username)
   end
 

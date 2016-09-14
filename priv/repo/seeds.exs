@@ -111,7 +111,7 @@ questions = [%Quizzbuzz.Question{
         answer: "I Want to Hold Your Hand"
       },
       %Quizzbuzz.Question{
-        body: "In what year whast One Canada Square completed?",
+        body: "In what year what One Canada Square completed?",
         options: ["1990","1991","1992","1989"],
         answer: "1991"
       },
