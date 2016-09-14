@@ -323,7 +323,7 @@ questions = [%Quizzbuzz.Question{
       %Quizzbuzz.Question{
         body: "Which music star was formerly a member of the band 'The Sugarcubes'?",
         options: ["Britney Spears","Gwen Stefani","Bjork","Katy Perry"],
-        answer: "Badminton"
+        answer: "Bjork"
       },
       %Quizzbuzz.Question{
         body: "In which mountain range is the highest peak outside of Asia?",
