@@ -13,7 +13,7 @@ defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
 
   def handle_in("ready", payload, socket) do
     queue_name = to_atom( "queue#{socket.assigns.game_id}" )
-
+    IO.puts "received READY"
     case TwentyPlayerServer.add_to_queue(queue_name, payload, socket) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
@@ -43,6 +43,11 @@ defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
     broadcast! socket, "message", %{body: body}
     {:noreply, socket}
   end
+  def handle_in("user_left", _payload, socket) do
+    broadcast! socket, "user_left", %{deserter: socket.assigns.current_user.username}
+    {:noreply, socket}
+  end
+
 
   defp start_new_game(socket) do
     questions = build_game

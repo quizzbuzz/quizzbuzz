@@ -9,10 +9,12 @@ defmodule Quizzbuzz.GameLobbyChannel do
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("join_two_player_queue", payload, socket) do
-    IO.puts "Join two player queue message receieved"
     case LobbyQueue.join(:two_player, socket) do
       :wait -> {:noreply, socket}
       players -> game_id = hash_id(players)
+        IO.puts "GAME ID IS #{game_id}"
+        IO.puts "======PLAYERS======"
+        IO.inspect players
         Enum.each players, &(push &1, "game_ready", %{game_id: "two_player:#{game_id}"})
     end
     {:noreply, socket}
@@ -38,9 +40,9 @@ defmodule Quizzbuzz.GameLobbyChannel do
     {:noreply, socket}
   end
 
-
   def hash_id(sockets) do
-    Enum.map(sockets, &( &1.assigns.current_user.email))
+    Enum.map(sockets, &( String.to_char_list(&1.assigns.current_user.email)
+      |>Enum.shuffle |> to_string))
       |> to_string |> Base.url_encode64 |> binary_part(0, 20)
   end
 

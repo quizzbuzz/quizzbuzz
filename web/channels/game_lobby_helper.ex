@@ -35,7 +35,7 @@ defmodule LobbyQueue do
   end
   def handle_call({:push_twenty, socket}, _from, list) do
     players = [socket | list]
-    if length(players) == 3 do
+    if length(players) == 4 do
       {:reply, players, []}
     else
       {:reply, :wait, players}
