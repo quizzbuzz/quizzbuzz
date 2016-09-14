@@ -7,11 +7,13 @@ class Chat extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="chat">
+        <div className="messages">
+          {this.props.messages.map(message => {
+            return <Message data={message} />
+          })}
+        </div>
         <MessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
-        {this.props.messages.map(message => {
-          return <Message data={message} />
-        })}
       </div>
     )
   }
@@ -22,8 +24,7 @@ class Message extends React.Component {
   render() {
     return (
       <div>
-        <div>{this.props.data.text}</div>
-        <div>{this.props.data.date}</div>
+        <div>{this.props.data.date}: {this.props.data.text}</div>
       </div>
     )
   }
@@ -40,7 +41,7 @@ class MessageInput extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" ref="text"/>
+        <input placeholder="Chit chat..." className="messageInput" type="text" ref="text"/>
       </form>
     )
   }
