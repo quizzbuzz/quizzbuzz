@@ -6,7 +6,7 @@ questions = [%Quizzbuzz.Question{
         answer: "Kingston"
       },
       %Quizzbuzz.Question{
-        body: "What is the sum of the internal angles o a triangle?",
+        body: "What is the sum of the internal angles of a triangle?",
         options: ["80 degrees","90 degress","180 degrees","360 degrees"],
         answer: "180 degrees"
       },
@@ -26,7 +26,7 @@ questions = [%Quizzbuzz.Question{
         answer: "Wood"
       },
       %Quizzbuzz.Question{
-        body: "What type of language is Romanian?",
+        body: "Which language family does Romanian belong to?",
         options: ["Romance","Slavic","Germanic","Turkic"],
         answer: "Romance"
       },
@@ -111,7 +111,7 @@ questions = [%Quizzbuzz.Question{
         answer: "I Want to Hold Your Hand"
       },
       %Quizzbuzz.Question{
-        body: "In what year what One Canada Square completed?",
+        body: "In what year was Canary Wharf completed?",
         options: ["1990","1991","1992","1989"],
         answer: "1991"
       },
@@ -310,6 +310,12 @@ users = [%Quizzbuzz.User{
     password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
     high_score: 29
   },
+  %Quizzbuzz.User{
+    email: "becca@email.com",
+    username: "becca",
+    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
+    high_score: 93
+  }
   %Quizzbuzz.User{
     email: "zozo@email.com",
     username: "zozo",

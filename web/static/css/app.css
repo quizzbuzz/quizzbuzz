@@ -13,6 +13,12 @@
   /*font-style: italic;*/
 }
 
+.c-position {
+  display: block;
+  float: left;
+  position: relative;
+  right: 50%;
+}
 
 .sizing:hover {
   background-color: rgb(157, 135, 227);
@@ -41,7 +47,7 @@ div.question {
   height: 50px;
 }
 
-#countdown {
+.timer {
   font-family: 'Baloo Tamma', cursive;
   font-size: 40px;
 }
@@ -158,7 +164,9 @@ div.question {
    background-color: rgb(157, 135, 227); /*Change rollover cell color here*/
  }
 
-
+.question {
+  text-align: center;
+}
 
 /* CHAT */
 
@@ -203,11 +211,25 @@ div.question {
   width: 100px;
   border-radius: 4px;
   padding: 10px;
-  margin-left: 75px;
-  margin-right: 75px;
+  margin-left: 150px;
   margin-bottom: 10px;
   font-family: 'Baloo Tamma', cursive;
   font-size: 20px;
+}
+
+.game-buttons {
+  clear: left;
+  float: left;
+  position: relative;
+  left: 50%;
+
+}
+
+.lobby {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 li#greeting {

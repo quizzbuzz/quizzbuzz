@@ -8,7 +8,14 @@ defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
+    send(self, :after_join)
     {:ok, Phoenix.Socket.assign(socket, :game_id, game_id) }
+  end
+
+  def handle_info(:after_join, socket) do
+    username = socket.assigns.current_user.username
+    push socket, "username", %{username: username}
+    {:noreply, socket}
   end
 
   def handle_in("ready", payload, socket) do
@@ -38,7 +45,9 @@ defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
 
     {:noreply, socket}
   end
-
+  def terminate(_reason, socket) do
+    broadcast socket, "user_left", %{deserter: socket.assigns.current_user.username}
+  end
   def handle_in("message", %{"body" => body}, socket) do
     broadcast! socket, "message", %{body: body}
     {:noreply, socket}

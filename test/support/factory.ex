@@ -13,8 +13,10 @@ defmodule Quizzbuzz.Factory do
   end
   def user_factory do
     %User{
-      email: "test@test.com",
+      email: "testingemail@test.com",
       password: "password",
+      username: "testytest",
+      high_score: 1,
       id: 888
     }
   end
