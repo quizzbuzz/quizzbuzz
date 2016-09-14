@@ -26,6 +26,11 @@ defmodule Quizzbuzz.GameLobbyChannel do
     {:noreply, socket}
   end
 
+  def handle_in("message", %{"body" => body}, socket) do
+    broadcast! socket, "message", %{body: body}
+    {:noreply, socket}
+  end
+
   def handle_call({:push_two, socket}, _from, []) do
     {:reply, :wait, [socket]}
   end
