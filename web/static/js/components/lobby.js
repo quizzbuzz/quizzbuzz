@@ -25,14 +25,12 @@ class Lobby extends React.Component {
 
   }
   configureChannel(lobby) {
-    console.log(lobby);
     lobby.join()
       .receive("ok", (payload) => {
         console.log(`Succesfully joined the game lobby.`)
       })
       .receive("error", () => { console.log(`Unable to join the game lobby.`)
       })
-      console.log(lobby);
     lobby.on("game_ready", payload => {
         this.setState({channel: payload.game_id})
         console.log(payload.game_id);
@@ -69,14 +67,16 @@ class Lobby extends React.Component {
     } else {
 
       return (
-        <div>
+        <div className="lobby">
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
             {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
-          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button>
-          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button>
-          <button className="sizing" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
+          <div className="game-buttons">
+            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button><br/>
+            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button><br/>
+            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
+          </div>
         </div>
       )
 

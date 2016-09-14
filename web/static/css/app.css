@@ -11,6 +11,12 @@
   border-radius: 10px;
 }
 
+.c-position {
+  display: block;
+  float: left;
+  position: relative;
+  right: 50%;
+}
 
 .sizing:hover {
   background-color: rgb(157, 135, 227);
@@ -160,9 +166,23 @@ div.question {
   width: 100px;
   border-radius: 4px;
   padding: 10px;
-  margin-left: 75px;
-  margin-right: 75px;
+  margin-left: 150px;
   margin-bottom: 10px;
+}
+
+.game-buttons {
+  clear: left;
+  float: left;
+  position: relative;
+  left: 50%;
+
+}
+
+.lobby {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 li#greeting {
