@@ -28,21 +28,17 @@ defmodule TwentyPlayerServer do
     def handle_call({:wait, payload, socket}, _from, queue) do
       player = %{socket: socket, payload: payload}
       players = [player | queue]
-      if length(players) == 3 do
+      if length(players) == 4 do
         {:reply, players, []}
       else
         {:reply, :wait, players}
       end
     end
 
-    def handle_call({:push, payload, socket}, _from, []) do
-      outcome = %{score: payload["score"], socket: socket}
-      {:reply, :wait, [outcome]}
-    end
     def handle_call({:push, payload, socket}, _from, list) do
       outcome = %{score: payload["final_score"], socket: socket}
       results = [outcome | list]
-      if length(results) == 3 do
+      if length(results) == 4 do
         results = Enum.sort_by([outcome|list], &(&1.score), &>=/2)
         {:reply, results, []}
       else
