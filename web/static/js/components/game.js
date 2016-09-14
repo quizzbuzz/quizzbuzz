@@ -4,6 +4,7 @@ import Timer from './timer'
 import Question from './question'
 import Gameover from './gameover'
 import Option from './option'
+import Chat from './chat'
 
 class Game extends React.Component {
   constructor (props) {
@@ -13,11 +14,11 @@ class Game extends React.Component {
       options: '',
       answer: '',
       time: 10,
+      messages: [],
       waiting: false,
       score: 0,
       gameEnd: false,
       channel: socket.channel(this.props.channel),
-      user_id: (Math.floor(Math.random() * 10000) + 1).toString()
     }
   }
   configureChannel(channel) {
@@ -27,12 +28,15 @@ class Game extends React.Component {
       })
       .receive("error", () => { console.log(`Unable to join the game room.`)}
     )
-    channel.push("ready", {user_id: this.state.user_id })
+    channel.push("ready")
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
      })
     channel.on("waiting", payload => {
       this.setState( {waiting: true} )
+    })
+    channel.on("message", payload => {
+      this.setState({messages: this.state.messages.concat([payload.body])})
     })
     channel.on("end_game", payload => {
       this.setState({gameEnd: true, options: false});
@@ -47,7 +51,7 @@ class Game extends React.Component {
     }
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
-    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
+    this.state.channel.push("answer", {score: this.state.score})
   }
   checkAnswer(answer) {
     if (this.state.answer === answer) {
@@ -56,11 +60,19 @@ class Game extends React.Component {
   }
   handleTimeOut() {
     console.log(this.state.score);
-    this.state.channel.push("answer", {score: this.state.score, user_id: this.state.user_id})
+    this.state.channel.push("answer", {score: this.state.score})
+  }
+  sendMessage(message) {
+    this.state.channel.push("message", {body: message})
   }
   render() {
     if (this.state.gameEnd === true) {
-      return <Gameover finalScore={this.state.score} />
+      return (
+        <div>
+          <Gameover finalScore={this.state.score} />
+          <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/>
+        </div>
+      )
     } else if (this.state.options) {
       return (
         <div>
@@ -73,18 +85,23 @@ class Game extends React.Component {
             return <Option key={index} index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
 
-
           <div className="score">Score: {this.state.score}</div>
+          <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/>
         </div>
       )
     } else if(this.state.waiting) {
 
-      return <div>Waiting for opponent</div>
+      return (
+        <div>
+          <div>Waiting for opponent</div>
+          <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/>
+        </div>
+      )
 
     } else {
-
       return <div></div>
     }
+
   }
 
   componentWillUnmount() {

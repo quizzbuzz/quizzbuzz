@@ -39,6 +39,11 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
     {:noreply, socket}
   end
 
+  def handle_in("message", %{"body" => body}, socket) do
+    broadcast! socket, "message", %{body: body}
+    {:noreply, socket}
+  end
+
   defp start_new_game(socket) do
     questions = build_game
     game_id = to_atom( socket.assigns.game_id )
@@ -94,7 +99,6 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
           IO.puts "something else"
     end
   end
-
 
 
 

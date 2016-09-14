@@ -17,6 +17,7 @@ import ReactDOM from 'react-dom'
 import Lobby from 'components/lobby'
 
 ReactDOM.render(<Lobby />, document.getElementById('game'))
+
 // Import local files
 //
 // Local files can be imported directly using relative
