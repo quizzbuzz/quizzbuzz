@@ -6,6 +6,7 @@ defmodule TwentyPlayerServer do
   end
 
   def add_to_queue(name, payload, socket) do
+    IO.puts "Received add to queue!"
     GenServer.call(name, {:wait, payload, socket})
   end
 

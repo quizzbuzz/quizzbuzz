@@ -45,6 +45,12 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
     {:noreply, socket}
   end
 
+  def handle_in("user_left", _payload, socket) do
+    broadcast! socket, "user_left", %{deserter: socket.assigns.current_user.username}
+    {:noreply, socket}
+  end
+
+
   defp start_new_game(socket) do
     questions = build_game
     game_id = to_atom( socket.assigns.game_id )
