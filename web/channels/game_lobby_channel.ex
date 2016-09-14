@@ -43,7 +43,7 @@ defmodule Quizzbuzz.GameLobbyChannel do
 
   def handle_call({:push_twenty, socket}, _from, list) do
     players = [socket | list]
-    if length(players) == 20 do
+    if length(players) == 3 do
       game_id = hash_id(players)
       Enum.each players, &(push &1, "game_ready", %{game_id: "twenty_player:#{game_id}"})
       {:reply, :go, []}
