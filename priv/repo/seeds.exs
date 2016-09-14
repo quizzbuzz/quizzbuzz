@@ -231,7 +231,157 @@ questions = [%Quizzbuzz.Question{
         answer: "Badminton"
       },
       %Quizzbuzz.Question{
-        body: "What year was the NHS formed?",
+        body: "In the sitcom Frasier, what is Frasier's surname?",
+        options: ["Smith","Geller","Crane","Green"],
+        answer: "Crane"
+      },
+      %Quizzbuzz.Question{
+        body: "Which comedian stars as a bookshop owner in Black Books?",
+        options: ["Noel Fielding","Peter Kay","Ricky Gervais","Dylan Moran"],
+        answer: "Dylan Moran"
+      },
+      %Quizzbuzz.Question{
+        body: "Epistemology is the study of what?",
+        options: ["Matter","Society","Knowledge","Education"],
+        answer: "Knowledge"
+      },
+      %Quizzbuzz.Question{
+        body: "In what month of the year do the French celebrate Bastille Day?",
+        options: ["May","June","July","August"],
+        answer: "July"
+      },
+      %Quizzbuzz.Question{
+        body: "Which city was the capital of England before London?",
+        options: ["Colchester","Norwich","Bristol","Winchester"],
+        answer: "Winchester"
+      },
+      %Quizzbuzz.Question{
+        body: "Jarlsberg cheese originates from which country? ",
+        options: ["Netherlands","Germany","Belgium","Norway"],
+        answer: "Norway"
+      },
+      %Quizzbuzz.Question{
+        body: "Where in the body is the hippocampus?",
+        options: ["Brain","Heart","Pancreas","Liver"],
+        answer: "Brain"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the collective noun for a group of giraffes?",
+        options: ["Crowd","Herd","Tower","Block"],
+        answer: "Tower"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the nickname of the NFL team based in Chicago?",
+        options: ["Wolves","Lions","Eagles","Bears"],
+        answer: "Bears"
+      },
+      %Quizzbuzz.Question{
+        body: "What shape is Rigatoni pasta?",
+        options: ["Bow","Twirl","Tube","Shell"],
+        answer: "Tube"
+      },
+      %Quizzbuzz.Question{
+        body: "Saffron is obtained from which flower?",
+        options: ["Lily","Sunflower","Dahlia","Crocus"],
+        answer: "Crocus"
+      },
+      %Quizzbuzz.Question{
+        body: "What major river flows through Nottingham?",
+        options: ["Trent","Thames","Avon","Mersey"],
+        answer: "Trent"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the name of Dr Who's home planet?",
+        options: ["Skaro","Telos","Gallifrey","New Earth"],
+        answer: "Gallifrey"
+      },
+      %Quizzbuzz.Question{
+        body: "'All the world's a stage and all the men and women are merely players,' is from which Shakespeare play?",
+        options: ["As You Like It","Measure for Measure","Hamlet","The Merchant of Venice"],
+        answer: "As You Like It"
+      },
+      %Quizzbuzz.Question{
+        body: "Which James Bond film stars Halle Berry?",
+        options: ["The World is Not Enough","Casino Royale","Die Another Day","Moonraker"],
+        answer: "Die Another Day"
+      },
+      %Quizzbuzz.Question{
+        body: "In Greek mythology, who was the wife of Zeus?",
+        options: ["Aphrodite","Eos","Iris","Hera"],
+        answer: "Hera"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the name of the musical by the creators of South Park?",
+        options: ["Wicked","In The Heights","The Book of Mormon","The Lion King"],
+        answer: "The Book of Mormon"
+      },
+      %Quizzbuzz.Question{
+        body: "Who had a hit single with 'Fame' in 1975?",
+        options: ["David Bowie","Elton John","Diana Ross","Eric Clapton"],
+        answer: "David Bowie"
+      },
+      %Quizzbuzz.Question{
+        body: "Which music star was formerly a member of the band 'The Sugarcubes'?",
+        options: ["Britney Spears","Gwen Stefani","Bjork","Katy Perry"],
+        answer: "Badminton"
+      },
+      %Quizzbuzz.Question{
+        body: "In which mountain range is the highest peak outside of Asia?",
+        options: ["French Alps","Rocky Mountains","Andes","Atlas Mountains"],
+        answer: "Andes"
+      },
+      %Quizzbuzz.Question{
+        body: "Gossamer is produced by which animal?",
+        options: ["Snake","Spider","Scorpion","Snail"],
+        answer: "Spider"
+      },
+      %Quizzbuzz.Question{
+        body: "Shawn Carter is the real name of which musician?",
+        options: ["Eminem","Busta Rhymes","50 Cent","Jay-Z"],
+        answer: "Jay-Z"
+      },
+      %Quizzbuzz.Question{
+        body: "Craven Cottage is the home stadium of which football club?",
+        options: ["Chelsea","Fulham","Arsenal","West Ham"],
+        answer: "Fulham"
+      },
+      %Quizzbuzz.Question{
+        body: "Stella Artois originates from which modern day country? ",
+        options: ["Netherlands","Germany","Belgium","France"],
+        answer: "Belgium"
+      },
+      %Quizzbuzz.Question{
+        body: "Nike take their from the name from the goddess of what?",
+        options: ["Love","Revenge","Victory","Friendship"],
+        answer: "Victory"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the national animal of Canada?",
+        options: ["Moose","Eagle","Bear","Beaver"],
+        answer: "Beaver"
+      },
+      %Quizzbuzz.Question{
+        body: "Justin Timberlake began his career in which boy band? ",
+        options: ["Backstreet Boys","New Kids on the Block","N-Sync","5ive"],
+        answer: "N-Sync"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the largest island in the Caribbean? ",
+        options: ["Cuba","Jamaica","Antigua","Grand Cayman"],
+        answer: "Cuba"
+      },
+      %Quizzbuzz.Question{
+        body: "Which herb is used in Bernaise sauce? ",
+        options: ["Chives","Oregano","Thyme","Tarragon"],
+        answer: "Tarragon"
+      },
+      %Quizzbuzz.Question{
+        body: "4 Privet drive is famous for appearing in which series of books?",
+        options: ["Chronicles of Narnia","Famous Five","Harry Potter","A Series of Unfortunate Events"],
+        answer: "Harry Potter"
+      },
+      %Quizzbuzz.Question{
+        body: "In which year was the NHS formed?",
         options: ["1947","1948","1949","1950"],
         answer: "1948"
       }]
