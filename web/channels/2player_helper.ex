@@ -28,6 +28,7 @@ defmodule TwoPlayerServer do
     def handle_call({:wait, payload, socket}, _from, []) do
       {:reply, :wait, [%{socket: socket, payload: payload}]}
     end
+    
     def handle_call({:wait, payload, socket}, _from, queue) do
       player = %{socket: socket, payload: payload}
       {:reply, [player | queue], []}
