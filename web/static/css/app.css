@@ -1,16 +1,16 @@
 /* This file is for your main application css. */
 
 .sizing {
+  position: relative;
   height: 50px;
   width: 200px;
-  margin: 10px;
   background-color: rgb(106, 75, 213);
   color: white;
   border: none;
   border-radius: 10px;
   font-family: 'Baloo Tamma', cursive;
   font-size: 20px;
-  /*font-style: italic;*/
+  margin-top: 38px
 }
 
 .c-position {
@@ -34,14 +34,17 @@ div.question {
   margin: 20px
 }
 
-#login {
+/*#login {
   display:inline-block;
   margin-right:10px;
-}
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}*/
 
-#join {
+/*#join {
   display:inline-block;
-}
+}*/
 
 #filler {
   height: 50px;
@@ -54,7 +57,8 @@ div.question {
 
 .score {
   font-family: 'Baloo Tamma', cursive;
-  font-size: 40px;
+  font-size:
+  40px;
 }
 
 #wait {
@@ -113,10 +117,15 @@ div.question {
 
 .form-control {
   width: 400px;
+  overflow: auto;
 }
 
 .form-group {
   width: 400px;
+  margin: 0 auto;
+  margin-top: 9px;
+  position: relative;
+  overflow: auto;
 }
 
 .title {
@@ -192,6 +201,7 @@ div.question {
   width:250px;
   margin: 10px;
   float: right;
+  position: relative;
 }
 
 .chat {
@@ -234,4 +244,63 @@ div.question {
 
 li#greeting {
     padding: 15px;
+}
+
+.signupformcontainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.register{
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  flex-direction: column;
+}
+
+.titleregister{
+  margin-bottom: 10px;
+}
+
+.form{
+  overflow: auto;
+}
+
+.homepageform{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.loginform{
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  flex-direction: column;
+}
+
+.logintitle{
+  margin-bottom: 30px;
+}
+
+form.play-form{
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  width: 99%
+}
+
+.timeandscore{
+
+}
+
+.options{
+
 }
