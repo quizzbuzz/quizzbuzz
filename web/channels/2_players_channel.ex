@@ -17,11 +17,18 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
     case TwoPlayerServer.add_to_queue(queue_id, payload, socket) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
-                  IO.puts "In the broadcast function"
                 Enum.each(players, &(push &1.socket, "new_question", question))
 
     end
     {:noreply, socket}
+  end
+
+  def terminate(_reason, socket) do
+    game_id = socket.assigns.game_id
+    queue_id = to_atom( "queue#{game_id}" )
+    broadcast socket, "user_left", %{deserter: socket.assigns.current_user.username}
+    IO.puts socket.assigns.game_id
+    TwoPlayerServer.end_game([queue_id, queue_id])
   end
 
   def handle_in("answer", payload, socket) do
