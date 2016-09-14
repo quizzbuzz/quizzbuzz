@@ -38,7 +38,9 @@ defmodule Elixir.Quizzbuzz.TwentyPlayerChannel do
 
     {:noreply, socket}
   end
-
+  def terminate(_reason, socket) do
+    broadcast socket, "user_left", %{deserter: socket.assigns.current_user.username}
+  end
   def handle_in("message", %{"body" => body}, socket) do
     broadcast! socket, "message", %{body: body}
     {:noreply, socket}
