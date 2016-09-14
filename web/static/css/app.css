@@ -6,9 +6,11 @@
   margin: 10px;
   background-color: rgb(106, 75, 213);
   color: white;
-  font-size: 15px;
   border: none;
   border-radius: 10px;
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 20px;
+  /*font-style: italic;*/
 }
 
 
@@ -37,6 +39,36 @@ div.question {
 
 #filler {
   height: 50px;
+}
+
+#countdown {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
+}
+
+.score {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
+}
+
+#wait {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
+}
+
+.question {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
+}
+
+.finalScore {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
+}
+
+.gameOver {
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 40px;
 }
 
 .table.table-striped {
@@ -84,8 +116,19 @@ div.question {
 .title {
   text-align: center;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   font-size: 80pt;
+  font-family: 'Bungee Shade', cursive;
+  color: rgb(106, 75, 213);
+}
+
+.sub-title {
+  text-align: center;
+  padding-bottom: 50px;
+  font-size:30pt;
+  font-family: 'Baloo Tamma', cursive;
+  font-style: italic;
+  color: rgb(157, 135, 227);
 }
 
 .navbar-custom {
@@ -163,6 +206,8 @@ div.question {
   margin-left: 75px;
   margin-right: 75px;
   margin-bottom: 10px;
+  font-family: 'Baloo Tamma', cursive;
+  font-size: 20px;
 }
 
 li#greeting {

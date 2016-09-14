@@ -126,7 +126,7 @@ class Game extends React.Component {
 
       return (
         <div>
-          <div>Waiting for opponents</div>
+          <div id="wait">Waiting for opponents</div>
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
             {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }

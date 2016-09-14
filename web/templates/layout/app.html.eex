@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Baloo|Baloo+Bhai|Baloo+Chettan|Baloo+Tamma|Baloo+Thambi|Bowlby+One+SC|Bungee+Inline|Bungee+Shade|Candal|Carter+One|Changa+One|Chango|Coiny|Fascinate|Faster+One|Fredoka+One|Fugaz+One|Holtwood+One+SC|Lemon|Lilita+One|Monoton|Passion+One|Rammetto+One|Rubik+One|Russo+One|Titan+One|Ultra" rel="stylesheet" type="text/css">
+<link <link href="https://fonts.googleapis.com/css?family=Baloo+Tamma|Bungee+Shade" rel="stylesheet" type="text/css">
 
     <title>Hello Quizzbuzz!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">

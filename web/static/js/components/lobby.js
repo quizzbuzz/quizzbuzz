@@ -63,7 +63,7 @@ class Lobby extends React.Component {
 
     } else if(this.state.gameChoice) {
       return (
-        <div>Waiting for Opponent</div>
+        <div id="wait">Waiting for Opponent</div>
       )
 
     } else {
