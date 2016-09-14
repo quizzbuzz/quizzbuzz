@@ -49,7 +49,7 @@ defmodule Quizzbuzz.GameLobbyChannel do
       Enum.each players, &(push &1, "game_ready", %{game_id: "twenty_player:#{game_id}"})
       {:reply, :go, []}
     else
-      {:reply, :wait, players}
+      {:reply, :wait, [players]}
     end
   end
 
