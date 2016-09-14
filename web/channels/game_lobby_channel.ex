@@ -3,7 +3,14 @@ defmodule Quizzbuzz.GameLobbyChannel do
 
   def join("game_lobby", payload, socket) do
     LobbyQueue.start
+    send(self, :after_join)
     {:ok, socket}
+  end
+
+  def handle_info(:after_join, socket) do
+    username = socket.assigns.current_user.username
+    push socket, "username", %{username: username}
+    {:noreply, socket}
   end
 
   # Channels can be used in a request/response fashion

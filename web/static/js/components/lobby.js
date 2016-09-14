@@ -10,6 +10,7 @@ class Lobby extends React.Component {
     this.state = {
       gameChoice: '',
       channel: '',
+      username: '',
       messages: [],
       chatVisible: false,
       lobby: socket.channel("game_lobby")
@@ -22,7 +23,6 @@ class Lobby extends React.Component {
     const room = event.currentTarget.attributes.getNamedItem('name').value
     this.setState({gameChoice: room })
     this.state.lobby.push(room)
-
   }
   configureChannel(lobby) {
     lobby.join()
@@ -31,9 +31,11 @@ class Lobby extends React.Component {
       })
       .receive("error", () => { console.log(`Unable to join the game lobby.`)
       })
+    lobby.on("username", (payload) => {
+      this.setState({username: payload.username})
+    })
     lobby.on("game_ready", payload => {
         this.setState({channel: payload.game_id})
-        console.log(payload.game_id);
       })
     lobby.on("message", payload => {
       this.setState({messages: this.state.messages.concat([payload.body])})
@@ -70,7 +72,7 @@ class Lobby extends React.Component {
         <div className="lobby">
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
+            {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
           <div className="game-buttons">
             <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button><br/>

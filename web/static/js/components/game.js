@@ -20,6 +20,7 @@ class Game extends React.Component {
       chatVisible: false,
       gameEnd: false,
       outcome: '',
+      username: '',
       channel: socket.channel(this.props.channel),
     }
   }
@@ -36,6 +37,9 @@ class Game extends React.Component {
      })
     channel.on("waiting", payload => {
       this.setState( {waiting: true} )
+    })
+    channel.on("username", (payload) => {
+      this.setState({username: payload.username})
     })
     channel.on("message", payload => {
       this.setState({messages: this.state.messages.concat([payload.body])})
@@ -89,7 +93,7 @@ class Game extends React.Component {
           <Gameover finalScore={this.state.score} outcome={this.state.outcome} />
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
+            {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
         </div>
       )
@@ -118,7 +122,7 @@ class Game extends React.Component {
           <div className="score">Score: {this.state.score}</div>
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
+            {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
         </div>
       )
@@ -129,7 +133,7 @@ class Game extends React.Component {
           <div>Waiting for opponents</div>
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
-            {this.state.chatVisible ? <Chat messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
+            {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
         </div>
       )

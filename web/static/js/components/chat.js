@@ -10,7 +10,7 @@ class Chat extends React.Component {
       <div className="chat">
         <div className="messages">
           {this.props.messages.map(message => {
-            return <Message data={message} />
+            return <Message username={this.props.username} data={message} />
           })}
         </div>
         <MessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
@@ -24,7 +24,7 @@ class Message extends React.Component {
   render() {
     return (
       <div>
-        <div>{this.props.data.date}: {this.props.data.text}</div>
+        <div>{this.props.username}: {this.props.data.text}</div>
       </div>
     )
   }
