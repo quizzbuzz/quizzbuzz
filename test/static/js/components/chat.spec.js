@@ -7,8 +7,8 @@ import TestUtils from 'react-addons-test-utils'
 import Game from '../../../../web/static/js/components/chat';
 
 describe('Chat', () => {
-  const chat = shallow(<Chat />);
-
-  console.log(chat.debug())
+  // const chat = shallow(<Chat />);
+  //
+  // console.log(chat.debug())
 
 })

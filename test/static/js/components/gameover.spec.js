@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme'
 import sinon from 'sinon'
 import TestUtils from 'react-addons-test-utils'
 
-import Gameover from '../../../../web/static/js/components/gameover';
+import Gameover from '../../../../web/static/js/components/singleGameover';
 
 describe('Gameover', () => {
 

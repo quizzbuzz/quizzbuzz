@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from '../../../../web/static/js/components/game';
+import Game from '../../../../web/static/js/components/singleGame';
 import { mount, shallow } from 'enzyme'
 import sinon from 'sinon'
 import TestUtils from 'react-addons-test-utils'
