@@ -44,7 +44,7 @@ defmodule Quizzbuzz.GameHelper do
     game_id = to_atom(game_id)
     Server.start(queue_id)
     Server.start(game_id, questions)
-    {:ok, Server.pop(game_id)}
+    Server.pop(game_id)
   end
 
   def build_game do
@@ -57,18 +57,13 @@ defmodule Quizzbuzz.GameHelper do
     queue_id = to_atom( "queue#{socket.assigns.game_id}" )
     case Server.add_to_queue(queue_id, payload, socket, game_size) do
       :wait -> :queue_not_full
-      players = [head | tail] -> case Server.pop(game_id) do
+      players -> case Server.pop(game_id) do
         :end_game ->  Server.end_game([game_id, queue_id])
                       {:end_game, players}
-        {:error, _} -> start_new_game(socket)
+        {:error, _} -> {:question, start_new_game(socket)}
         question -> {:question, question}
         end
       end
-  end
-
-  def end_game(socket) do
-    servers = server_ids(socket)
-    Enum.each servers, &(GenServer.stop(&1))
   end
 
   def server_ids(socket) do

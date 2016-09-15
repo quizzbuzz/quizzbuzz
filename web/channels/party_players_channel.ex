@@ -41,7 +41,7 @@ defmodule Elixir.Quizzbuzz.PartyChannel do
 
   def terminate(_reason, socket) do
     broadcast! socket, "user_left", %{deserter: socket.assigns.current_user.username}
-    end_game(socket)
+    Server.end_game(server_ids(socket))
   end
 
 

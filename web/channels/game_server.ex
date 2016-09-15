@@ -25,6 +25,11 @@ defmodule Quizzbuzz.Game.Server do
     {:reply,:end_game, []}
   end
 
+  def end_game(servers) do
+    Enum.each servers, &(GenServer.stop(&1))
+  end
+
+
   def handle_call({:wait, payload, socket, game_size}, _from, queue) do
     player = %{socket: socket, payload: payload}
     players = [player | queue]

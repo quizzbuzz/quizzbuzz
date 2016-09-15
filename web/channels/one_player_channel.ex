@@ -43,10 +43,11 @@ defmodule Quizzbuzz.OnePlayerChannel do
 
   def terminate(_reason, socket) do
     broadcast! socket, "user_left", %{deserter: socket.assigns.current_user.username}
-    end_game(socket)
+    Server.end_game(server_ids(socket))
   end
 
   defp report_results(players) do
+    IO.puts "Reporting results at the end of the game!"
     [winner | losers] = sort_results(players)
     push winner.socket, "end_game", %{result: "You Win", winner_score: winner.payload["score"]}
     Enum.each(losers, &( push &1.socket, "end_game",  %{result: "You Lose", winner_score: winner.payload["score"]}))
