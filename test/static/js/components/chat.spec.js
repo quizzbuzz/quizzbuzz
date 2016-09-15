@@ -8,10 +8,8 @@ import Chat from '../../../../web/static/js/components/chat';
 
 describe('Chat', () => {
 
-  const handleMessageSubmit = sinon.spy();
-
   it("returns a blank chat window if no messages have been sent", () =>  {
-    const chat = mount(<Chat messages={[{text: "", username: ""}]}/>);
+    const chat = shallow(<Chat messages={[{text: "", username: ""}]}/>);
     expect(chat.find('Message')).to.have.length(1);
   });
 
@@ -24,9 +22,6 @@ describe('Chat', () => {
     const chat = mount(<Chat messages={[{text: "This is the first message", username: "test1"},]} username="test2"/>);
     expect(chat.find("MessageInput").prop("username")).to.be.equal("test2");
   });
-
-  // Would like to test the submission of a message
-
 
 
 })

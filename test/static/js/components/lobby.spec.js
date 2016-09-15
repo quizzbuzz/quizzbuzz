@@ -6,8 +6,20 @@ import TestUtils from 'react-addons-test-utils'
 import Lobby from '../../../../web/static/js/components/lobby';
 
 describe("Lobby", () => {
+
+  const componentWillMount = sinon.spy(Lobby.prototype, "componentWillMount")
+  const configureChannel = sinon.spy(Lobby.prototype, "configureChannel")
   const lobby = shallow(<Lobby />);
-  lobby.setState({username: "test1"})
+  lobby.setState({username: "test1"});
+
+  it('should call componentWillMount', () => {
+    expect(componentWillMount.calledOnce).to.be.true;
+  })
+
+  it('should call configureChannel on componentWillMount', () => {
+    expect(configureChannel.calledOnce).to.be.true;
+  })
+
 
   it('Should give the user the single player option', () => {
     expect(lobby.contains("Single Player Game")).to.be.true;
@@ -44,5 +56,13 @@ describe("Lobby", () => {
     lobby.setState({channel: "multiplayer"});
     expect(lobby.find("Game").prop("channel")).to.be.equal("multiplayer")
   })
+
+  it('shows waiting for opponent when multiplayer is selected', () => {
+    const newlobby = mount(<Lobby />);
+    newlobby.setState({username: "test1", gameChoice:"multiplayer"});
+    expect(newlobby.text()).to.equal("Waiting for Opponent");
+
+  })
+
 
 })

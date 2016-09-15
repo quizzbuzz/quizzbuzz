@@ -26,11 +26,6 @@ class Lobby extends React.Component {
   }
   configureChannel(lobby) {
     lobby.join()
-      .receive("ok", (payload) => {
-        console.log(`Succesfully joined the game lobby.`)
-      })
-      .receive("error", () => { console.log(`Unable to join the game lobby.`)
-      })
     lobby.on("username", (payload) => {
       this.setState({username: payload.username})
     })
