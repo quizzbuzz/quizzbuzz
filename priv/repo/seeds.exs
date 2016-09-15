@@ -171,7 +171,7 @@ questions = [%Quizzbuzz.Question{
         answer: "Amsterdam"
       },
       %Quizzbuzz.Question{
-        body: "Who was the first femal artist to have a self-penned UK number one?",
+        body: "Who was the first female artist to have a self-penned UK number one?",
         options: ["Kate Bush","Madonna","Sinead O'Connor","Diana Ross"],
         answer: "Kate Bush"
       },
