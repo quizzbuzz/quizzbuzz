@@ -1,8 +1,11 @@
 import React from 'react'
 import socket from "../socket"
+import Message from "./message"
+import MessageInput from "./messageInput"
 
 class Chat extends React.Component {
   handleMessageSubmit(message) {
+    console.log(message);
     this.props.onSendMessage(message)
   }
   render() {
@@ -13,36 +16,8 @@ class Chat extends React.Component {
             return <Message username={this.props.username} data={message} />
           })}
         </div>
-        <MessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
+        <MessageInput username={this.props.username} onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
       </div>
-    )
-  }
-}
-
-
-class Message extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>{this.props.username}: {this.props.data.text}</div>
-      </div>
-    )
-  }
-}
-
-class MessageInput extends React.Component {
-  handleSubmit(event) {
-    event.preventDefault()
-    const text = this.refs.text.value.trim()
-    const date = new Date().toLocaleTimeString()
-    this.refs.text.value = ""
-    this.props.onMessageSubmit({text: text, date: date})
-  }
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input placeholder="Chit chat..." className="messageInput" type="text" ref="text"/>
-      </form>
     )
   }
 }
