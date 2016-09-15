@@ -174,7 +174,6 @@ div.question {
     border-radius: 4px;
     color: black;
     padding-top: 10px;
-
 }
 
 .messages {
@@ -187,10 +186,10 @@ div.question {
   overflow:auto;
 }
 #chat {
-  width:250px;
-  margin: 10px;
-  float: right;
-  position: relative;
+  position: absolute;
+  margin: 0 auto;
+  margin-left: 77%;
+  margin-top: 0;
 }
 
 .chat {
@@ -200,7 +199,7 @@ div.question {
   background-color: rgb(106, 75, 213);
   color: white;
   padding: 10px;
-  float: right;
+
 
 }
 .chat-button {
@@ -287,8 +286,10 @@ form.play-form{
 }
 
 .timeandscore{
+  margin: 0 auto;
   display: flex;
-  /*flex-direction: row;*/
+  flex-direction: row;
+  text-align: center;
 }
 
 #game{
@@ -313,4 +314,8 @@ form.play-form{
   margin: 0 auto;
   text-align: center;
   flex-direction: column;
+}
+
+.gamepage{
+  display: flex;
 }

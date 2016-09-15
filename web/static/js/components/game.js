@@ -109,17 +109,23 @@ class Game extends React.Component {
     } else if (this.state.options) {
 
       return (
-        <div>
+        <div className="gamepage">
           <Question question={this.state.question} />
+
+          <div className="timerandscore">
 
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
 
+          <div className="score">Score: {this.state.score}</div>
+
+          </div>
+
+          <div className="options">
 
           {this.state.options.map((option, index )=> {
             return <Option key={index} index={index} onClick={this.handleClick.bind(this)} option={option}/>
           })}
-
-          <div className="score">Score: {this.state.score}</div>
+          </div>
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
             {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
