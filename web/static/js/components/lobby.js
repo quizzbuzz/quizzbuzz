@@ -47,13 +47,13 @@ class Lobby extends React.Component {
     if(this.state.channel.includes("one_player")) {
 
       return (
-        <SingleGame channel={this.state.channel} />
+        <SingleGame username={this.state.username} channel={this.state.channel} />
         )
 
     } else if(this.state.channel) {
 
       return (
-        <MultiGame channel={this.state.channel} />
+        <MultiGame username={this.state.username} channel={this.state.channel} />
         )
 
     } else if(this.state.gameChoice) {

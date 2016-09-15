@@ -20,7 +20,7 @@ class Game extends React.Component {
       chatVisible: false,
       gameEnd: false,
       outcome: '',
-      username: '',
+      username: this.props.username,
       channel: socket.channel(this.props.channel),
     }
   }
@@ -33,14 +33,10 @@ class Game extends React.Component {
     channel.on("waiting", payload => {
       this.setState( {waiting: true} )
     })
-    channel.on("username", (payload) => {
-      this.setState({username: payload.username})
-    })
     channel.on("message", payload => {
       this.setState({messages: this.state.messages.concat([payload.body])})
     })
     channel.on("end_game", payload => {
-      console.log(payload.winner);
       this.setState({gameEnd: true, options: false, outcome: payload.result});
      })
     channel.on("user_left", payload => {
