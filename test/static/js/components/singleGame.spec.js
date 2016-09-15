@@ -6,12 +6,12 @@ import TestUtils from 'react-addons-test-utils'
 import Option from '../../../../web/static/js/components/option'
 
 describe('Game', () => {
-    const componentWillMount = sinon.spy(Game.prototype, "componentWillMount")
-    const configureChannel = sinon.spy(Game.prototype, "configureChannel")
-    const wrapper = shallow(<Game channel="one-player"/>)
-    const socket = sinon.stub(channel, "on").withArgs("new_question")
-    wrapper.setState({channel: socket})
-    console.log(wrapper.state());
+    // const componentWillMount = sinon.spy(Game.prototype, "componentWillMount")
+    // const configureChannel = sinon.spy(Game.prototype, "configureChannel")
+    // const wrapper = shallow(<Game channel="one-player"/>)
+    // const socket = sinon.stub().withArgs("new_question")
+    // wrapper.setState({channel: socket})
+    // console.log(wrapper.state());
 
   it('should render an empty div if no states have been set', () => {
     expect(wrapper.find('div').text()).to.be.empty
