@@ -7,14 +7,10 @@ import Timer from '../../../../web/static/js/components/timer';
 
 describe("Timer", () => {
 
-
   const timer = mount(<Timer secondsRemaining="10"/>);
+
   it("displays the seconds remaining", () => {
     expect(timer.find("div").text()).to.be.equal("10")
   })
-
-
-  // TODO check the tick method works
-
 
 })
