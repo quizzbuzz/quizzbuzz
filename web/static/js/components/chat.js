@@ -5,7 +5,6 @@ import MessageInput from "./messageInput"
 
 class Chat extends React.Component {
   handleMessageSubmit(message) {
-    console.log(message);
     this.props.onSendMessage(message)
   }
   render() {
