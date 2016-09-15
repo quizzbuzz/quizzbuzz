@@ -1,7 +1,7 @@
 import socket from "../socket"
 import React from 'react'
-import SingleGame from './SingleGame'
-import MultiGame from './game'
+import SingleGame from './singleGame'
+import MultiGame from './multiGame'
 import Chat from './chat'
 
 class Lobby extends React.Component {

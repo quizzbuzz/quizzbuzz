@@ -464,8 +464,8 @@ users = [%Quizzbuzz.User{
     email: "becca@email.com",
     username: "becca",
     password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
-    high_score: 93
-  }
+    high_score: 73
+  },
   %Quizzbuzz.User{
     email: "zozo@email.com",
     username: "zozo",

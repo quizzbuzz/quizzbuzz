@@ -2,7 +2,7 @@ import socket from "../socket"
 import React from 'react'
 import Timer from './timer'
 import Question from './question'
-import Gameover from './gameover'
+import Gameover from './multiGameover'
 import Option from './option'
 import Chat from './chat'
 
