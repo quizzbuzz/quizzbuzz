@@ -109,27 +109,37 @@ describe('Mulitplayer Game', () => {
       const mountedGame = mount(<Game />)
       mountedGame.setState({options: ["A", "B", "C", "D"]})
       mountedGame.find('.chat-button').simulate('click')
-      console.log(mountedGame.find('form').debug());
       mountedGame.find('form').simulate('submit')
       expect(sendMessage.calledOnce).to.be.true
     })
 
     // it('onZero of timer function handleTimeOut is called', () => {
-    //   mountedGame.setState({channel: stub})
-    //   sinon.stub(channel, on).given("new_question")
-    //                    .yields(this.setState({question: "new question",
-    //                                           options: ["A", "B", "C", "D"],
-    //                                           answer: "A",
-    //                                           waiting: false})
-    //   // const channel = sinon.spy(channel, "push")
-    //   // mountedGame.setState({channel: sinon.stub()})
-    //   // const channel = sinon.stub(socket, "channel").yieldsTo("push",)
     //   const handleTimeOut = sinon.spy(Game.prototype, "handleTimeOut")
     //   const mountedGame = mount(<Game />)
-    //   mountedGame.setState({time: 0, options: ["A", "B", "C", "D"], question: 'this is a question', answer: "A"})
-    //   console.log(mountedGame.find('Timer').prop('onZero'))
+    //   mountedGame.setState({time: 0, options: ["A", "B", "C", "D"]})
     //   expect(handleTimeOut.calledOnce).to.be.true
     // })
 
   })
+
+  describe('Opponent has left the game', () => {
+
+    beforeEach(() => {
+      wrapper.setState({gameEnd: false, userLeft: "aga"})
+    })
+
+    it('should inform the user that an opponent has left the game', () => {
+      expect(wrapper.find('.sorry').text()).to.equal("Sorry, aga has left the game")
+    })
+
+    it('should render a button to play again', () => {
+      expect(wrapper.find('button').text()).to.equal("Play Again")
+    })
+
+    it('the button action should send to /game', () => {
+      expect(wrapper.find('form').prop('action')).to.equal("/game")
+    })
+
+  })
+
 });

@@ -93,10 +93,10 @@ class Game extends React.Component {
     } else if (this.state.userLeft) {
       return (
         <div>
-        <div>Sorry, {this.state.userLeft} has left the game</div>
-        <form action="/game">
-          <button id="play" className="sizing">Play Again</button>
-        </form>
+          <div className="sorry">Sorry, {this.state.userLeft} has left the game</div>
+          <form action="/game">
+            <button id="play" className="sizing">Play Again</button>
+          </form>
         </div>
       )
     } else if (this.state.options) {
@@ -137,7 +137,6 @@ class Game extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.state.channel.push("user_left");
     this.state.channel.leave();
   }
 
