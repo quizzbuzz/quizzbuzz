@@ -48,7 +48,6 @@ class SingleGame extends React.Component {
     }
   }
   handleTimeOut() {
-    console.log(this.state.score);
     this.state.channel.push("answer", {score: this.state.score})
   }
   render() {
@@ -67,7 +66,6 @@ class SingleGame extends React.Component {
           <div className="score">Score: {this.state.score}</div>
 
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
-
 
           {this.state.options.map((option, index )=> {
             return <Option key={index} index={index} onClick={this.handleClick.bind(this)} option={option}/>

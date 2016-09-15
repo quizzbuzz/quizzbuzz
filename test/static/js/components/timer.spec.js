@@ -13,7 +13,6 @@ describe("Timer", () => {
     expect(timer.find("div").text()).to.be.equal("10")
   })
 
-  console.log(timer.debug());
 
   // TODO check the tick method works
 
