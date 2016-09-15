@@ -5,7 +5,7 @@ defmodule Elixir.Quizzbuzz.PartyChannel do
   alias Quizzbuzz.Game.Server
   alias Phoenix.Socket
 
-  @game_size 20
+  @game_size 4
   @room_prefix "twenty_player:"
 
 
@@ -16,6 +16,7 @@ defmodule Elixir.Quizzbuzz.PartyChannel do
   end
 
   def handle_in("ready", payload, socket) do
+    IO.puts "received ready!"
     case handle_answer(payload, socket, @game_size) do
       :queue_not_full -> push socket, "waiting", %{}
       {:end_game, players} -> report_results(players)
