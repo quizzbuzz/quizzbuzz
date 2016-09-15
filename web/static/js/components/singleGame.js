@@ -21,11 +21,6 @@ class SingleGame extends React.Component {
   }
   configureChannel(channel) {
     channel.join()
-      .receive("ok", (payload) => {
-        console.log(`Succesfully joined the game room.`)
-      })
-      .receive("error", () => { console.log(`Unable to join the game room.`)}
-    )
     channel.push("ready")
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
@@ -48,7 +43,6 @@ class SingleGame extends React.Component {
     }
   }
   handleTimeOut() {
-    console.log(this.state.score);
     this.state.channel.push("answer", {score: this.state.score})
   }
   render() {
