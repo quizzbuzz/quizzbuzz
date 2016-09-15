@@ -188,8 +188,10 @@ div.question {
 #chat {
   position: absolute;
   margin: 0 auto;
-  margin-left: 77%;
-  margin-top: 0;
+  float: right;
+  margin-right: 25px;
+  top: 20px;
+  right: 50px;
 }
 
 .chat {
