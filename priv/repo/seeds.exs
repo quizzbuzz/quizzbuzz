@@ -381,6 +381,36 @@ questions = [%Quizzbuzz.Question{
         answer: "Harry Potter"
       },
       %Quizzbuzz.Question{
+        body: "In what language was Homer's epic the Iliad written?",
+        options: ["Ancient Egyptian","Phoenician","Ancient Greek","Aramaic"],
+        answer: "Ancient Greek"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the only species of bird that can fly backwards?",
+        options: ["Hummingbird","Wren","Swallow","Swift"],
+        answer: "Hummingbird"
+      },
+      %Quizzbuzz.Question{
+        body: "What field is the study of the properties and production of sound?",
+        options: ["Calligraphy","Ethnography","Acoustics","Phonology"],
+        answer: "Acoustics"
+      },
+      %Quizzbuzz.Question{
+        body: "How many interior angles does a heptagon have?",
+        options: ["8","7","5","6"],
+        answer: "7"
+      },
+      %Quizzbuzz.Question{
+        body: "The Harlem Globetrotters play which sport?",
+        options: ["Basketball","Ice Hockey","American football","Baseball"],
+        answer: "Basketball"
+      },
+      %Quizzbuzz.Question{
+        body: "What does a zygote form once it starts mitosis?",
+        options: ["Baby","Placenta","Embryo","Fetus"],
+        answer: "Embryo"
+      },
+      %Quizzbuzz.Question{
         body: "In which year was the NHS formed?",
         options: ["1947","1948","1949","1950"],
         answer: "1948"
@@ -392,7 +422,7 @@ users = [%Quizzbuzz.User{
     email: "wawa@email.com",
     username: "wawa",
     password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
-    high_score: 92
+    high_score: 84
   },
   %Quizzbuzz.User{
     email: "solo@email.com",
@@ -459,12 +489,6 @@ users = [%Quizzbuzz.User{
     username: "fofo",
     password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
     high_score: 29
-  },
-  %Quizzbuzz.User{
-    email: "becca@email.com",
-    username: "becca",
-    password_hash: "rtyuiopjihgjhcfvnbmnjlhuiyut",
-    high_score: 73
   },
   %Quizzbuzz.User{
     email: "zozo@email.com",

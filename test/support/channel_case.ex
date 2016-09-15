@@ -21,6 +21,8 @@ defmodule Quizzbuzz.ChannelCase do
       use Phoenix.ChannelTest
 
       alias Quizzbuzz.Repo
+      alias Quizzbuzz.{Repo, User}
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query

@@ -7,6 +7,12 @@ defmodule Quizzbuzz.OnePlayerChannelTest do
 
   alias Quizzbuzz.OnePlayerChannel
 
+  def create_user(email, username) do
+    %User{}
+    |> User.changeset(%{email: email, username: username, password: password})
+    |> Repo.insert
+  end
+
   setup do
 
     insert(:question)
@@ -14,7 +20,7 @@ defmodule Quizzbuzz.OnePlayerChannelTest do
     user = insert(:user)
 
     {:ok, game, socket} =
-      socket("game", %{current_user: %{email: user.email, id: user.id}, high_score: user.high_score})
+      socket("game", %{current_user: %{email: user.email, id: user.id}, high_score: nil})
       |> subscribe_and_join(OnePlayerChannel, "one_player:lobby")
 
     {:ok, game_info: game, socket: socket}
@@ -46,19 +52,12 @@ defmodule Quizzbuzz.OnePlayerChannelTest do
     leave socket
   end
 
-  test "when a game ends with a new high score it is added to the user" do
+  test "when a game ends with a new high score it is added to the user", %{socket: socket} do
+    assert Repo.high_score == 30
   end
 
-  test "when a game ends without a new high score it is not added to the user", %{socket: socket} do
-    push socket, "end_game", %{"score" => 30}
-    assert Ecto.Repo.includes(30)
-    leave socket
-  end
+  test "if a user has a previously unfinished game the server restarts", %{socket: socket} do
 
-  test "when a players first game ends a new high score is added" do
-  end
-
-  test "if a user has a previously unfinished game the server restarts" do
   end
 
 
