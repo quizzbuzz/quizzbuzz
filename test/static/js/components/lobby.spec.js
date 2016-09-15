@@ -58,10 +58,45 @@ describe("Lobby", () => {
   })
 
   it('shows waiting for opponent when multiplayer is selected', () => {
-    const newlobby = mount(<Lobby />);
-    newlobby.setState({username: "test1", gameChoice:"multiplayer"});
-    expect(newlobby.text()).to.equal("Waiting for Opponent");
+    const mountedLobby = mount(<Lobby />);
+    mountedLobby.setState({username: "test1", gameChoice:"multiplayer"});
+    expect(mountedLobby.text()).to.equal("Waiting for Opponent");
 
+  })
+
+  const handleClick = sinon.spy(Lobby.prototype, "handleClick")
+
+  it('onMessage should call sendMessage function', () => {
+    const sendMessage = sinon.spy(Lobby.prototype, "sendMessage")
+    const mountedLobby = mount(<Lobby />)
+    mountedLobby.find('.chat-button').simulate('click')
+    mountedLobby.find('form').simulate('submit')
+    expect(sendMessage.calledOnce).to.be.true
+  })
+
+  it('onClick Single Player should call handleClick function', () => {
+    const mountedLobby = mount(<Lobby />)
+    mountedLobby.find('#single').simulate('click')
+    expect(handleClick.called).to.be.true
+  })
+
+  it('onClick Two Player should call handleClick function', () => {
+    const mountedLobby = mount(<Lobby />)
+    mountedLobby.find('#two').simulate('click')
+    expect(handleClick.called).to.be.true
+  })
+
+  it('onClick Quiz Party should call handleClick function', () => {
+    const mountedLobby = mount(<Lobby />)
+    mountedLobby.find('#multi').simulate('click')
+    expect(handleClick.called).to.be.true
+  })
+
+  it('when chat-button is clicked toggleChast is called', () => {
+    const toggelChat = sinon.spy(Lobby.prototype, "toggleChat")
+    const mountedLobby = mount(<Lobby />)
+    mountedLobby.find('.chat-button').simulate('click')
+    expect(toggelChat.calledOnce).to.be.true
   })
 
 

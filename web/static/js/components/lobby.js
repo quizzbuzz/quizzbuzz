@@ -70,9 +70,9 @@ class Lobby extends React.Component {
             {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }
           </div>
           <div className="game-buttons">
-            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button><br/>
-            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button><br/>
-            <button className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
+            <button id="single" className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_one_player_game">Single Player Game</button><br/>
+            <button id="two" className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_two_player_queue">Two Player Game</button><br/>
+            <button id="multi" className="sizing c-position" onClick={this.handleClick.bind(this)} name="join_twenty_player_queue">Quizz Party</button>
           </div>
         </div>
       )

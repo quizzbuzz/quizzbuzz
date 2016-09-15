@@ -60,15 +60,15 @@ describe('Mulitplayer Game', () => {
     })
 
     it('should render a question when options are set', () => {
-      expect(wrapper.children('Question')).to.have.length(1)
+      expect(wrapper.find('Question')).to.have.length(1)
     })
 
     it('should render a four options when options are set', () => {
-      expect(wrapper.children('Option')).to.have.length(4)
+      expect(wrapper.find('Option')).to.have.length(4)
     })
 
     it('should render a timer when options are set', () => {
-      expect(wrapper.children('Timer')).to.have.length(1)
+      expect(wrapper.find('Timer')).to.have.length(1)
     })
 
     it('should render a chat button when options are set', () => {

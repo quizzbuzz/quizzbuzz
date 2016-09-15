@@ -9,9 +9,6 @@ describe('Game', () => {
     const componentWillMount = sinon.spy(Game.prototype, "componentWillMount")
     const configureChannel = sinon.spy(Game.prototype, "configureChannel")
     const wrapper = shallow(<Game channel="one-player"/>)
-    // const socket = sinon.stub().withArgs("new_question")
-    // wrapper.setState({channel: socket})
-    // console.log(wrapper.state());
 
   it('should render an empty div if no states have been set', () => {
     expect(wrapper.find('div').text()).to.be.empty
@@ -23,7 +20,6 @@ describe('Game', () => {
 
   it('should call configureChannel on componentWillMount', () => {
     expect(configureChannel.calledOnce).to.be.true
-    // expect(configureChannel.calledWith(socket.channel("one-player"))).to.be.true
   })
 
   describe('Game ends', () => {
@@ -43,15 +39,15 @@ describe('Game', () => {
     })
 
     it('should render a question when options are set', () => {
-      expect(wrapper.children('Question')).to.have.length(1)
+      expect(wrapper.find('Question')).to.have.length(1)
     })
 
     it('should render a four options when options are set', () => {
-      expect(wrapper.children('Option')).to.have.length(4)
+      expect(wrapper.find('Option')).to.have.length(4)
     })
 
     it('should render a timer when options are set', () => {
-      expect(wrapper.children('Timer')).to.have.length(1)
+      expect(wrapper.find('Timer')).to.have.length(1)
     })
 
     it('when option is clicked handleClick is called', () => {
