@@ -26,11 +26,6 @@ class Game extends React.Component {
   }
   configureChannel(channel) {
     channel.join()
-      .receive("ok", (payload) => {
-        console.log(`Succesfully joined the game room.`)
-      })
-      .receive("error", () => { console.log(`Unable to join the game room.`)}
-    )
     channel.push("ready")
     channel.on("new_question", payload => {
        this.setState({question: payload.question.body, options: payload.question.options, answer: payload.question.answer, waiting: false})
@@ -59,9 +54,7 @@ class Game extends React.Component {
   }
 
   handleClick(event) {
-    if(!this.props.channel.includes("one_player")) {
-      this.setState({options: '', waiting: true})
-    }
+    this.setState({options: '', waiting: true})
     const answer = event.currentTarget.textContent
     this.checkAnswer(answer)
     this.state.channel.push("answer", {score: this.state.score})
