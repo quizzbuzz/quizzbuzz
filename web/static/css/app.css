@@ -10,7 +10,8 @@
   border-radius: 10px;
   font-family: 'Baloo Tamma', cursive;
   font-size: 20px;
-  margin-top: 38px
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .c-position {
@@ -33,18 +34,6 @@ div.question {
   font-size: 30px;
   margin: 20px
 }
-
-/*#login {
-  display:inline-block;
-  margin-right:10px;
-  position: relative;
-  margin: 0 auto;
-  text-align: center;
-}*/
-
-/*#join {
-  display:inline-block;
-}*/
 
 #filler {
   height: 50px;
@@ -299,7 +288,7 @@ form.play-form{
 
 .timeandscore{
   display: flex;
-  flex-direction: row;
+  /*flex-direction: row;*/
 }
 
 #game{
@@ -315,5 +304,13 @@ form.play-form{
   text-align: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 40%
+  width: 35%
+}
+
+.page-header{
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  flex-direction: column;
 }
