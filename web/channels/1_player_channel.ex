@@ -1,20 +1,25 @@
 defmodule Quizzbuzz.OnePlayerChannel do
   use Quizzbuzz.Web, :channel
 
+  alias Game.Server
+  alias Phoenix.Socket
+
+  @game_size 1
+
   def join("one_player:" <> game_id, payload, socket) do
     queue_id = to_atom( "queue#{game_id}" )
     try do
-      OnePlayerServer.start(queue_id)
+      Server.start(queue_id)
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
-    {:ok, Phoenix.Socket.assign(socket, :game_id, game_id) }
+    {:ok, Socket.assign(socket, :game_id, game_id) }
   end
 
   def handle_in("ready", payload, socket) do
     queue_id = to_atom( "queue#{socket.assigns.game_id}" )
 
-    case OnePlayerServer.add_to_queue(queue_id, payload, socket) do
+    case Server.add_to_queue(queue_id, payload, socket, @game_size) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
                 IO.puts "In the broadcast function"
@@ -27,12 +32,12 @@ defmodule Quizzbuzz.OnePlayerChannel do
   def handle_in("answer", payload, socket) do
     game_id = to_atom(socket.assigns.game_id)
     queue_id = to_atom( "queue#{socket.assigns.game_id}" )
-    case OnePlayerServer.add_to_queue(queue_id, payload, socket) do
+    case Server.add_to_queue(queue_id, payload, socket, @game_size) do
       :wait -> push socket, "waiting", %{}
-      players = [head | tail] -> case OnePlayerServer.pop(game_id) do
+      players = [head | tail] -> case Server.pop(game_id) do
         :end_game ->
           report_results(players)
-          OnePlayerServer.end_game([game_id, queue_id])
+          Server.end_game([game_id, queue_id])
         question -> broadcast! head.socket, "new_question", question
       end
     end
@@ -54,8 +59,8 @@ defmodule Quizzbuzz.OnePlayerChannel do
   defp start_new_game(socket) do
     questions = build_game
     game_id = to_atom( socket.assigns.game_id )
-    {:ok, _} = OnePlayerServer.start_new_game(game_id, questions)
-    {:ok, OnePlayerServer.pop(game_id)}
+    {:ok, _} = Server.start_new_game(game_id, questions)
+    {:ok, Server.pop(game_id)}
   end
 
   defp report_results(players) do

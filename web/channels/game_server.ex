@@ -1,4 +1,4 @@
-defmodule TwoPlayerServer do
+defmodule Game.Server do
   use GenServer
 
   def start(name) do
@@ -9,8 +9,8 @@ defmodule TwoPlayerServer do
     Enum.each servers, &(GenServer.stop(&1))
   end
 
-  def add_to_queue(name, payload, socket) do
-    GenServer.call(name, {:wait, payload, socket})
+  def add_to_queue(name, payload, socket, game_size) do
+    GenServer.call(name, {:wait, payload, socket, game_size})
   end
 
   def start_new_game(game_id, questions) do
@@ -29,24 +29,14 @@ defmodule TwoPlayerServer do
       {:reply,:end_game, []}
     end
 
-    def handle_call({:wait, payload, socket}, _from, queue) do
+    def handle_call({:wait, payload, socket, game_size}, _from, queue) do
       player = %{socket: socket, payload: payload}
       players = [player | queue]
-      if length(players) == 2 do
+      if length(players) == game_size do
         {:reply, players, []}
       else
         {:reply, :wait, players}
       end
     end
 
-    def handle_call({:push, payload, socket}, _from, list) do
-      outcome = %{score: payload["final_score"], socket: socket}
-      results = [outcome | list]
-      if length(results) == 2 do
-        results = Enum.sort_by([outcome|list], &(&1.score), &>=/2)
-        {:reply, results, []}
-      else
-        {:reply, :wait, results}
-      end
-    end
 end

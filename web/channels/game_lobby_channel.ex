@@ -1,6 +1,8 @@
 defmodule Quizzbuzz.GameLobbyChannel do
   use Quizzbuzz.Web, :channel
 
+  alias Game.Server
+
   def join("game_lobby", payload, socket) do
     LobbyQueue.start
     send(self, :after_join)

@@ -1,15 +1,20 @@
 defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   use Quizzbuzz.Web, :channel
 
+  alias Game.Server
+  alias Phoenix.Socket
+
+  @game_size 2
+
   def join("two_player:" <> game_id, payload, socket) do
     queue_id = to_atom( "queue#{game_id}" )
     try do
-      TwoPlayerServer.start(queue_id)
+      Server.start(queue_id)
     catch
       {:error, _} -> IO.puts "Server already started, error handled"
     end
     send(self, :after_join)
-    {:ok, Phoenix.Socket.assign(socket, :game_id, game_id) }
+    {:ok, Socket.assign(socket, :game_id, game_id) }
   end
 
   def handle_info(:after_join, socket) do
@@ -21,7 +26,7 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   def handle_in("ready", payload, socket) do
     queue_id = to_atom( "queue#{socket.assigns.game_id}" )
 
-    case TwoPlayerServer.add_to_queue(queue_id, payload, socket) do
+    case Server.add_to_queue(queue_id, payload, socket, @game_size) do
       :wait -> push socket, "waiting", %{}
       players -> {:ok, question} = start_new_game(socket)
                 Enum.each(players, &(push &1.socket, "new_question", question))
@@ -35,18 +40,18 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
     queue_id = to_atom( "queue#{game_id}" )
     broadcast socket, "user_left", %{deserter: socket.assigns.current_user.username}
     IO.puts socket.assigns.game_id
-    TwoPlayerServer.end_game([queue_id, queue_id])
+    Server.end_game([queue_id, queue_id])
   end
 
   def handle_in("answer", payload, socket) do
     game_id = to_atom(socket.assigns.game_id)
     queue_id = to_atom( "queue#{socket.assigns.game_id}" )
-    case TwoPlayerServer.add_to_queue(queue_id, payload, socket) do
+    case Server.add_to_queue(queue_id, payload, socket, @game_size) do
       :wait -> push socket, "waiting", %{}
-      players = [head | tail] -> case TwoPlayerServer.pop(game_id) do
+      players = [head | tail] -> case Server.pop(game_id) do
         :end_game ->
           report_results(players)
-          TwoPlayerServer.end_game([game_id, queue_id])
+          Server.end_game([game_id, queue_id])
         question -> broadcast! head.socket, "new_question", question
       end
     end
@@ -68,8 +73,8 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
   defp start_new_game(socket) do
     questions = build_game
     game_id = to_atom( socket.assigns.game_id )
-    {:ok, _} = TwoPlayerServer.start_new_game(game_id, questions)
-    {:ok, TwoPlayerServer.pop(game_id)}
+    {:ok, _} = Server.start_new_game(game_id, questions)
+    {:ok, Server.pop(game_id)}
   end
 
   defp report_results(players) do
@@ -120,7 +125,4 @@ defmodule Elixir.Quizzbuzz.TwoPlayersChannel do
           IO.puts "something else"
     end
   end
-
-
-
 end
