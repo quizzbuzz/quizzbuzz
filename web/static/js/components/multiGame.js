@@ -136,7 +136,8 @@ class Game extends React.Component {
 
       return (
         <div>
-          <div id="wait">Waiting for opponents</div>
+        <div id="wait">Waiting for Opponent
+        <img src={'http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_red_256.gif'} /></div>
           <div id="chat">
             <div className="chat-button" onClick={this.toggleChat.bind(this)}>Chat</div>
             {this.state.chatVisible ? <Chat username={this.state.username} messages={this.state.messages} onSendMessage={this.sendMessage.bind(this)}/> : null }

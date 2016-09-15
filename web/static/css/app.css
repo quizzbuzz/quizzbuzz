@@ -316,5 +316,17 @@ form.play-form{
   flex-direction: column;
 }
 
-.gamepage{
+#wait {
+  margin-top: 20px;
+  -webkit-filter: hue-rotate(265deg);
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+img{
+    width: 100px;
+    margin: auto;
+    margin-top: 20px;
 }
