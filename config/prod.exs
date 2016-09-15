@@ -25,6 +25,8 @@ config :logger, level: :info
 # Configure your database
 config :quizzbuzz, Quizzbuzz.Repo,
   adapter: Ecto.Adapters.Postgres,
+  username: "user_name",
+  password: "password",
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
