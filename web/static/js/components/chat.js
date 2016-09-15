@@ -13,7 +13,7 @@ class Chat extends React.Component {
       <div className="chat">
         <div className="messages">
           {this.props.messages.map(message => {
-            return <Message username={this.props.username} data={message} />
+            return <Message data={message} />
           })}
         </div>
         <MessageInput username={this.props.username} onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
