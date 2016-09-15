@@ -1,12 +1,14 @@
-defmodule Quizzbuzz.OnePlayerChannel do
+defmodule Elixir.Quizzbuzz.PartyChannel do
   use Quizzbuzz.Web, :channel
   import Quizzbuzz.GameHelper
 
   alias Quizzbuzz.Game.Server
   alias Phoenix.Socket
 
-  @game_size 1
-  @room_prefix "one_player:"
+  @game_size 20
+  @room_prefix "twenty_player:"
+
+
 
   def join(@room_prefix <> game_id, payload, socket) do
     start_new_game(game_id)
@@ -31,10 +33,6 @@ defmodule Quizzbuzz.OnePlayerChannel do
     {:noreply, socket}
   end
 
-  def handle_in("user_left", _payload, socket) do
-    broadcast! socket, "user_left", %{deserter: socket.assigns.current_user.username}
-    {:noreply, socket}
-  end
 
   def handle_in("message", %{"body" => body}, socket) do
     broadcast! socket, "message", %{body: body}
@@ -46,8 +44,8 @@ defmodule Quizzbuzz.OnePlayerChannel do
     Server.end_game(server_ids(socket))
   end
 
+
   defp report_results(players) do
-    IO.puts "Reporting results at the end of the game!"
     [winner | losers] = sort_results(players)
     push winner.socket, "end_game", %{result: "You Win", winner_score: winner.payload["score"]}
     Enum.each(losers, &( push &1.socket, "end_game",  %{result: "You Lose", winner_score: winner.payload["score"]}))
