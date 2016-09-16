@@ -197,6 +197,14 @@ div.question {
   color: rgb(157, 135, 227);
 }
 
+#score {
+  text-align: center;
+  font-size:25pt;
+  font-family: 'Baloo Tamma', cursive;
+  font-style: italic;
+  color: rgb(157, 135, 227);
+}
+
 .navbar-custom {
     background-color:rgb(106, 75, 213);
     color: white;
@@ -258,7 +266,7 @@ div.question {
   float: right;
   margin-right: 25px;
   right: 50px;
-  bottom: 20px;  
+  bottom: 20px;
 }
 
 .chat {

@@ -104,7 +104,7 @@ class Game extends React.Component {
 
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
 
-          <div className="score">Score: {this.state.score}</div>
+          <div className="score" id="score">Score: {this.state.score}</div>
 
           </div>
 

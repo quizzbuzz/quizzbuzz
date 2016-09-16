@@ -58,7 +58,7 @@ class SingleGame extends React.Component {
         <div className="timerandscore">
 
           <div className="question-pane"><Question question={this.state.question} /></div>
-          <div className="score">Score: {this.state.score}</div>
+          <div className="score" id="score">Score: {this.state.score}</div>
 
           <Timer ref="timer" secondsRemaining={this.state.time} question={this.state.question} onZero={this.handleTimeOut.bind(this)}/>
 
