@@ -98,7 +98,7 @@ class Game extends React.Component {
 
       return (
         <div className="gamepage">
-          <Question question={this.state.question} />
+          <div className="question-pane"><Question question={this.state.question} /></div>
 
           <div className="timerandscore">
 
