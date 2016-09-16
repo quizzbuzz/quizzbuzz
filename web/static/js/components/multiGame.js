@@ -66,7 +66,6 @@ class Game extends React.Component {
   }
 
   handleTimeOut() {
-    console.log(this.state.score);
     this.state.channel.push("answer", {score: this.state.score})
   }
 

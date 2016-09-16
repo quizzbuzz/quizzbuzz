@@ -6,31 +6,42 @@ import TestUtils from 'react-addons-test-utils'
 import Option from '../../../../web/static/js/components/option'
 
 describe('Mulitplayer Game', () => {
-    const componentWillMount = sinon.spy(Game.prototype, "componentWillMount")
-    const configureChannel = sinon.spy(Game.prototype, "configureChannel")
-    const wrapper = shallow(<Game channel="one-player"/>)
 
   it('should render an empty div if no states have been set', () => {
+    const wrapper = shallow(<Game />)
     expect(wrapper.find('div').text()).to.be.empty
   })
 
   it('should call componentWillMount', () => {
+    const componentWillMount = sinon.spy(Game.prototype, "componentWillMount")
+    const wrapper = shallow(<Game />)
     expect(componentWillMount.calledOnce).to.be.true
   })
 
   it('should call configureChannel on componentWillMount', () => {
+    const configureChannel = sinon.spy(Game.prototype, "configureChannel")
+    const wrapper = shallow(<Game />)
     expect(configureChannel.calledOnce).to.be.true
-    // expect(configureChannel.calledWith(socket.channel("one-player"))).to.be.true
+  })
+
+  it('should call componentWillUnmount', () => {
+    const componentWillUnmount = sinon.spy(Game.prototype, "componentWillUnmount")
+    const wrapper = shallow(<Game />)
+    wrapper.unmount()
+    expect(componentWillUnmount.calledOnce).to.be.true
   })
 
   describe('Game ends', () => {
     it('should render SingleGameover', () => {
+      const wrapper = shallow(<Game />)
       wrapper.setState({gameEnd: true})
       expect(wrapper.children('Gameover')).to.have.length(1)
     })
   })
 
   describe('Waiting for opponent', () => {
+    const wrapper = shallow(<Game />)
+
     it('should render "Waiting for opponent"', () => {
       wrapper.setState({gameEnd: false, waiting: true})
       expect(wrapper.find('#wait')).to.have.length(1)
@@ -51,9 +62,8 @@ describe('Mulitplayer Game', () => {
   })
 
   describe('Option and question state have been set', () => {
-    beforeEach(() => {
+      const wrapper = shallow(<Game />)
       wrapper.setState({gameEnd: false, options: ["A", "B", "C", "D"], question: 'this is a question', answer: "A"})
-    })
 
     it('should render a question component when question is set', () => {
       expect(wrapper.find('Question').prop('question')).to.equal('this is a question')
@@ -124,9 +134,8 @@ describe('Mulitplayer Game', () => {
 
   describe('Opponent has left the game', () => {
 
-    beforeEach(() => {
+      const wrapper = shallow(<Game />)
       wrapper.setState({gameEnd: false, userLeft: "aga"})
-    })
 
     it('should inform the user that an opponent has left the game', () => {
       expect(wrapper.find('.sorry').text()).to.equal("Sorry, aga has left the game")

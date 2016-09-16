@@ -1,8 +1,6 @@
 import React from 'react';
-
 import { mount, shallow } from 'enzyme'
 import sinon from 'sinon'
-import TestUtils from 'react-addons-test-utils'
 
 import Chat from '../../../../web/static/js/components/chat';
 
@@ -19,9 +17,16 @@ describe('Chat', () => {
   });
 
   it('assigns any message input to the current user', () => {
-    const chat = mount(<Chat messages={[{text: "This is the first message", username: "test1"},]} username="test2"/>);
+    const chat = mount(<Chat messages={[{text: "This is the first message", username: "test1"}]} username="test2"/>);
     expect(chat.find("MessageInput").prop("username")).to.be.equal("test2");
   });
+
+  it('should call handleMessageSubmit when a message it submitted', () => {
+    const handleMessageSubmit = sinon.spy(Chat.prototype, "handleMessageSubmit")
+    const chat = mount(<Chat onSendMessage={() => {}} messages={[{text: "message", username: "username"}]}/>)
+    chat.find('form').simulate('submit')
+    expect(handleMessageSubmit.calledOnce).to.be.true
+  })
 
 
 })
