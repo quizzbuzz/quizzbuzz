@@ -3,7 +3,7 @@
 .sizing {
   position: relative;
   height: 50px;
-  width: 200px;
+  width: 250px;
   background-color: rgb(106, 75, 213);
   color: white;
   border: none;
@@ -31,7 +31,6 @@ button:focus {
 
 div.question {
   color: black;
-  font-size: 30px;
   margin: 20px
 }
 
@@ -41,13 +40,12 @@ div.question {
 
 .timer {
   font-family: 'Baloo Tamma', cursive;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .score {
   font-family: 'Baloo Tamma', cursive;
-  font-size:
-  40px;
+  font-size: 30px;
 }
 
 #wait {
@@ -57,7 +55,7 @@ div.question {
 
 .question {
   font-family: 'Baloo Tamma', cursive;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .finalScore {
@@ -129,6 +127,35 @@ div.question {
   margin-top: 9px;
   position: relative;
   overflow: auto;
+}
+
+.frontpage{
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+.title1 {
+  margin: 0 auto;
+  display: inline;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 80pt;
+  font-family: 'Bungee Shade', cursive;
+  color: rgb(106, 75, 213);
+  margin-right: -30px;
+}
+
+.title2 {
+  margin: 0 auto;
+  display: inline;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 80pt;
+  font-family: 'Bungee Shade', cursive;
+  color: rgb(106, 75, 213);
 }
 
 .title {
