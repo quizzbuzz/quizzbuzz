@@ -1,4 +1,7 @@
-<h1 class="title"> Quizzbuzz </h1>
+<div class="title">
+<h1 class="title1"> Quizz </h1>
+<h1 class="title2"> buzz </h1>
+</div>
 <p class="sub-title">Let's get quizzical!</p>
 
 <%= if @current_user do %>
