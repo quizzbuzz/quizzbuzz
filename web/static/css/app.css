@@ -341,7 +341,9 @@ form.play-form{
   flex-direction: column;
 }
 
-
+#login{
+  margin-right: 15px;
+}
 
 img{
     width: 100px;
