@@ -41,11 +41,13 @@ div.question {
 .timer {
   font-family: 'Baloo Tamma', cursive;
   font-size: 30px;
+  text-align: center;
 }
 
 .score {
   font-family: 'Baloo Tamma', cursive;
   font-size: 30px;
+  text-align: center;
 }
 
 #wait {
@@ -237,6 +239,11 @@ div.question {
     padding-top: 10px;
 }
 
+.chat-messages {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 .messages {
   width: 230px;
   height: 335px;
@@ -244,7 +251,7 @@ div.question {
   color: black;
   background-color: white;
   margin-bottom: 10px;
-  overflow:auto;
+  overflow: scroll;
 }
 #chat {
   position: absolute;
@@ -358,7 +365,6 @@ form.play-form{
 #game{
   position: relative;
   margin: 0 auto;
-  text-align: center;
 }
 
 .options{
@@ -384,9 +390,8 @@ form.play-form{
   -webkit-filter: hue-rotate(265deg);
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
-
-
 
 img{
     width: 100px;

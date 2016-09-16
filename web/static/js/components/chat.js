@@ -10,8 +10,8 @@ class Chat extends React.Component {
   render() {
     return (
       <div className="chat">
-        <div className="messages">
-          {this.props.messages.map((message, index) => {
+        <div ref="messagebox" className="messages">
+          {this.props.messages.reverse().map((message, index) => {
             return <Message key={index} data={message} />
           })}
         </div>
