@@ -117,9 +117,27 @@ div.question {
   overflow: auto;
 }
 
-.title {
+.title{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title1 {
+  margin: 0 auto;
+  display: inline;
   text-align: center;
   padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 80pt;
+  font-family: 'Bungee Shade', cursive;
+  color: rgb(106, 75, 213);
+  margin-right: 0;
+}
+
+.title2 {
+  margin: 0 auto;
+  display: inline;
+  text-align: center;
   padding-bottom: 10px;
   font-size: 80pt;
   font-family: 'Bungee Shade', cursive;
