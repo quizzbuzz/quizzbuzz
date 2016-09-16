@@ -290,7 +290,6 @@ div.question {
   float: left;
   position: relative;
   left: 50%;
-
 }
 
 .lobby {
@@ -391,6 +390,11 @@ form.play-form{
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+
+#login{
+  margin-right: 15px;
 }
 
 img{
