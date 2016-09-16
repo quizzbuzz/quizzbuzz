@@ -406,7 +406,7 @@ questions = [%Quizzbuzz.Question{
         answer: "Basketball"
       },
       %Quizzbuzz.Question{
-        body: "What does a zygote form once it starts mitosis?",
+        body: "Which of these is a city in Canada?",
         options: ["New York","San Francisco","Boston","Toronto"],
         answer: "Toronto"
       },
@@ -421,9 +421,64 @@ questions = [%Quizzbuzz.Question{
         answer: "The Lion King"
       },
       %Quizzbuzz.Question{
-        body: "Which of these is a city in Canada?",
+        body: "What does a zygote form once it starts mitosis?",
         options: ["Baby","Placenta","Embryo","Fetus"],
         answer: "Embryo"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the name of Moe's pet cat in the cartoon show The Simpsons?",
+        options: ["Mr Tickles","Mr Cuddles","Mr Smelly","Mr Snookums"],
+        answer: "Mr Snookums"
+      },
+      %Quizzbuzz.Question{
+        body: "England's national rugby union side play their home games at which ground?",
+        options: ["Wembley","Ricoh Arena","Darlington Arena","Twickenham"],
+        answer: "Twickenham"
+      },
+      %Quizzbuzz.Question{
+        body: "Where would you find the Sea of Tranquility?",
+        options: ["Earth","Mars","The Moon","Jupiter"],
+        answer: "The Moon"
+      },
+      %Quizzbuzz.Question{
+        body: "In what soap opera would you find The Woolpack?",
+        options: ["Eastenders","Emmerdale","Coronation Street","Hollyoaks"],
+        answer: "Emmerdale"
+      },
+      %Quizzbuzz.Question{
+        body: "What is Pakistan's currency?",
+        options: ["Renminbi","Reil","Rupee","Ruble"],
+        answer: "Rupee"
+      },
+      %Quizzbuzz.Question{
+        body: "What kind of weapon is a falchion?",
+        options: ["Bow","Gun","Sword","Cannon"],
+        answer: "Sword"
+      },
+      %Quizzbuzz.Question{
+        body: "What is another word for lexicon?",
+        options: ["Time","Group","Dictionary","Barrier"],
+        answer: "Dictionary"
+      },
+      %Quizzbuzz.Question{
+        body: "What is the world's longest river?",
+        options: ["Nile","Amazon","Severn","Danube"],
+        answer: "Amazon"
+      },
+      %Quizzbuzz.Question{
+        body: "What colour is a Himalayan poppy?",
+        options: ["Blue","Yellow","Red","Purple"],
+        answer: "Blue"
+      },
+      %Quizzbuzz.Question{
+        body: "What colour jersey is worn by the winners of each stage of the Tour De France?",
+        options: ["Pink","Orange","Yellow","Black"],
+        answer: "Yellow"
+      },
+      %Quizzbuzz.Question{
+        body: "Which chess piece can only move diagonally?",
+        options: ["Queen","King","Knight","Bishop"],
+        answer: "Bishop"
       },
       %Quizzbuzz.Question{
         body: "In which year was the NHS formed?",
