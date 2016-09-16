@@ -407,6 +407,21 @@ questions = [%Quizzbuzz.Question{
       },
       %Quizzbuzz.Question{
         body: "What does a zygote form once it starts mitosis?",
+        options: ["New York","San Francisco","Boston","Toronto"],
+        answer: "Toronto"
+      },
+      %Quizzbuzz.Question{
+        body: "The Golden Gate bridge is found is which city?",
+        options: ["Detroit","New York","San Francisco","Boston"],
+        answer: "San Francisco"
+      },
+      %Quizzbuzz.Question{
+        body: "Which movie has the characters Simba, Mufasa and Scar?",
+        options: ["The Lion King","Aladdin","The Jungle Book","Toy Story"],
+        answer: "The Lion King"
+      },
+      %Quizzbuzz.Question{
+        body: "Which of these is a city in Canada?",
         options: ["Baby","Placenta","Embryo","Fetus"],
         answer: "Embryo"
       },
