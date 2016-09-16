@@ -106,11 +106,6 @@ questions = [%Quizzbuzz.Question{
         answer: "Swan"
       },
       %Quizzbuzz.Question{
-        body: "What song was the Beatles first US number 1?",
-        options: ["I Want to Hold Your Hand","Can't Buy Me Love","A Hard Day's Night","Help!"],
-        answer: "I Want to Hold Your Hand"
-      },
-      %Quizzbuzz.Question{
         body: "In what year was Canary Wharf completed?",
         options: ["1990","1991","1992","1989"],
         answer: "1991"
@@ -119,11 +114,6 @@ questions = [%Quizzbuzz.Question{
         body: "Which sea is bordered by the Dalmation coast?",
         options: ["Mediterranean","Adriatic","Aegean","Baltic"],
         answer: "Adriatic"
-      },
-      %Quizzbuzz.Question{
-        body: "In what year was the first full-length episode of The Simpsons broadcast?",
-        options: ["1989","1990","1991","1992"],
-        answer: "1989"
       },
       %Quizzbuzz.Question{
         body: "What many stars are there on the flag of China?",
@@ -169,11 +159,6 @@ questions = [%Quizzbuzz.Question{
         body: "In which city can you visit the Anne Frank house?",
         options: ["Berlin","Paris","Amsterdam","Brussels"],
         answer: "Amsterdam"
-      },
-      %Quizzbuzz.Question{
-        body: "Who was the first female artist to have a self-penned UK number one?",
-        options: ["Kate Bush","Madonna","Sinead O'Connor","Diana Ross"],
-        answer: "Kate Bush"
       },
       %Quizzbuzz.Question{
         body: "On what date is International Women's Day?",
@@ -296,11 +281,6 @@ questions = [%Quizzbuzz.Question{
         answer: "Gallifrey"
       },
       %Quizzbuzz.Question{
-        body: "'All the world's a stage and all the men and women are merely players,' is from which Shakespeare play?",
-        options: ["As You Like It","Measure for Measure","Hamlet","The Merchant of Venice"],
-        answer: "As You Like It"
-      },
-      %Quizzbuzz.Question{
         body: "Which James Bond film stars Halle Berry?",
         options: ["The World is Not Enough","Casino Royale","Die Another Day","Moonraker"],
         answer: "Die Another Day"
@@ -319,11 +299,6 @@ questions = [%Quizzbuzz.Question{
         body: "Who had a hit single with 'Fame' in 1975?",
         options: ["David Bowie","Elton John","Diana Ross","Eric Clapton"],
         answer: "David Bowie"
-      },
-      %Quizzbuzz.Question{
-        body: "Which music star was formerly a member of the band 'The Sugarcubes'?",
-        options: ["Britney Spears","Gwen Stefani","Bjork","Katy Perry"],
-        answer: "Bjork"
       },
       %Quizzbuzz.Question{
         body: "In which mountain range is the highest peak outside of Asia?",
@@ -376,11 +351,6 @@ questions = [%Quizzbuzz.Question{
         answer: "Tarragon"
       },
       %Quizzbuzz.Question{
-        body: "4 Privet drive is famous for appearing in which series of books?",
-        options: ["Chronicles of Narnia","Famous Five","Harry Potter","A Series of Unfortunate Events"],
-        answer: "Harry Potter"
-      },
-      %Quizzbuzz.Question{
         body: "In what language was Homer's epic the Iliad written?",
         options: ["Ancient Egyptian","Phoenician","Ancient Greek","Aramaic"],
         answer: "Ancient Greek"
@@ -389,11 +359,6 @@ questions = [%Quizzbuzz.Question{
         body: "What is the only species of bird that can fly backwards?",
         options: ["Hummingbird","Wren","Swallow","Swift"],
         answer: "Hummingbird"
-      },
-      %Quizzbuzz.Question{
-        body: "What field is the study of the properties and production of sound?",
-        options: ["Calligraphy","Ethnography","Acoustics","Phonology"],
-        answer: "Acoustics"
       },
       %Quizzbuzz.Question{
         body: "How many interior angles does a heptagon have?",
@@ -431,11 +396,6 @@ questions = [%Quizzbuzz.Question{
         answer: "Mr Snookums"
       },
       %Quizzbuzz.Question{
-        body: "England's national rugby union side play their home games at which ground?",
-        options: ["Wembley","Ricoh Arena","Darlington Arena","Twickenham"],
-        answer: "Twickenham"
-      },
-      %Quizzbuzz.Question{
         body: "Where would you find the Sea of Tranquility?",
         options: ["Earth","Mars","The Moon","Jupiter"],
         answer: "The Moon"
@@ -469,11 +429,6 @@ questions = [%Quizzbuzz.Question{
         body: "What colour is a Himalayan poppy?",
         options: ["Blue","Yellow","Red","Purple"],
         answer: "Blue"
-      },
-      %Quizzbuzz.Question{
-        body: "What colour jersey is worn by the winners of each stage of the Tour De France?",
-        options: ["Pink","Orange","Yellow","Black"],
-        answer: "Yellow"
       },
       %Quizzbuzz.Question{
         body: "Which chess piece can only move diagonally?",
