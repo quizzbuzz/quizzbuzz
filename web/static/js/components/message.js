@@ -4,7 +4,7 @@ class Message extends React.Component {
   render() {
     return (
       <div>
-        <div>{this.props.data.username}: {this.props.data.text}</div>
+        <div className="chat-messages"><b>{this.props.data.username}</b>: {this.props.data.text}</div>
       </div>
     )
   }
