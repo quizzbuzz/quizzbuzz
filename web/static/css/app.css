@@ -132,6 +132,8 @@ div.question {
 .frontpage{
   margin: 0 auto;
   text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
 }
 
 .title1 {
@@ -143,7 +145,7 @@ div.question {
   font-size: 80pt;
   font-family: 'Bungee Shade', cursive;
   color: rgb(106, 75, 213);
-  margin-right: 0;
+  margin-right: -30px;
 }
 
 .title2 {
