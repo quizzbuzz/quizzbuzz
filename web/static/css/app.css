@@ -283,7 +283,6 @@ div.question {
   float: left;
   position: relative;
   left: 50%;
-
 }
 
 .lobby {
@@ -384,6 +383,10 @@ form.play-form{
   -webkit-filter: hue-rotate(265deg);
   display: flex;
   flex-direction: column;
+}
+
+#login{
+  margin-right: 15px;
 }
 
 
