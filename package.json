@@ -34,6 +34,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
+    "compile": "webpack -p",
+    "start": "webpack --watch-stdin --progress --color",
+    "postinstall": "webpack -p --config webpack.config.js --progress",
     "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base priv/static/js",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js --recursive",
     "test:watch": "npm test -- —watch",
