@@ -397,6 +397,10 @@ form.play-form{
   margin-right: 15px;
 }
 
+#play-form {
+  text-align: center;
+}
+
 img{
     width: 100px;
     margin: auto;
