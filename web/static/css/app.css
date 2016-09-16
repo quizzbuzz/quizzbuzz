@@ -41,13 +41,12 @@ div.question {
 
 .timer {
   font-family: 'Baloo Tamma', cursive;
-  font-size: 40px;
+  font-size: 20px;
 }
 
 .score {
   font-family: 'Baloo Tamma', cursive;
-  font-size:
-  40px;
+  font-size: 20px;
 }
 
 #wait {
@@ -292,22 +291,26 @@ form.play-form{
   display: flex;
   flex-direction: row;
   text-align: center;
+  height: 100%;
 }
 
 #game{
   position: relative;
   margin: 0 auto;
   text-align: center;
+  height: 590px;
 }
 
 .options{
   display: flex;
-  position: relative;
   margin: 0 auto;
   text-align: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 35%
+  width: 35%;
+  max-width: 450px;
+  min-width: 200px;
+  bottom: -50px;
 }
 
 .page-header{
@@ -331,4 +334,25 @@ img{
     width: 100px;
     margin: auto;
     margin-top: 20px;
+}
+div.question {
+    padding: 15px;
+    background: rgb(157, 135, 227);
+    color: white;
+    border-radius: 20px;
+    max-width: 500px;
+    margin: auto;
+    font-size: 25px;    
+
+}
+main {
+  margin: 10px;
+}
+
+.question-pane{
+    display: flex;
+    align-items: center;
+    min-height: 160px;
+
+    justify-content: center;
 }
