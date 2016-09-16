@@ -93,15 +93,29 @@ div.question {
 
 .head-field {
   text-align: center;
+  color: rgb(106, 75, 213);
+  font-size:25pt;
+  font-family: 'Baloo Tamma', cursive;
+  font-style: italic;
 }
 
 .index-field {
   width: 250px;
+  /*font-family: 'Slabo 27px', serif;*/
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  /*font-family: 'Antic Slab', serif;*/
+    color: rgb(106, 75, 213);
 }
 
 .index-row  {
   width: 100px;
   text-align: center;
+  /*font-family: 'Slabo 27px', serif;*/
+  font-family: 'Roboto Slab', serif;
+  /*font-family: 'Antic Slab', serif;*/
+  font-size: 20px;
+  color: rgb(106, 75, 213);
 }
 
 .form-control {
@@ -126,7 +140,27 @@ div.question {
   color: rgb(106, 75, 213);
 }
 
+#title {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 80pt;
+  font-family: 'Bungee Shade', cursive;
+  color: rgb(106, 75, 213);
+}
+
+
+
 .sub-title {
+  text-align: center;
+  padding-bottom: 50px;
+  font-size:30pt;
+  font-family: 'Baloo Tamma', cursive;
+  font-style: italic;
+  color: rgb(157, 135, 227);
+}
+
+#sub-title {
   text-align: center;
   padding-bottom: 50px;
   font-size:30pt;
