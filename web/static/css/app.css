@@ -281,7 +281,6 @@ li#greeting {
   flex-direction: row;
   justify-content: space-between;;
   max-width: 450px;
-  margin: 0 auto;
 }
 
 .loginform{
