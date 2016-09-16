@@ -328,6 +328,7 @@ form.play-form{
   -webkit-filter: hue-rotate(265deg);
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 img{

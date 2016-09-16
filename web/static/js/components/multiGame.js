@@ -87,7 +87,7 @@ class Game extends React.Component {
     } else if (this.state.userLeft) {
       return (
         <div>
-          <div className="sorry">Sorry, {this.state.userLeft} has left the game</div>
+          <div id="sorry" className="sub-title">Sorry, {this.state.userLeft} has left the game</div>
           <form action="/game">
             <button id="play" className="sizing">Play Again</button>
           </form>

@@ -138,7 +138,7 @@ describe('Mulitplayer Game', () => {
       wrapper.setState({gameEnd: false, userLeft: "aga"})
 
     it('should inform the user that an opponent has left the game', () => {
-      expect(wrapper.find('.sorry').text()).to.equal("Sorry, aga has left the game")
+      expect(wrapper.find('#sorry').text()).to.equal("Sorry, aga has left the game")
     })
 
     it('should render a button to play again', () => {
