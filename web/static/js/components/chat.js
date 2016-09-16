@@ -11,8 +11,8 @@ class Chat extends React.Component {
     return (
       <div className="chat">
         <div className="messages">
-          {this.props.messages.map(message => {
-            return <Message data={message} />
+          {this.props.messages.map((message, index) => {
+            return <Message key={index} data={message} />
           })}
         </div>
         <MessageInput username={this.props.username} onMessageSubmit={this.handleMessageSubmit.bind(this)}/>

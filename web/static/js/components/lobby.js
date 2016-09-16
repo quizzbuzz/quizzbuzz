@@ -58,7 +58,8 @@ class Lobby extends React.Component {
 
     } else if(this.state.gameChoice) {
       return (
-        <div id="wait">Waiting for Opponent</div>
+        <div id="wait">Waiting for Opponent
+        <img src={'http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_red_256.gif'} /></div>
       )
 
     } else {
